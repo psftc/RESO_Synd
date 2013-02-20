@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+				xmlns:commons="http://rets.org/xsd/RETSCommons"
+				targetNamespace="http://rets.org/xsd/RETSCommons"
+				elementFormDefault="qualified"
+				attributeFormDefault="unqualified">
+
+	<!--
+		(C)2007 National Association of REALTORS(R). All Rights Reserved
+
+		(C) 2010 Falcon Technologies Corporation. All Rights Reserved.
+
+		Tab stops
+		:set ts=3
+		
+		File History
+		======================
+		$Header: School.xsd, 13, 1/24/08 11:30:35 AM PST, Paul Stusiak$
+		
+		$Log:
+		 13   055_RETS_Standard 1.12        1/24/08 11:30:35 AM PSTPaul Stusiak
+		      correct copyright notice language
+		 12   055_RETS_Standard 1.11        10/7/07 10:44:43 PM PDTPaul Stusiak
+		      general clean up of the schema, add missing retsid as necessary.
+		 11   055_RETS_Standard 1.10        7/9/07 12:13:01 PM PDT Paul Stusiak
+		      Add SchoolDistrict to School
+		 10   055_RETS_Standard 1.9         7/9/07 1:58:27 AM PDT  Paul Stusiak
+		      fix problem with enumeration typing - remove incorrect type.
+		 9    055_RETS_Standard 1.8         7/6/07 9:30:49 AM PDT  Paul Stusiak
+		      Change enumerations to use common format of
+		      OtherEnumerationDescriptionString for Rooms change CR 29
+		 8    055_RETS_Standard 1.7         7/5/07 11:57:09 PM PDT Paul Stusiak
+		      early check in of CR 24, <Property>OtherDescription attribute pattern
+		 7    055_RETS_Standard 1.6         6/28/07 7:47:23 AM PDT Gina Accawi
+		      Make changes adding category and type enum for the school information
+		      as per June Westlake meeting.
+		 6    055_RETS_Standard 1.5         5/1/07 2:37:00 PM PDT  Paul Stusiak
+		      Update the version timestamp, make the schema relative again,
+		      normalize the date related typing to use SecureDateTime and naming to
+		      be of the form XXXDateTime
+		 5    055_RETS_Standard 1.4         4/3/07 4:59:33 PM PDT  Paul Stusiak
+		      use url resolution for include, import to test schema validation
+		 4    055_RETS_Standard 1.3         4/3/07 1:43:03 AM PDT  Paul Stusiak
+		      change namespace to remote location (www.ftc2.com) for testing
+		 3    055_RETS_Standard 1.2         4/2/07 11:26:58 AM PDT Paul Stusiak
+		      change namespace to match responding server and to use the URI
+		      versioning suggested by both HP and XFront
+		 2    055_RETS_Standard 1.1         3/30/07 6:19:06 PM PDT Paul Stusiak
+		      Update of the versionTimestamp and the namespace (namespace to
+		      200704). Change formating to a standard format
+		 1    055_RETS_Standard 1.0         3/16/07 11:46:56 AM PDTPaul Stusiak    
+		$
+		======================
+	-->
+
+	<xs:annotation>
+		<xs:documentation>
+			Elements related to schooling information about the property
+		</xs:documentation>
+	</xs:annotation>
+
+	<xs:include schemaLocation="Primitives.xsd" />
+
+	<!-- Types -->
+
+	<xs:complexType name="SchoolTypeEnum">
+		<xs:simpleContent>
+			<xs:restriction base="commons:OtherEnumerationDescriptionString">
+				<xs:enumeration value="Primary">
+					<xs:annotation>
+						<xs:documentation>
+							The assigned school,usually including the first
+							three or four grades of elementary school and
+							sometimes kindergarten, in the public school
+							district in which the property is located.
+						</xs:documentation>
+						<xs:appinfo>Grandview Annex</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Elementary">
+					<xs:annotation>
+						<xs:documentation>
+							The assigned school for the first four to eight
+							years of a child's formal education, often
+							including kindergarten, in the public school
+							district in which the property is located.
+						</xs:documentation>
+						<xs:appinfo>Laura Secord Elementary</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Middle">
+					<xs:annotation>
+						<xs:documentation>
+							The assigned school for the sixth, seventh,
+							eighth and possibly ninth years of a child's
+							formal education, in the public school district
+							in which the property is located.
+						</xs:documentation>
+						<xs:appinfo>Como Lake Middle</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="JuniorHigh">
+					<xs:annotation>
+						<xs:documentation>
+							The assigned school for the sixth, seventh,
+							eighth and possibly ninth years of a child's
+							formal education, in the public school district
+							in which the property is located.
+						</xs:documentation>
+						<xs:appinfo>Clinton Junior High School</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="High">
+					<xs:annotation>
+						<xs:documentation>
+							The assigned school for the last four years of a
+							child's formal education, in the public school
+							district in which the property is located.
+						</xs:documentation>
+						<xs:appinfo>Terry Fox High</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Secondary">
+					<xs:annotation>
+						<xs:documentation>
+							The assigned school for the last four years of a
+							child's formal education, in the public school
+							district in which the property is located.
+						</xs:documentation>
+						<xs:appinfo>Terry Fox Secondary</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Other" />
+			</xs:restriction>
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<xs:complexType name="SchoolDistrict">
+		<xs:annotation>
+			<xs:documentation>
+				Text field listing the name of the geographic district,
+				the public schools of which are administered together.
+			</xs:documentation>
+			<xs:appinfo>District 43</xs:appinfo>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="commons:SecureString" />
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<xs:complexType name="School">
+		<xs:annotation>
+			<xs:documentation>
+				School in the given property's area.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Name" 
+							type="xs:string" 
+							minOccurs="0"
+							maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						The name of the school.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>100073</retsid>
+						<example>Smith High School</example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="SchoolCategory"
+							type="commons:SchoolTypeEnum" 
+							minOccurs="0"
+							maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						The type of school in question.
+						Examples include Middle, Junior High,
+						etc.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>100074</retsid>
+						<example>High</example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="District"
+							type="commons:SchoolDistrict"
+							minOccurs="0"
+							maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						The district that a school is in.
+						A school may only belong to a single
+						district.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>100075</retsid>
+						<example>District 43</example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Description" 
+							type="commons:Remark"
+							minOccurs="0"
+							maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Further information about the school.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>100076</retsid>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="Schools">
+		<xs:annotation>
+			<xs:documentation>
+				The collection of schools for a given property.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="School" 
+							type="commons:School" 
+							minOccurs="0"
+							maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:appinfo>
+						<retsid>100077</retsid>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:any		namespace="##other" 
+							minOccurs="0"
+							maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

@@ -1,0 +1,5557 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema 	xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+			xmlns:commons="http://rets.org/xsd/RETSCommons/2010-04" 
+			targetNamespace="http://rets.org/xsd/RETSCommons/2010-04" 
+			elementFormDefault="qualified" 
+			attributeFormDefault="unqualified">
+
+	<!--
+		(C)2007 National Association of REALTORS(R). All Rights Reserved
+		(C)2010 Falcon Technologies Corporation. All Rights Reserved.
+
+		Tab stops
+		:set ts=3
+
+		File History
+		======================
+		$Header: RETSCommons.xsd, 107, 15/04/09 5:39:22 PDT PM, Paul Stusiak$
+		
+		$Log:
+		 107  055_RETS_Standard 1.106       15/04/09 5:39:22 PDT PMPaul Stusiak
+		      add additional foundation types, add retsid as necessary
+		 106  055_RETS_Standard 1.105       15/04/09 12:44:14 PDT PMGina Accawi
+		      Move MarketingInformation into commons to share between Listings and
+		      Syndication for the VOW fields
+		 105  055_RETS_Standard 1.104       04/04/08 2:41:19 PDT AMPaul Stusiak
+		      alphabetize the enum order, add property condition enum, add skirting
+		      enum, add license type wrt to manufactured homes and make it
+		      repeatable, remove the trival Name and PropertyCondition type
+		      definitions, clean up some formating
+		 104  055_RETS_Standard 1.103       03/04/08 2:32:35 PDT PMGina Accawi
+		      Move in ListingCategoryEnum and ListingStatusEnum from Listings.xsd
+		      for reuse by Syndication. Add many enum values from Syndication
+		      schema.
+		 103  055_RETS_Standard 1.102       03/04/08 9:47:10 PDT AMPaul Stusiak
+		      Moved URL to primitives as part of the Property refactoring
+		 102  055_RETS_Standard 1.101       01/04/08 7:49:03 PDT PMGina Accawi
+		      Add values for architectural style based on syndication data.
+		 101  055_RETS_Standard 1.100       01/04/08 4:47:39 PDT PMPaul Stusiak
+		      Change name to ArchitecturalStyleEnum from HousingStyleEnum
+		 100  055_RETS_Standard 1.99        31/03/08 1:09:27 PDT AMPaul Stusiak
+		      work in progress checkin against change requests including the RCP for
+		       the adopted schemas
+		 99   055_RETS_Standard 1.98        28/02/08 12:06:24 PST PMPaul Stusiak
+		      Add some retsid to enumerations in the file, remove PermittedTypes
+		      definition - not used.
+		 98   055_RETS_Standard 1.97        26/02/08 3:12:36 PST PMPaul Stusiak
+		      Move ContingengiesType and Disclosures to Legal.xsd. Update
+		      enumerations in Legal.xsd
+		 97   055_RETS_Standard 1.96        21/02/08 12:56:03 PST PMGina Accawi
+		      Modify enum values to add whitespace where necessary.
+		 96   055_RETS_Standard 1.95        24/01/08 12:29:30 PST PMPaul Stusiak
+		      Check in for 241, wip for 244, 243, Farm, ManufacturedHousing
+		 95   055_RETS_Standard 1.94        29/11/07 10:16:47 PST AMPaul Stusiak
+		      Multiple change requests from Boston, Calgary meetings
+		 94   055_RETS_Standard 1.93        22/11/07 1:52:47 PST AMPaul Stusiak
+		      Work in progress check-in
+		 93   055_RETS_Standard 1.92        08/10/07 1:22:15 PDT PMPaul Stusiak
+		      Update version timestamp
+		 92   055_RETS_Standard 1.91        07/10/07 10:45:03 PDT PMPaul Stusiak
+		      general clean up of schema
+		 91   055_RETS_Standard 1.90        04/10/07 11:30:13 PDT AMGina Accawi
+		      Create disclosure enum.
+		 90   055_RETS_Standard 1.89        03/10/07 2:53:49 PDT PMGina Accawi
+		      Rename ExistingStructureEnum to ExistingStructureCategoryEnum.
+		 89   055_RETS_Standard 1.88        03/10/07 2:46:05 PDT PMGina Accawi
+		      Rename Contingency Reason to Description, for the element and the
+		      enum.
+		 88   055_RETS_Standard 1.87        27/09/07 7:11:54 PDT AMGina Accawi
+		      Allow Room/Description to be repeatable
+		 87   055_RETS_Standard 1.86        27/09/07 6:52:53 PDT AMGina Accawi
+		      Remove lease as a subtype of property.
+		 86   055_RETS_Standard 1.85        26/09/07 1:38:26 PDT PMGina Accawi
+		      Remove unused type, Utility.
+		 85   055_RETS_Standard 1.84        26/09/07 1:23:14 PDT PMGina Accawi
+		      Make parcel number a string.
+		 84   055_RETS_Standard 1.83        26/09/07 9:23:51 PDT AMGina Accawi
+		      Add marketing information.
+		 83   055_RETS_Standard 1.82        26/09/07 6:42:58 PDT AMGina Accawi
+		      Put rental/lease information for the listing contract into a
+		      container. Add Pending date and Pending price.
+		 82   055_RETS_Standard 1.81        26/09/07 6:16:02 PDT AMGina Accawi
+		      Make changes to ListingContract complex type.
+		 81   055_RETS_Standard 1.80        25/09/07 2:37:51 PDT PMGina Accawi
+		      Modify listing contract information structure. Include Rent/Lease
+		      dates in contract information.
+		 80   055_RETS_Standard 1.79        25/09/07 12:56:17 PDT PMGina Accawi
+		      Redefine contingencies structures.
+		 79   055_RETS_Standard 1.78        25/09/07 11:59:33 PDT AMGina Accawi
+		      Restructure listing complex types.
+		 78   055_RETS_Standard 1.77        24/09/07 1:25:15 PDT PMGina Accawi
+		      Move exclusions, add inclusions to contract information
+		 77   055_RETS_Standard 1.76        24/09/07 12:40:41 PDT PMGina Accawi
+		      Modify ShowingInformation.
+		 76   055_RETS_Standard 1.75        24/09/07 9:04:33 PDT AMGina Accawi
+		      Move Listing only types to Listing. Remove unused type.
+		 75   055_RETS_Standard 1.74        24/09/07 7:33:03 PDT AMGina Accawi
+		      Modify documentation to add detail. Move ListingAgreementEnum to the
+		      Listing Schema.
+		 74   055_RETS_Standard 1.73        24/09/07 7:27:15 PDT AMGina Accawi
+		      Rename ListingType to ListingAgreement
+		 73   055_RETS_Standard 1.72        17/09/07 9:25:17 PDT AMGina Accawi
+		      Make AdditionalCompensation a string.
+		 72   055_RETS_Standard 1.71        17/09/07 9:21:21 PDT AMGina Accawi
+		      Rename commissionAmount to commissionDataType
+		 71   055_RETS_Standard 1.70        17/09/07 9:04:55 PDT AMGina Accawi
+		      Change ContractDocument data type to a key.
+		 70   055_RETS_Standard 1.69        14/09/07 10:58:14 PDT AMGina Accawi
+		      Remove SubMemberCompensation.
+		 69   055_RETS_Standard 1.68        14/09/07 10:53:25 PDT AMGina Accawi
+		      Made VariableRateCompensation a SecureString
+		 68   055_RETS_Standard 1.67        01/08/07 11:03:46 PDT AMGina Accawi
+		      Create and include Licensing.
+		 67   055_RETS_Standard 1.66        26/07/07 7:17:49 PDT PMPaul Stusiak
+		      Sort and group. Remove unused types
+		 66   055_RETS_Standard 1.65        26/07/07 2:16:18 PDT PMPaul Stusiak
+		      Revise ParkingType; replace TaxData with PublicRecord; remove unused
+		      area types.
+		 65   055_RETS_Standard 1.64        26/07/07 1:04:43 PDT PMGina Accawi
+		      Remarks and geo changes.
+		 64   055_RETS_Standard 1.63        26/07/07 11:55:01 PDT AMPaul Stusiak
+		      In-progress check in
+		 63   055_RETS_Standard 1.62        26/07/07 10:51:07 PDT AMGina Accawi
+		      Consolidate remarks types.
+		 62   055_RETS_Standard 1.61        26/07/07 8:55:50 PDT AMGina Accawi
+		      Geographic data overhaul per Westlake meeting discussion.
+		 61   055_RETS_Standard 1.60        24/07/07 10:46:49 PDT PMPaul Stusiak
+		      use boundedCardinalInteger to avoid code generation use of BigDecimal;
+		       use YearBuiltType
+		 60   055_RETS_Standard 1.59        24/07/07 5:09:02 PDT PMPaul Stusiak
+		      add keys to Participant and Person, update the entities to support
+		      this, make the files have a common pattern.
+		 59   055_RETS_Standard 1.58        24/07/07 2:02:07 PDT PMGina Accawi
+		      Rename elements, attributes and types that were named "Type".
+		 58   055_RETS_Standard 1.57        24/07/07 9:52:11 PDT AMGina Accawi
+		      Remove ShortOffice type.
+		 57   055_RETS_Standard 1.56        09/07/07 12:12:48 PDT PMPaul Stusiak
+		      Add to AnimalPolicy, move View, Community to Property from Listing
+		 56   055_RETS_Standard 1.55        09/07/07 2:00:58 PDT AMPaul Stusiak
+		      Rework of CR 80 to change the way that Role, Team, Person and Member
+		      interact as Participants. Person, Member and Team now take on a Role
+		      when acting as a Participant for a Listing (or Transaction)
+		 55   055_RETS_Standard 1.54        06/07/07 2:31:01 PDT PMGina Accawi
+		      Rename ids.
+		 54   055_RETS_Standard 1.53        06/07/07 1:40:17 PDT PMGina Accawi
+		      Listing participants now have a role in the listing. Additionally,
+		      team members have a team role. 
+		 53   055_RETS_Standard 1.52        06/07/07 11:03:33 PDT AMPaul Stusiak
+		      Standardized enumeration extensibility across Features.xsd.
+		 52   055_RETS_Standard 1.51        06/07/07 9:30:49 PDT AMPaul Stusiak
+		      Change enumerations to use common format of
+		      OtherEnumerationDescriptionString for Rooms change CR 29
+		 51   055_RETS_Standard 1.50        06/07/07 12:12:21 PDT AMPaul Stusiak
+		      Add container for ListingPricing and ListingDates and early check-in
+		      of CR24, <Property>OtherDescription attribute pattern
+		 50   055_RETS_Standard 1.49        05/07/07 5:58:14 PDT PMPaul Stusiak
+		      use pattern of xs:nonNegativeInteger for elements or types with a name
+		       <Property.Total> and a data type of decimal or integer
+		 49   055_RETS_Standard 1.48        05/07/07 5:14:54 PDT PMPaul Stusiak
+		      Remove unnecessary type definitions, create container for dimensions,
+		      add enumerations for PossessionTypes
+		 48   055_RETS_Standard 1.47        04/07/07 7:04:03 PDT PMPaul Stusiak
+		      add measurementSource to measured types.
+		 47   055_RETS_Standard 1.46        04/07/07 11:19:59 PDT AMPaul Stusiak
+		      Add additional comments to the ListPriceLow, ListPriceHigh
+		 46   055_RETS_Standard 1.45        03/07/07 1:04:54 PDT AMPaul Stusiak
+		      General clean up of Property. Add modification timestamp, remove and
+		      containerize complexTypes as needed.
+		 45   055_RETS_Standard 1.44        28/06/07 12:04:05 PDT PMGina Accawi
+		      Add enum possibility of unknown for consistency.
+		 44   055_RETS_Standard 1.43        27/06/07 11:30:02 PDT AMGina Accawi
+		      Added property types per June meeting in Westlake.
+		 43   055_RETS_Standard 1.42        26/06/07 1:05:16 PDT PMGina Accawi
+		      Rename ContactInformation to ContactMethod.
+		 42   055_RETS_Standard 1.41        26/06/07 12:40:35 PDT PMGina Accawi
+		      Rename Agent to Member. This affects namespaces, element names, type
+		      references, and attribute names.
+		 41   055_RETS_Standard 1.40        26/06/07 11:59:45 PDT AMGina Accawi
+		      Rename items that are TotalBlah to BlahTotal for consistency
+		      throughout.
+		 40   055_RETS_Standard 1.39        25/06/07 3:22:38 PDT PMGina Accawi
+		      Correct ContactInformation reference to ContactMethods for file
+		      rename. Remove custom total count types. Add reference on the Room
+		      type to the isMaster flag. Remove Baths type, as Baths are treated as
+		      rooms now.
+		 39   055_RETS_Standard 1.38        14/06/07 3:04:18 PDT PMGina Accawi
+		      Correct reference for Phone.xsd, which is renamed
+		      ContactInformation.xsd
+		 38   055_RETS_Standard 1.37        13/06/07 2:16:16 PDT PMGina Accawi
+		      Move phone type and phone category types to the phone.xsd.
+		 37   055_RETS_Standard 1.36        13/06/07 1:24:08 PDT PMGina Accawi
+		      Add PhoneTypeEnum and PhoneCategoryEnum.
+		 36   055_RETS_Standard 1.35        09/05/07 8:46:50 PDT PMPaul Stusiak
+		      Create SimpleGeographicData
+		 35   055_RETS_Standard 1.34        02/05/07 1:31:40 PDT PMPaul Stusiak
+		      remove use of default on attributes
+		 34   055_RETS_Standard 1.33        01/05/07 2:36:59 PDT PMPaul Stusiak
+		      Update the version timestamp, make the schema relative again,
+		      normalize the date related typing to use SecureDateTime and naming to
+		      be of the form XXXDateTime
+		 33   055_RETS_Standard 1.32        03/04/07 4:59:32 PDT PMPaul Stusiak
+		      use url resolution for include, import to test schema validation
+		 32   055_RETS_Standard 1.31        03/04/07 1:44:10 PDT AMPaul Stusiak
+		      change namespace to remote location (www.ftc2.com) for testing
+		 31   055_RETS_Standard 1.30        02/04/07 11:26:57 PDT AMPaul Stusiak
+		      change namespace to match responding server and to use the URI
+		      versioning suggested by both HP and XFront
+		 30   055_RETS_Standard 1.29        30/03/07 6:19:53 PDT PMPaul Stusiak
+		      Update of the versionTimestamp and the namespace (namespace to
+		      200704). Change formating to a standard format
+		 29   055_RETS_Standard 1.28        30/03/07 12:51:06 PDT PMPaul Stusiak
+		      Move type definitions out to other files in the same namespace to
+		      rationalize the schemas.
+		 28   055_RETS_Standard 1.27        30/03/07 12:42:25 PDT AMPaul Stusiak
+		      change attribute group to simple type
+		 27   055_RETS_Standard 1.26        29/03/07 12:20:31 PDT AMPaul Stusiak
+		      refactoring work
+		 26   055_RETS_Standard 1.25        28/03/07 7:22:57 PDT PMPaul Stusiak
+		      checkpoint check-in
+		 25   055_RETS_Standard 1.24        26/03/07 6:43:42 PDT PMPaul Stusiak
+		      additional annotations added and some minor corrections
+		 24   055_RETS_Standard 1.23        26/03/07 10:52:06 PDT AMPaul Stusiak
+		      redefined Dimensions in LotSize to refer to irregular dimensions and
+		      to have an appinfo entry.
+		 23   055_RETS_Standard 1.22        19/03/07 9:17:54 PDT PMPaul Stusiak
+		      Add ShortOffice complex type, some reformating
+		 22   055_RETS_Standard 1.21        16/03/07 11:52:02 PDT AMPaul Stusiak
+		      restructure to place attributes, attribute groups and simple types
+		      near the top. Refactor out into Census.xsd, Features.xsd and
+		      School.xsd
+		 21   055_RETS_Standard 1.20        07/03/07 11:07:54 PST PMPaul Stusiak
+		      Clean up the project information for the purposes of document
+		      generation. Added trial annotation format for Gina's review. Made
+		      modification to document format. Moved the type Notes, attributes
+		      textFormatType to Primitives and use the new Primitive type
+		      SecureRemark 
+		 20   055_RETS_Standard 1.19        06/03/07 2:04:59 PST PMPaul Stusiak
+		      Added tab stop information, clean up, change base type of type Age,
+		      change ID -> Id, added Type Area
+		 19   055_RETS_Standard 1.18        28/02/07 10:39:58 PST AMGina Accawi
+		      Removed Buyer type. 
+		 18   055_RETS_Standard 1.17        28/02/07 8:22:39 PST AMGina Accawi
+		      Changed buyer type from sequence of untyped element children to the
+		      commonly defined Person. Renamed attribute from QueryType to queryType
+		       for case consistency.
+		 17   055_RETS_Standard 1.16        28/02/07 1:15:40 PST AMPaul Stusiak
+		      add standard header and refactoring RETSCommons changes, fixed
+		      incorrect naming convention 'EnumType' - should be 'TypeEnum', we are
+		      enumerating the type, not typing the enumeration. General clean up.
+		 16   055_RETS_Standard 1.15        22/02/07 4:05:38 PST PMGina Accawi
+		      Removed (R) from REALTOR. This was being flagged as a problem due to
+		      the document being UTF-8. I'm not an ASCII/Unicode/BOM expert, so if
+		      there is a way to include this character, or if this is ok and I
+		      should ignore, we can roll this change back.
+		 15   055_RETS_Standard 1.14        22/02/07 1:48:17 PST PMPaul Stusiak
+		      Minor documentation changes - attempt to have consistent format for
+		      document tags. Minor move to attempt to start grouping like elements.
+		 14   055_RETS_Standard 1.13        22/02/07 12:32:34 PST PMPaul Stusiak
+		      2007-2-21 Paula O'Brien version
+		 13   055_RETS_Standard 1.12        22/02/07 12:28:16 PST PMPaul Stusiak
+		      BROKEN - fixed G Accawi comments version
+		 12   055_RETS_Standard 1.11        22/02/07 12:27:10 PST PMPaul Stusiak
+		      BROKEN - G Accawi comments version out of date with revision 11,
+		      probably from revision 9 or 10
+		 11   055_RETS_Standard 1.10        02/01/07 11:22:25 PST AMJeff Brush
+		      refactored to include FBS, MRIS and 12/20/06 MLS meeting suggestions
+		      for schema revisions
+		 10   055_RETS_Standard 1.9         20/12/06 12:31:11 PST PMJeff Brush
+		      added retsserver location back to imports;  renamed Prospect to
+		      SavedQuery; changed ListingHistory to track only select fields
+		      identified by workgroup;renamed Agency to Agents and fixed references
+		      in other schemas;changed TotalSqFeet references to TotalArea; per 12/7
+		       MLS payload workgroup meeting
+		 9    055_RETS_Standard 1.8         02/12/06 1:12:45 PST AMPaul Stusiak
+		      various mechanical fixes tho the schema and a re-direct from
+		      retsserver.realtors.org to www.ftc2.com
+		 8    055_RETS_Standard 1.7         28/11/06 1:41:32 PST AMPaul Stusiak
+		      updated version per meetings
+		 7    055_RETS_Standard 1.6         13/10/06 7:45:16 PDT AMJeff Brush
+		      Changes to schemas from 10/5 and 10/12 TMS workgroup meeting.
+		 6    055_RETS_Standard 1.5         20/09/06 12:43:28 PDT PMJeff Brush
+		      chgd schemaLocation to point to http://retsserver.rets.org:8080/xsd/
+		 5    055_RETS_Standard 1.4         11/04/06 6:51:22 PDT AMPaul Stusiak
+		      fixed missing tag
+		 4    055_RETS_Standard 1.3         07/04/06 1:42:23 PDT PMJeff Brush
+		      added 200604 to namespace
+		 3    055_RETS_Standard 1.2         07/04/06 1:34:46 PDT AMPaul Stusiak
+		      remove xmlspy reference
+		 2    055_RETS_Standard 1.1         04/04/06 8:06:00 PDT AMJeff Brush
+		      Updated schemas.  All MLS schemas have extensibility points.  New
+		      ObjectReferenceList.xsd
+		 1    055_RETS_Standard 1.0         06/03/06 8:13:40 PST AMPaul Stusiak    
+		$
+	-->
+
+	<xs:annotation>
+		<xs:documentation>
+			A collection of common complex types for the real estate domain
+
+			Enumerations are expected to be implemented as
+			lookup lists. The schema use the human readable
+			form of the lookup list rather than a code value.
+			
+			Systems are permitted to implement any internal
+			method for storing such enumerations but MUST
+			expose the list values using the data values
+			of the appropriate enumeration.
+			
+			Systems that have fewer values in a particular list do not
+			need to implement the additional enumeration values since they
+			will never be visible.
+			
+			Systems that have more values in a particular list should expose the
+			additional values in the metadata and use the extension mechanism of
+			setting the element value to 'Other' and putting the extension data into
+			the otherDescription attribute.
+		</xs:documentation>
+	</xs:annotation>
+
+	<xs:include schemaLocation="Address.xsd"/>
+	<xs:include schemaLocation="Census.xsd"/>
+	<xs:include schemaLocation="Features.xsd"/>
+	<xs:include schemaLocation="Financial.xsd"/>
+	<xs:include schemaLocation="Legal.xsd"/>
+	<xs:include schemaLocation="Licensing.xsd"/>
+	<xs:include schemaLocation="Primitives.xsd"/>
+	<xs:include schemaLocation="Role.xsd"/>
+	<xs:include schemaLocation="ContactMethods.xsd"/>
+	<xs:include schemaLocation="Person.xsd"/>
+	<xs:include schemaLocation="School.xsd"/>
+		
+	<!-- Attributes -->
+	<xs:attribute name="queryType">
+		<xs:simpleType>
+			<xs:restriction base="xs:NMTOKEN"/>
+		</xs:simpleType>
+	</xs:attribute>
+
+	<xs:attribute name="newConstruction">
+		<xs:simpleType>
+			<xs:restriction base="xs:token">
+				<xs:enumeration value="Yes"/>
+				<xs:enumeration value="No"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:attribute>
+	
+	<xs:attribute name="weightUnits">
+		<xs:simpleType>
+			<xs:restriction base="xs:token">
+				<xs:enumeration value="lbs"/>
+				<xs:enumeration value="kilo"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:attribute>
+
+	<xs:attribute name="commissionDataType" default="Percent">
+		<xs:simpleType>
+			<xs:restriction base="xs:token">
+				<xs:enumeration value="Percent"/>
+				<xs:enumeration value="Currency"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:attribute>
+
+	<!-- Simple Types -->
+	<xs:simpleType name="Vocabulary">
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+
+	<!-- Enumerations -->
+	<xs:complexType name="ArchitecturalStyleEnum">
+		<xs:annotation>
+			<xs:documentation>
+				Defines the subset of property types.
+				
+				This list is derived from the list on realtor.org,
+				architectural guidelines, residential styles.
+			</xs:documentation>
+			<xs:appinfo>
+				Craftsman
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:restriction base="commons:OtherEnumerationDescriptionString">
+				<xs:enumeration value="A Frame">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101658</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Art Deco">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101516</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Bungalow">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101517</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Cape Cod">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101518</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Colonial">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101519</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Contemporary">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101520</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Conventional">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101659</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Cottage">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101660</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Craftsman">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101521</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Creole">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101522</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Dome">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101661</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Dutch Colonial">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101523</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="English">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101662</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Federal">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101524</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="French">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101663</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="French Provincial">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101525</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Georgian">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101526</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Gothic Revival">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101527</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Greek Revival">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101528</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="High Rise">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101664</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Historical">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101665</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="International">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101529</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Italianate">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101530</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Loft">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101666</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Mansion">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101667</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Mediterranean">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101668</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Modern">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101726</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Monterey">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101531</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Mountain">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101669</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="National">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101532</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Neoclassical">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101533</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="New Traditional">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101670</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>				
+				<xs:enumeration value="Prairie">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101534</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Pueblo">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101535</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Queen Anne">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101536</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Rambler">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101671</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Ranch">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101537</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Regency">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101538</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Rustic">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101672</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Saltbox">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101539</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Santa Fe">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101673</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Second Empire">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101540</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Shed">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101541</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Shingle">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101542</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Shotgun">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101543</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Spanish">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101674</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Spanish Eclectic">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101544</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Split Level">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101545</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Stick">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101546</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Tudor">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101547</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Victorian">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101548</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Other">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101549</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+			</xs:restriction>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="BasementCategoryEnum">
+		<xs:annotation>
+			<xs:documentation>
+				The basement category.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:restriction base="commons:OtherEnumerationDescriptionString">
+				<xs:enumeration value="Crawlspace-Barrier">
+					<xs:annotation>
+						<xs:documentation>
+							A floor space that has less than the
+							locally defined minimum height for
+							a room with an earth floor covered by a
+							barrier system to minimize allergic reactions.
+							See also Crawlspace for further definition.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101708</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Cellar">
+					<xs:annotation>
+						<xs:documentation>
+							An unfinished space which may have earth or
+							 non-foundation walls. It may also include
+							 spaces that are accessed only via external
+							 entrances. It is typically unheated.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101709</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Crawlspace">
+					<xs:annotation>
+						<xs:documentation>
+							A floor space that has less than the
+							locally defined minimum height for
+							a room. Typically, this space has much
+							less than this minimum height and may
+							have insufficient height for a human to
+							enter the space.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101710</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Full">
+					<xs:annotation>
+						<xs:documentation>
+							A below-grade space extending under
+							the main footprint of the structure
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101711</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Partial">
+					<xs:annotation>
+						<xs:documentation>
+							A below-grade space extending under
+							a portion of the main footprint of the
+							structure.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101712</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Crawlspace-Partial">
+					<xs:annotation>
+						<xs:documentation>
+							A floor space that has less than the
+							locally defined minimum height for
+							a room. Typically, this space has much
+							less than this minimum height and may
+							have insufficient height for a human to
+							enter the space. This will only extend
+							for a portion of the footprint of the
+							structure.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101713</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Walk-out-Partial">
+					<xs:annotation>
+						<xs:documentation>
+							A basement where one or more sides
+							of the basement are at grade, typically
+							caused because the structure is on a sloping
+							site. This type may also be known as a
+							daylight basement. This will extend over
+							only a portion of the footprint of the structure.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101714</retsid>
+							<synonym>daylight</synonym>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Walk-out">
+					<xs:annotation>
+						<xs:documentation>
+							A basement where one or more sides
+							of the basement are at grade, typically
+							caused because the structure is on a sloping
+							site. This type may also be known as a
+							daylight basement.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101715</retsid>
+							<synonym>daylight</synonym>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Unknown">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101716</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Other">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101717</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+			</xs:restriction>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="ExistingStructureCategoryEnum">
+		<xs:annotation>
+			<xs:documentation>
+				Defines the types of structures that exist on the property.
+			</xs:documentation>
+			<xs:appinfo>
+				Barn
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:restriction base="commons:OtherEnumerationDescriptionString">
+				<xs:enumeration value="Aboveground Pool">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101441</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Bank Barn">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101442</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Barn">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101443</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Barn Stable">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101444</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Belmont">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101445</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Boathouse">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101446</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Carriage House">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101447</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Cattle Barn">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101448</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Center Aisle">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101449</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Corn Barn">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101450</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Clubhouse">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101451</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Community Park">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101452</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Dog Run">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101453</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Exercise Area">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101454</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Gazebo">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101455</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Garage">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101456</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Golf Course">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101457</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Greenhouse">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101458</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Guesthouse">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101459</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Horse Stable">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101460</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="House">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101461</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Hot Tub">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101462</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Indoor Arena">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101463</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Inground Pool">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101464</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Loafing Shed">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101465</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Machine Shed">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101466</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Office Or Studio">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101467</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Playhouse">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101468</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Pool House">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101469</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Poultry House">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101470</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Recreational Facilities">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101471</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Run In Shed">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101472</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Sauna">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101473</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Secondary House">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101474</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Security Facilities">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101475</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Shed">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101476</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Shed-Row">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101477</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Shed-Shop">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101478</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Storage Barn">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101479</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Tenant House">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101480</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Tennis Court">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101481</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Tobacco Barn">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101482</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Other">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101483</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+			</xs:restriction>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="FoundationConstructionEnum">
+		<xs:annotation>
+			<xs:documentation>
+				The construction type of the foundation.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:restriction base="commons:OtherEnumerationDescriptionString">
+				<xs:enumeration value="Block">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101826</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Concrete Perimeter">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101718</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Concrete Perimeter and Slab">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101719</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Concrete Slab">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101720</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Masonry">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101721</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Mudsill">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101722</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Pier">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101828</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Piling">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101827</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Pillar">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101723</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Post and Beam">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101829</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Post and Pier">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101830</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Quake Bracing">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101831</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Stone">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101832</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Unknown">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101724</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Other">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101725</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+			</xs:restriction>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:simpleType name="ListingCategoryEnum">
+		<xs:restriction base="xs:token">
+			<xs:enumeration value="Purchase">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>101217</retsid>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Lease">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>101218</retsid>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Rent">
+				<xs:annotation>
+					<xs:documentation>
+						While rent and lease may be considered
+						synonymous, this is a convenience entry.
+						Common usage has Rent as a term of less
+						than a year, or month to month, while
+						lease represents a term of greater
+						than one year. These are usages only
+						and local conditions may change the
+						meaning.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>101219</retsid>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ListingStatusEnum">
+		<xs:annotation>
+			<xs:documentation>
+				The current status of the listing.
+				A lengthy discussion of the listings statuses
+				occurred during the Boston 2007 meeting.
+				At this time, the group decided to restructure
+				the list of statuses, removing some synonyms
+				and making the list 'closed'. That is, the 
+				extension mechanism normally applied to enumerations
+				to permit additional values has been removed.
+				Only the statuses in this list are RETS status
+				values.
+				See the ListingStatusType for a location to
+				included locally defined status types that MUST
+				map to an equivalent RETS listing status.
+			</xs:documentation>
+			<xs:appinfo>
+				Active
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:restriction base="xs:token">
+			<xs:enumeration value="Active">
+				<xs:annotation>
+					<xs:documentation>
+						The listing is available for marketing.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>101220</retsid>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Cancelled">
+				<xs:annotation>
+					<xs:documentation>
+						The listing contract has terminated prior 
+						to contract expiration. This is synonymous
+						to the status of Terminated.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>101221</retsid>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Closed">
+				<xs:annotation>
+					<xs:documentation>
+						The listing transaction is completed.
+						Some systems may have historical
+						information described as Sold.
+						This is a synonym.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>101222</retsid>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Expired">
+				<xs:annotation>
+					<xs:documentation>
+						The term of the listing contract
+						expired without closing.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>101223</retsid>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Pending">
+				<xs:annotation>
+					<xs:documentation>
+						A contract for purchase or lease
+						has been entered into.
+						This is considered synonymous with
+						the status UnderContract, that more
+						precisely describes the status, however,
+						usage in the industry has been around the
+						word 'Pending' so the group decided to
+						keep the word in common usage rather than
+						the more correct word.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>101224</retsid>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Withdrawn">
+				<xs:annotation>
+					<xs:documentation>
+						The listing is temporarily
+						or permanently off market.
+						The listing contract is still
+						in force.
+						Historical statuses like Inactive, TempOff
+						and Off-Market are considered synonyms
+						of Withdrawn.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>101225</retsid>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ManufacturedHousingCategoryEnum">
+		<xs:restriction base="xs:token">
+			<xs:enumeration value="Manufactured">
+				<xs:annotation>
+					<xs:documentation>
+						The structure meets federal building codes but not
+						local building codes,
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>101438</retsid>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Mobile">
+				<xs:annotation>
+					<xs:documentation>
+						The structure retains axles and
+						was built before 1976
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>101439</retsid>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Modular">
+				<xs:annotation>
+					<xs:documentation>
+						The structure does not retain axles, may be permanently
+						attached to the site, should qualify for a real property
+						mortgage and meets local building codes.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>101440</retsid>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="SourceProviderCategoryEnum">
+		<xs:annotation>
+			<xs:documentation>
+				The source of the listing information - used by Syndication.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:restriction base="commons:OtherEnumerationDescriptionString">
+				<xs:enumeration value="Aggregator">
+					<xs:annotation>
+						<xs:documentation>
+							Information provided by Aggregator.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>103335</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Broker">
+					<xs:annotation>
+						<xs:documentation>
+							The information was provided by the Broker
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>103336</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Franchiser">
+					<xs:annotation>
+						<xs:documentation>
+							The information was provided by the Franchiser
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>103337</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="HomeBuilder">
+					<xs:annotation>
+						<xs:documentation>
+							The information was provided by the Home Builder
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>103338</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Member">
+					<xs:annotation>
+						<xs:documentation>
+							The information was provided by the Listing Member
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>103339</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="MLS">
+					<xs:annotation>
+						<xs:documentation>
+							The information was provided by the MLS
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>103340</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Owner">
+					<xs:annotation>
+						<xs:documentation>
+							The information was provided by the property Owner
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>103341</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Publisher">
+					<xs:annotation>
+						<xs:documentation>
+							The information was provided by a Publisher
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>103342</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Unknown">
+					<xs:annotation>
+						<xs:documentation>
+							The information provider is unknown
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>103343</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Other">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>103344</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+			</xs:restriction>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="OccupancyStateEnum">
+		<xs:annotation>
+			<xs:documentation>
+				The current occupancy state values.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:restriction base="commons:OtherEnumerationDescriptionString">
+				<xs:enumeration value="Leasee Occupied">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101484</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Manager">
+					<xs:annotation>
+						<xs:documentation>
+							Property or unit is occupied by the property manager.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101686</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Owner Occupied">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101485</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Tenant Occupied">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101486</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Vacant">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101487</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Unknown">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101488</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Other">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101489</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+			</xs:restriction>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="PropertyConditionEnum">
+		<xs:annotation>
+			<xs:documentation>
+				A subjective assessment of the condition
+				of the property.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:restriction base="commons:OtherEnumerationDescriptionString">
+				<xs:enumeration value="Condemed">
+					<xs:annotation>
+						<xs:documentation>
+							The property is uninhabitable and costs may be
+							incurred to remove existing structures or debris
+							on the property.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101727</retsid>
+							<synonym>Value in land</synonym>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Fair">
+					<xs:annotation>
+						<xs:documentation>
+							The property is in fair condition.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101728</retsid>
+							<synonym>Average</synonym>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Good">
+					<xs:annotation>
+						<xs:documentation>
+							The property is in good condition.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101729</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Poor">
+					<xs:annotation>
+						<xs:documentation>
+							The property is in poor condition.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101730</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Repairs - Cosmetic">
+					<xs:annotation>
+						<xs:documentation>
+							The property needs cosmetic repairs
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101731</retsid>
+							<synonym>Handyman</synonym>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Repairs - Major">
+					<xs:annotation>
+						<xs:documentation>
+							The property needs major repairs.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101732</retsid>
+							<synonym>Fixer</synonym>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Under Construction">
+					<xs:annotation>
+						<xs:documentation>
+							The property is under current construction.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101733</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Unfinished">
+					<xs:annotation>
+						<xs:documentation>
+							The property is under construction or renovation
+							and the construction has been abandonded with
+							the property in an uninhabitable state.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101734</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Uninhabitable">
+					<xs:annotation>
+						<xs:documentation>
+							The property is in an unihabitable state
+							through neglect. Repairs and permits are
+							required to inhabit this property.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101735</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Unknown">
+					<xs:annotation>
+						<xs:documentation>
+							The property condition is unknown or
+							such descriptions may be forbidden by local
+							or state regulations.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101736</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Other">
+					<xs:annotation>
+						<xs:documentation>
+							A locally defined value.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101737</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+			</xs:restriction>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="PropertyTypeEnum">
+		<xs:annotation>
+			<xs:documentation>
+				Defines the major property resource.
+			</xs:documentation>
+			<xs:appinfo>
+				Residential
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:restriction base="commons:OtherEnumerationDescriptionString">
+				<xs:enumeration value="Residential">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101490</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Lots And Land">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101491</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+			         <xs:enumeration value="Farm And Agriculture">
+			         	<xs:annotation>
+			         		<xs:documentation>
+			         		</xs:documentation>
+			         		<xs:appinfo>
+							<retsid>101492</retsid>
+			         		</xs:appinfo>
+			         	</xs:annotation>
+			         </xs:enumeration>
+				<xs:enumeration value="MultiFamily">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101493</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Commercial">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101494</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Common Interest">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101495</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Rental">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101496</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Other">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101497</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+			</xs:restriction>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="PropertySubTypeEnum">
+		<xs:annotation>
+			<xs:documentation>
+				Defines the subset of property types.
+			</xs:documentation>
+			<xs:appinfo>
+				SingleFamily
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:restriction base="commons:OtherEnumerationDescriptionString">
+				<xs:enumeration value="Apartment">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101498</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Deeded Parking">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101499</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Boatslip">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101500</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Cabin">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101501</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Condominium">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101502</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Duplex">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101503</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Farm">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101504</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Manufactured Home">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101505</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Mobile Home">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101506</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Own Your Own">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101507</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Quadruplex">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101508</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Single Family Attached">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101509</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Single Family Detached">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101510</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Stock Cooperative">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101511</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Townhouse">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101512</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Timeshare">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101513</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Triplex">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101514</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Other">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101515</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+			</xs:restriction>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="SkirtingEnum">
+		<xs:annotation>
+			<xs:documentation>
+				The current occupancy state values.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:restriction base="commons:OtherEnumerationDescriptionString">
+				<xs:enumeration value="Aluminum">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101687</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Block">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101688</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Brick">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101689</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Cement Block">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101690</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Concrete">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101691</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Fibreglass">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101692</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Flagstone">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101693</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Frame">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101694</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Glass">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101695</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Masonite">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101696</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Rock">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101697</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Siding">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101698</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Steel">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101699</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Wood">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101700</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Unknown">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101701</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Other">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101702</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+			</xs:restriction>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="SpaceStateEnum">
+		<xs:annotation>
+			<xs:documentation>
+				The current state of optionally finished spaces
+				like a basement or attic.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:restriction base="commons:OtherEnumerationDescriptionString">
+				<xs:enumeration value="Finished">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101703</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Partial Finished">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101704</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Unfinished">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101705</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Unknown">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101706</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Other">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101707</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+			</xs:restriction>
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<!-- Complex Types -->
+
+	<xs:complexType name="AssociationMemberId">
+		<xs:annotation>
+			<xs:documentation>
+				The membership number that uniquely identifies the members.
+				For NRDS, it is an 8 or 9 digit unique number that is assigned
+				to a membership record in the National REALTOR&#174; Database System.
+				This number is also found on a NAR membership card.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="commons:SecureInteger"/>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="AssociationOfficeId">
+		<xs:annotation>
+			<xs:documentation>
+				The office number that uniquely identifies the member office.
+				For NRDS, it is an 8 or 9 digit unique number that is assigned to
+				an Office record in the National REALTOR&#174; Database System.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="commons:SecureInteger"/>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="AssessedValuation">
+		<xs:annotation>
+			<xs:documentation>
+				The value of real property as established by the state government
+				for purposes of computing real property taxes. Formatting is
+				specified by the currency attribute.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="commons:SecureMoney"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="BasementType">
+		<xs:simpleContent>
+			<xs:extension base="commons:SecureString"/>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="BedsTotal">
+		<xs:simpleContent>
+			<xs:extension base="commons:boundedCardinalInteger"/>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="BrokerId">
+		<xs:annotation>
+			<xs:documentation>
+				The unique identifier of a Broker within a given MLS.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="commons:SecureString"/>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="BrokerName">
+		<xs:annotation>
+			<xs:documentation>
+				The business name for a given Broker within the MLS.
+				This may correspond to the NRDS Broker name.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="commons:SecureString"/>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="BuildingName">
+		<xs:annotation>
+			<xs:documentation>
+				Legal name of the structure.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="commons:SecureString"/>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="BuildingType">
+		<xs:annotation>
+			<xs:documentation>
+				The server's classification or grouping for the construction
+				type of the structure.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="commons:SecureString"/>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="BusinessName">
+		<xs:annotation>
+			<xs:documentation>
+				Legal business name for the person or entity referenced by this element.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="commons:SecureString"/>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="CommissionType">
+		<xs:annotation>
+			<xs:documentation>
+				The compensation paid to a licensed real estate broker or by 
+				the broker to the salesperson for services rendered, 
+				usually a percentage of the selling price of the property. 
+				Formatting defined by the commission attribute.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="commons:SecureDecimal">
+				<xs:attribute ref="commons:commissionDataType"/>
+				<xs:attribute ref="commons:currencyCode"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="Condominium">
+		<xs:annotation>
+			<xs:documentation>
+				Text describing a building or complex in which units of
+				property such as apartments, are owned by individuals and
+				common parts of the property such as the grounds and building
+				structure, are owned jointly by the unit owners. 
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="commons:SecureString"/>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="CopyrightNoticeType">
+		<xs:annotation>
+			<xs:documentation>
+				Notice of the legal rights of the owner of the information or data.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="commons:SecureString"/>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="County">
+		<xs:annotation>
+			<xs:documentation>
+				The region created by territorial division for the purpose of
+				local government, in which a property address is located.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="commons:SecureString"/>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="CrossStreet">
+		<xs:simpleContent>
+			<xs:extension base="commons:SecureString"/>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="DaysOnMarket">
+		<xs:annotation>
+			<xs:documentation>
+				Number calculated from the days elapsed when a property was
+				first put on the market until it was put under contract,
+				or taken off the market. 
+				Formatting defined by the type attribute.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="commons:SecureDecimal"/>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="Designation">
+		<xs:annotation>
+			<xs:documentation>
+				Designation for an Member - ABR, CRB, PRO, etc.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="commons:SecureString"/>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="DevelopmentStatus">
+		<xs:annotation>
+			<xs:documentation>
+				Text description that defines the stage of the property life
+				cycle, i.e., planned, existing, existing 
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="commons:SecureString"/>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="DimensionsType">
+		<xs:annotation>
+			<xs:documentation>
+				This element represents a measure of spatial extent,
+				It is intended for use in cases where the extent is not a
+				rectangle or is irregular. The units attribute defines
+				the unit of measurement from the measurement attribute list
+			</xs:documentation>
+			<xs:appinfo>
+				Irregular, 123 x 65.9 x 127 x 70
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="commons:SecureString">
+				<xs:attribute ref="commons:measurementUnits" use="optional"/>
+				<xs:attribute ref="commons:measurementSource" use="optional"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="Directions">
+		<xs:annotation>
+			<xs:documentation>
+				Narrative text providing guidance to locate a given physical address.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="commons:SecureString"/>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="AccessibiltyFeaturesType">
+		<xs:annotation>
+			<xs:documentation>
+				Text description of a property's common amenities to assist
+				residents.  May include items such as: wheelchair entry ramps, converted
+				bathrooms, etc.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="commons:AccessibilityEnum">
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="Disclaimer">
+		<xs:annotation>
+			<xs:documentation>
+				Text that serves as a negation or limitation of the rights under 
+				a warranty given by a seller to a buyer.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="commons:SecureString"/>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="DocumentId">
+		<xs:annotation>
+			<xs:documentation>
+				A unique identifier, maintained by a given server, for a document.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="commons:SecureString"/>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="DocumentType">
+		<xs:annotation>
+			<xs:documentation>
+				The server's classification or grouping for a given document
+				belongs to.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="commons:SecureString"/>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="HOADocuments">
+		<xs:annotation>
+			<xs:documentation>
+				Text description of list of HOA documents available.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="commons:SecureString"/>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="Latitude">
+		<xs:annotation>
+			<xs:documentation>
+				An object's (such as a property) location north or south of
+				the equator, measured as an angle and expressed in degrees,
+				minutes and seconds. Formatting defined by the attribute.
+			</xs:documentation>
+			<xs:appinfo>
+				103.252
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="commons:SecureFloat"/>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="LeaseOption">
+		<xs:annotation>
+			<xs:documentation>
+				Text describing the conditions of a lease that contains the
+				right to purchase the property for a specific price within a
+				specific time frame.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="commons:SecureString">
+				<xs:attribute ref="commons:present"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="LegalDescription">
+		<xs:annotation>
+			<xs:documentation>
+				Text that is used to describe the location of property in
+				legal documents. An example is deeds or titles. It may reference
+				topography, plats, grids, etc.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="commons:SecureString"/>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="Level">
+		<xs:annotation>
+			<xs:documentation>
+				Describes the level a room is on: examples are 2nd story,
+				kitchen level,ground level, etc.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="commons:SecureString"/>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="LicenseType">
+		<xs:sequence>
+			<xs:element	name="LicenseExpDate"
+						type="commons:SecureDateTime"
+						minOccurs="0"
+						maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103007</retsid>
+						<example/>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="LicenseAmount"
+						type="commons:SecureDecimal"
+						minOccurs="0"
+						maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103008</retsid>
+						<example/>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="LicenseNumber"
+						type="commons:SecureString"
+						minOccurs="0"
+						maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103009</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="LicenseCategory"
+						type="commons:SecureString"
+						minOccurs="0"
+						maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						The specific type of license. An example is
+						State, but is determined by local rules.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103010</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ListingId">
+		<xs:annotation>
+			<xs:documentation>
+				The key (reference identifier) that uniquely identifies a
+				Listing within a given MLS by a resource type
+				(i.e.ResidentialProperty).  
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="commons:SecureString"/>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="Longitude">
+		<xs:annotation>
+			<xs:documentation>
+				An object's (such as a property) location east or west of the prime meridian,
+				measured as an angle and expressed in degrees, minutes and seconds.
+				Formatting defined by the attribute.
+			</xs:documentation>
+			<xs:appinfo>
+				44.223
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="commons:SecureFloat"/>			
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="LotSizeRange">
+		<xs:simpleContent>
+			<xs:extension base="commons:SecureString">
+				<xs:attribute ref="commons:areaUnits"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="MapCoordinate">
+		<xs:annotation>
+			<xs:documentation>
+				A reference system using latitude and longitude to define the 
+				location of points on the surface of a sphere or spheroid.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="commons:SecureString"/>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="OfficeId">
+		<xs:annotation>
+			<xs:documentation>
+				The key (reference identifier) that uniquely identifies an
+				Office within a given system.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="commons:SecureString"/>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="OfficeName">
+		<xs:annotation>
+			<xs:documentation>
+				The familiar name for a given Office within the system, typically
+				an MLS. May correspond to the Membership system Office name.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="commons:SecureString"/>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="OwnerPays">
+		<xs:simpleContent>
+			<xs:extension base="commons:SecureString"/>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="OwnershipType">
+		<xs:annotation>
+			<xs:documentation>
+				Form of property ownership, commonly one of the following:
+					joint tenancy,
+					tenancy in entirety,
+					sole ownership,
+					tenants in common,
+					community property.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="commons:SecureString"/>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="ParcelAccess">
+		<xs:annotation>
+			<xs:documentation>
+				Text description of how an inventory of real property 
+				(normally at the county level), compiled from recorded deeds, plats, 
+				and other public records and data, may be accessed.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="commons:SecureString"/>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="ParcelMapURL">
+		<xs:annotation>
+			<xs:documentation>
+				An Internet address used to locate a map of an inventory of real
+				property (normally at the county level), compiled from recorded
+				deeds, plats and other public records and data.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="commons:SecureURI"/>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="ParcelNumber">
+		<xs:annotation>
+			<xs:documentation>
+				An integer that is the Assessors Parcel Number (APN) for a
+				property. This number can be located on a property tax bill.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="commons:SecureString"/>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="PatioStyleType">
+		<xs:simpleContent>
+			<xs:extension base="commons:SecureString"/>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="PictureCaption">
+		<xs:annotation>
+			<xs:documentation>
+				Text description associated with property photo for purposes
+				of display in advertisments (web site, fliers, homebooks, etc.).
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="commons:SecureString"/>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="PictureId">
+		<xs:annotation>
+			<xs:documentation>
+				The key (reference identifier) that uniquely identifies an media
+				object (photo, etc.) within a given MLS.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="commons:SecureString"/>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="PresentUse">
+		<xs:annotation>
+			<xs:documentation>
+				Text description of the current use of the property. This
+				is one of the factors used in assessing a property's value.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="commons:SecureString"/>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="PropertyZoning">
+		<xs:annotation>
+			<xs:documentation>
+				Text description of the system of land use regulation 
+				which designates the permitted uses of land based on mapped
+				zones, which separate one part of the community from another.
+				Property zoning commonly includes regulation of the kinds of
+				activities which will be acceptable on particular lots
+				(vacant, residential, agricultural, commercial, industrial, etc.).
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="commons:SecureString"/>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="Query">
+		<!-- +++ PS What is this for? -->
+		<xs:attribute ref="commons:queryType" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="ReportsAvailable">
+		<xs:annotation>
+			<xs:documentation>
+				Text description of list of reports or inspections available.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="commons:SecureString"/>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="ResourceName">
+		<xs:annotation>
+			<xs:documentation>
+				The name of a collection of data that may be searched or
+				updated by a server. This may be either a local name or one
+				of the RETS well-known resource names such as Member, Office,
+				ResidentialProperty, LotsAndLand, etc.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="commons:SecureToken"/>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="SeniorCommunity">
+		<xs:annotation>
+			<xs:documentation>
+				Text description of the common amenities offered to residents
+				in a common interest where a major percentage of the residents
+				in each household are 55 or older. May include items such as:
+					assisted living,
+					senior center,
+					etc.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="commons:SecureString">
+				<xs:attribute ref="commons:present"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="Sequence">
+		<xs:simpleContent>
+			<xs:extension base="commons:SecureDecimal"/>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="Stories">
+		<xs:annotation>
+			<xs:documentation>
+				Number of horizontal divisions of a building, 
+				constituting the area between two adjacent levels. 
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="commons:SecureDecimal"/>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="Style">
+		<xs:annotation>
+			<xs:documentation>
+				Text field containing the MLS definition of the 
+				building's architectural style
+				(Colonial, Cottage, Bungalow, etc.) .
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="commons:SecureString"/>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="Subdivision">
+		<xs:annotation>
+			<xs:documentation>
+				Text field containing the name of a particular area of 
+				land laid out and divided into lots, blocks, and building
+				sites, and in which public facilities are laid out, such as
+				streets, alleys, parks, and easements for public utilities.
+				Types of subdivisions include common interests (condominiums),
+				planned developments, time-share projects,
+			</xs:documentation>
+			<xs:appinfo>
+				Rancho Cordova
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="commons:SecureString"/>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="TaxId">
+		<xs:annotation>
+			<xs:documentation>
+				An Employer Identification Number (EIN) is also known as
+				a federal tax identification number, and is used to identify
+				a business entity. The format is nine digits, separated by
+				a hypen following the first two digits, "12-3456789".
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="commons:SecureString"/>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="TaxKey">
+		<xs:annotation>
+			<xs:documentation>
+				Text field containing the parcel tax key for a given property,
+				unique to the property within a county. Formats vary by county.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="commons:SecureString"/>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="TenantPays">
+		<xs:simpleContent>
+			<xs:extension base="commons:SecureString"/>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="TradeOption">
+		<xs:annotation>
+			<xs:documentation>
+				Text describing the conditions of a sale contract that contains
+				the right to purchase the property via a trade for another
+				property within a specific time frame.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="commons:SecureString">
+				<xs:attribute ref="commons:present"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="TransactionType">
+		<xs:annotation>
+			<xs:documentation>
+				The server's classification or grouping that a given
+				transaction belongs to.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="commons:SecureString"/>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="UnitsTotal">
+		<xs:annotation>
+			<xs:documentation>
+				Total number of separately owned (or occupied) spaces
+				whose interior surfaces (walls, floors and ceilings)
+				serve as their boundaries, in a building or
+				complex. Formatting defined by the attribute.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="commons:boundedCardinalInteger"/>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="UsedTimestamp">
+		<xs:annotation>
+			<xs:documentation>
+				Datetime indicating when the record or resource was last accessed
+				by a user or automated system.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="commons:SecureDateTime"/>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="VestmentType">
+		<xs:annotation>
+			<xs:documentation>
+				TODO
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="commons:SecureString"/>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="WeightLimit">
+		<xs:annotation>
+			<xs:documentation>
+				Number representing the maximum amount an object can weigh.
+				The unit attribute specifies the unit of measure, i.e, lbs, kgs, etc.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="commons:SecureDecimal">
+				<xs:attribute ref="commons:weightUnits"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="YearBuiltType">
+		<xs:annotation>
+			<xs:documentation>
+				Four digit year indicating when a building was constructed.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="commons:SecureYear">
+				<xs:attribute ref="commons:newConstruction" use="optional"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<!-- nested complex types-->
+	<xs:complexType name="AnimalPolicy">
+		<xs:sequence>
+			<xs:element name="PermitAnimals" 
+					type="commons:nullable-boolean" 
+					minOccurs="0" 
+					maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Indicates if animals are allowed in the
+						community, building or unit.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>101606</retsid>
+						<example>true</example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="IsDepositRequired" type="commons:nullable-boolean" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>101607</retsid>
+						<example>false</example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="PermittedTypes" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						PermittedTypes should include things like
+						breeds, types (Cats, Dogs), Neutered, Spayed,
+						Declawed or other information.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>101608</retsid>
+						<example/>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="WeightLimit" type="commons:WeightLimit" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Indicates the size by weight of animals
+						permitted.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>101609</retsid>
+						<example/>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="PetDepositAmount" type="commons:SecureMoney" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>101610</retsid>
+						<example/>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="PetAdditionalFee" type="commons:FeeWithFrequency" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>101611</retsid>
+						<example/>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:any namespace="##other" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AssociationMembershipType">
+		<xs:sequence>
+			<xs:element name="AssociationName" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						The name of the association.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103011</retsid>
+						<example/>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="AssociationId" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						The identifier of the association.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103012</retsid>
+						<example/>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="AssociationMembershipId" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						The identifier assigned to the Member or Office by the 
+						assocation.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103013</retsid>
+						<example/>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Community">
+		<xs:sequence>
+			<xs:element name="Subdivision" type="commons:Subdivision" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103014</retsid>
+						<example/>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Schools" type="commons:Schools" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103015</retsid>
+						<example/>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CommunityName" type="commons:SecureString" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+						The name of the development, neighborhood or
+						association in which the property is located.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103016</retsid>
+						<example/>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="SeniorCommunity" type="commons:SeniorCommunity" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103017</retsid>
+						<example/>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ExistingStructures" type="commons:ExistingStructures" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103018</retsid>
+						<example/>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:any namespace="##other" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CoordinateSystem">
+		<xs:sequence>
+			<xs:element name="Easting" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103019</retsid>
+						<example/>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Northing" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103020</retsid>
+						<example/>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Height" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103021</retsid>
+						<example/>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Designations">
+		<xs:sequence>
+			<xs:element	name="Designation"
+						type="commons:Designation"
+						minOccurs="0"
+						maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103022</retsid>
+						<example/>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ExistingStructure">
+		<xs:sequence>
+			<xs:element name="Category" type="commons:ExistingStructureCategoryEnum" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103023</retsid>
+						<example/>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="BuildingType" type="commons:BuildingType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103024</retsid>
+						<example/>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="StructureDimensionsType"
+						type="commons:PlanarDimensionsType"
+						minOccurs="0"
+						maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103025</retsid>
+						<example/>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="Description"
+						type="commons:SecureString"
+						minOccurs="0"
+						maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103026</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="ConstructionMaterials"
+						type="commons:ConstructionMaterials"
+						minOccurs="0"
+						maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103027</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:any	namespace="##other"
+					minOccurs="0"
+					maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ExistingStructures">
+		<xs:annotation>
+			<xs:documentation>
+				A collection of ExistingStructure. These are
+				buildings or facilities that are present on the
+				property when it is listed for sale, and are
+				included in the sale price. These buildings may
+				include a dwelling, garage, barn, outbuilding or
+				other structures.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element	name="ExistingStructure"
+						type="commons:ExistingStructure"
+						minOccurs="0"
+						maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103028</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="FarmType">
+		<xs:sequence>
+			<xs:element	name="HasAgricultureUseExemption"
+						type="commons:nullable-boolean"
+						minOccurs="0"
+						maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						The property has a tax exemption for use as agriculture or
+						open space that reduces the annual tax bill.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103029</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="IsAgricultureReserve"
+						type="commons:nullable-boolean"
+						minOccurs="0"
+						maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						The property is restricted to use as a
+						farm or other agricultural use.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103030</retsid>
+						<example>true</example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="SilosTotal"
+						type="commons:boundedCardinalInteger"
+						minOccurs="0"
+						maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Count of silo storage structures
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103031</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="SiloCapacityTotal"
+						type="commons:SiloCapacityType"
+						minOccurs="0"
+						maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Total silo storage capacity of
+						all silo structures.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103032</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="TenantDwellingsTotal"
+						type="commons:boundedCardinalInteger"
+						minOccurs="0"
+						maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103033</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="BestUse"
+						type="commons:SecureString"
+						minOccurs="0"
+						maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						An enumeration of the farm use
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103034</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="PresentUse"
+						type="commons:SecureString"
+						minOccurs="0"
+						maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						An enumeration of the farm use
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103035</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="CurrentCrop"
+						type="commons:SecureString"
+						minOccurs="0"
+						maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						An enumeration of the crops currently
+						on the property
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103036</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="HasWell"
+						type="xs:boolean"
+						minOccurs="0"
+						maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						An enumeration of the farm use
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103037</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="Irrigation"
+						type="commons:SecureString"
+						minOccurs="0"
+						maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						An enumeration of the irrigationhe farm use
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103038</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="FarmOperation"
+						type="commons:SecureString"
+						minOccurs="0"
+						maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103039</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="MainBarnSize"
+						type="commons:MainBarnSize"
+						minOccurs="0"
+						maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103040</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="PastureArea"
+						type="commons:SecureArea"
+						minOccurs="0"
+						maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103041</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="TillableArea"
+						type="commons:SecureArea"
+						minOccurs="0"
+						maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103042</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="PresentLivestock"
+						type="commons:SecureString"
+						minOccurs="0"
+						maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103043</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="PotentialLivestock"
+						type="commons:SecureString"
+						minOccurs="0"
+						maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103044</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:any	namespace="##other"
+					minOccurs="0"
+					maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="GeographicData">
+		<xs:complexContent>
+			<xs:extension base="commons:SimpleGeographicData">
+				<xs:sequence>
+					<xs:element name="Source" type="commons:SecureString" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>
+							</xs:documentation>
+							<xs:appinfo>
+								<retsid>103045</retsid>
+								<example/>
+							</xs:appinfo>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="Accuracy" type="commons:SecureString" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>
+							</xs:documentation>
+							<xs:appinfo>
+								<retsid>103046</retsid>
+								<example/>
+							</xs:appinfo>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="URL" type="commons:URL" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>
+							</xs:documentation>
+							<xs:appinfo>
+								<retsid>103047</retsid>
+								<example/>
+							</xs:appinfo>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="CrossStreet" type="commons:CrossStreet" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>
+							</xs:documentation>
+							<xs:appinfo>
+								<retsid>103048</retsid>
+								<example/>
+							</xs:appinfo>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="CensusGeography" type="commons:CensusGeography" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>
+							</xs:documentation>
+							<xs:appinfo>
+								<retsid>103049</retsid>
+								<example/>
+							</xs:appinfo>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="FloodPlain" type="commons:SecureString" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>
+							</xs:documentation>
+							<xs:appinfo>
+								<retsid>103050</retsid>
+								<example/>
+							</xs:appinfo>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="PrintedMapCoordinates" type="commons:PrintedMapCoordinates" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>
+							</xs:documentation>
+							<xs:appinfo>
+								<retsid>103051</retsid>
+								<example/>
+							</xs:appinfo>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="CoordinateSystem" type="commons:CoordinateSystem" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>
+							</xs:documentation>
+							<xs:appinfo>
+								<retsid>103052</retsid>
+								<example/>
+							</xs:appinfo>
+						</xs:annotation>
+					</xs:element>
+					<xs:any namespace="##other" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="MarketingInformationType">
+		<xs:annotation>
+			<xs:documentation>
+				Items related to the contract between the
+				selling agent and the owner.
+				These indicators are used to determine the
+				visibility of the listing on the internet,
+				visibility of address on the internet, visibility
+				of the photo on the internet, and whether the
+				property has a sign. Additional elements
+				may be others discovered in the future.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element	name="PermitInternet"
+				type="commons:SecureBoolean"
+				minOccurs="0"
+				maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						The seller agreed to permit the
+						listing to be marketed on the
+						internet.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>100342</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="PermitAddressOnInternet"
+				type="commons:SecureBoolean"
+				minOccurs="0"
+				maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						The seller agreed to permit the
+						property address to be displayed
+						on the internet.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>100343</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="PermitPictureOnInternet"
+				type="commons:SecureBoolean"
+				minOccurs="0"
+				maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						The seller agreed to permit the
+						display of image(s) of the property
+						on the internet.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>100344</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="PermitSignOnProperty"
+				type="commons:SecureBoolean"
+				minOccurs="0"
+				maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						The seller agreed to permit a for-sale
+						sign on the property and asserts the
+						right to provide that permission.
+						This may be constrained by local
+						rules or home-owner rules.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>100345</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="HasSignOnProperty"
+				type="commons:SecureBoolean"
+				minOccurs="0"
+				maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						A for-sale sign is on the property.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>100388</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="VOWEntireListingDisplay"
+				type="commons:SecureBoolean"
+				minOccurs="0"
+				maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Indicates whether the listing may be displayed.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>102026</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="VOWAddressDisplay"
+				type="commons:SecureBoolean"
+				minOccurs="0"
+				maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Indicates whether the listing address may be displayed.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>102027</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="VOWAutomatedValuationDisplay"
+				type="commons:SecureBoolean"
+				minOccurs="0"
+				maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Indicates whether the listing approximated valuation may be displayed.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>102028</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="VOWConsumerComment"
+				type="commons:SecureBoolean"
+				minOccurs="0"
+				maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Indicates whether consumer comments may be displayed.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>102029</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:any	namespace="##other"
+				processContents="lax"
+				minOccurs="0"
+				maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="LeaseOptions">
+		<xs:sequence>
+			<xs:element name="LeaseOption" type="commons:LeaseOption" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103053</retsid>
+						<example/>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="LockboxType">
+		<xs:sequence>
+			<xs:element name="Location" type="commons:SecureString" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Site location for the lockbox.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>100394</retsid>
+						<example>Front Door</example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Model" type="commons:SecureString" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						A description of the lockbox brand and model
+						number.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>100395</retsid>
+						<example>Realtor's Friend</example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="LotSize">
+		<xs:sequence>
+			<xs:element	name="LotDimensions"
+						type="commons:PlanarDimensionsType"
+						minOccurs="0"
+						maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103054</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="MailingAddress">
+		<xs:sequence>
+			<xs:element	name="Address"
+						type="commons:Address"
+						minOccurs="0"
+						maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103055</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="MainBarnSize">
+		<xs:sequence>
+			<xs:element	name="BarnDimensions"
+						type="commons:PlanarDimensionsType"
+						minOccurs="0" 
+						maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103056</retsid>
+						<example/>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="MainFloorCeilingHeight"
+						type="commons:Measurement"
+						minOccurs="0"
+						maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103057</retsid>
+						<example/>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="MLSAreaType">
+		<xs:annotation>
+			<xs:documentation>
+				A Marketing area descriptor for a listing, consisting
+				of optional major, secondary and minor names.
+				These names may be area (region/zone), a county,
+				neighborhood, city, or combination of geographic
+				areas which may have no legal standing but
+				defines a small region in terms well-known
+				by users of the information.
+				
+				The schema does not enforce data-mapping order
+				but common usage is that data fields are mapped
+				in order of major, secondary and minor. Systems
+				that do not capture information for any of these
+				elements should suppress the field to element
+				mapping using the order described above. For
+				example, if a system only has a single piece of
+				data for marketing area, they should map this to
+				the major area. If a system has two pieces of
+				information, the mapping should be to the major
+				and secondary area. In both examples, no data
+				is mapped to the minor area and it would not
+				be expressed in the response document.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element	name="MajorArea"
+						type="commons:SecureString"
+						minOccurs="0"
+						maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						The major marketing area name, as defined by
+						the MLS or other non-governmental organization
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>100385</retsid>
+						<example>Harbor Hill</example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="SecondaryArea"
+						type="commons:SecureString"
+						minOccurs="0"
+						maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						The secondary marketing area name, as defined
+						by the MLS or other non-governmental
+						organization.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>100386</retsid>
+						<example>Hilltop</example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="MinorArea"
+						type="commons:SecureString"
+						minOccurs="0"
+						maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						A tertiary marketing area name, as
+						defined by the MLS or other non-governmental
+						organization.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>100387</retsid>
+						<example>Old Crossroads</example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="MLSOperator">
+		<xs:annotation>
+			<xs:documentation>
+				The id and name of the Association or Board 
+				that has entered and maintains the Listing 
+				record.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element	name="MLSOperatorId"
+						type="xs:string"
+						minOccurs="0"
+						maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103058</retsid>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="MLSOperatorName"
+						type="xs:string"
+						minOccurs="0"
+						maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103059</retsid>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ManufacturedHousingType">
+		<xs:sequence>
+			<xs:element	name="IsFullyInsulated"
+						type="xs:boolean"
+						minOccurs="0"
+						maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						The manufactured home is sufficiently insulated
+						to be occupied year-round.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103060</retsid>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="HousingCategory" 
+						type="commons:ManufacturedHousingCategoryEnum"
+						minOccurs="0"
+						maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						An enumeration of the category that this structure belongs
+						to.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103061</retsid>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="ManufacturerName"
+						type="commons:SecureString"
+						minOccurs="0"
+						maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Covers housing built off-site and either
+						transported to the site by trailer or
+						own axle.
+						
+						The housing may be permanently attached to the
+						site or may retain transportability.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103062</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="Model"
+						type="commons:SecureString"
+						minOccurs="0"
+						maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103063</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="Make"
+						type="commons:SecureString"
+						minOccurs="0"
+						maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103064</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="ManufacturingDate"
+						type="commons:SecureDateTime"
+						minOccurs="0"
+						maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103065</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="Dimensions"
+						type="commons:PlanarDimensionsType"
+						minOccurs="0"
+						maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103066</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="License"
+						type="commons:LicenseType"
+						minOccurs="0"
+						maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103067</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="SpaceRent"
+						type="commons:SecureDecimal"
+						minOccurs="0"
+						maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103068</retsid>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:any	namespace="##other"
+					minOccurs="0"
+					maxOccurs="unbounded">
+			</xs:any>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="OwnedItem">
+		<xs:annotation>
+			<xs:documentation>
+				An element that has an ownership state
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element	name="Description"
+						type="commons:SecureString"
+						minOccurs="0"
+						maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						The description of the owned item.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103069</retsid>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="OwnershipType"
+						type="commons:SecureString"
+						minOccurs="0"
+						maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						The ownership type string
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103070</retsid>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:any	namespace="##other"
+					minOccurs="0"
+					maxOccurs="unbounded">
+			</xs:any>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PlanarDimensionsType">
+		<xs:annotation>
+			<xs:documentation>
+				A container for plane measurements.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element	name="Area"
+						type="commons:SecureArea"
+						minOccurs="0"
+						maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103071</retsid>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="IrregularDimensions"
+						type="commons:DimensionsType"
+						minOccurs="0"
+						maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Measurement specifying a list of dimensions
+						for an irregular space.
+						The source attribute defines the source of the
+						measurement, while the units attribute defines
+						the unit of measurement: feet, meters or other
+						units of measure. The general use of this is
+						restricted to regular rectangular objects.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103072</retsid>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="Length"
+						type="commons:SecureMeasurement"
+						minOccurs="0"
+						maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Measurement specifying the horizontal
+						dimension of something that is fixed in place.
+						The source attribute defines the source of the
+						measurement, while the units attribute defines
+						the unit of measurement: feet, meters or other
+						units of measure. The general use of this is
+						restricted to regular rectangular objects.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103073</retsid>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="Width"
+						type="commons:SecureMeasurement"
+						minOccurs="0"
+						maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Measurement specifying the smaller horizontal
+						dimension of something that is fixed in place.
+						The source attribute defines the source of the
+						measurement, while the units attribute defines
+						the unit of measurement: feet, meters or other
+						units of measure. The general use of this is
+						restricted to regular rectangular objects.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103074</retsid>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PrintedMapCoordinate">
+		<xs:sequence>
+			<xs:element	name="MapCoordinate"
+						type="commons:MapCoordinate"
+						minOccurs="0"
+						maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103075</retsid>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="MapPage"
+						type="commons:SecureString"
+						minOccurs="0"
+						maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103076</retsid>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="ReferenceBook"
+						type="commons:SecureString"
+						minOccurs="0"
+						maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103077</retsid>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PrintedMapCoordinates">
+		<xs:sequence>
+			<xs:element	name="PrintedMapCoordinate"
+						type="commons:PrintedMapCoordinate"
+						minOccurs="0"
+						maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103078</retsid>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="RemarksType">
+		<xs:sequence>
+			<xs:element name="AdvertisingRemarks" type="commons:SecureRemark" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+						Remarks meant for marketing purposes. 
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103079</retsid>
+						<example>If you lived here you'd be home already!</example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="MemberRemarks" type="commons:SecureRemark" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+						Text remarks that are restricted. In an MLS 
+						this is typically the field where information 
+						is stored for REALTORS(R) only. This information 
+						is NOT intended to be displayed to the general 
+						public. Realtor remarks may contain information 
+						pertaining to seller/tenant, listing member 
+						contact information, or entry information. 
+						In other systems, access will be determined 
+						by local business rules.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103080</retsid>
+						<example>Beware of dog on premises</example>
+					</xs:appinfo>
+				</xs:annotation>				
+			</xs:element>
+			<xs:element name="PublicRemarks" type="commons:SecureRemark" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+						Text remarks that may be displayed to the
+						public. In an MLS, it is the field where
+						information is entered for the public. This
+						information is intended to be visible on-line.
+						This is typically information that describes
+						the selling points of the building and/or land
+						for sale. Local conditions and rules will
+						determine what such content can contain.
+						Generally, the following information is excluded:
+						any information pertaining to entry to the
+						property, the seller and/or tenant,
+						listing member contact information.
+						In other systems, these remarks will be
+						determined by local business rules.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103081</retsid>
+						<example>A real gem!</example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="ListingOfficeRemarks"
+						type="commons:SecureRemark"
+						minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+						Remarks meant for internal office use.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103082</retsid>
+						<example>Highly marketable!</example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="CompanyRemarks"
+						type="commons:SecureRemark"
+						minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+						Remarks meant for offices that are the
+						same company as the listing office.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103083</retsid>
+						<example>Highly marketable!</example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:any namespace="##other" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="RentalAmounts">
+		<xs:sequence>
+			<xs:element name="RentalAmount" type="commons:FeeWithFrequency" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103084</retsid>
+						<example/>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="RentLeaseClauses">
+		<xs:sequence>
+			<xs:element name="RentLeaseClause" type="commons:SecureString" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103085</retsid>
+						<example/>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="RentalLeaseInformationType">
+		<xs:sequence>
+			<xs:element name="RentLeaseDates" type="commons:RentLeaseDatesType" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103086</retsid>
+						<example/>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="RentLeaseClauses" type="commons:RentLeaseClauses" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103087</retsid>
+						<example/>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="RentLeaseSpecials" type="commons:RentLeaseSpecials" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103088</retsid>
+						<example/>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="TenantResponsible" type="commons:TenantResponsible" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103089</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="TenantRights"
+						type="commons:TenantRights"
+						minOccurs="0"
+						maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103090</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="RentLeaseSpecials">
+		<xs:sequence>
+			<xs:element	name="RentLeaseSpecial"
+						type="commons:SecureString"
+						minOccurs="0"
+						maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103091</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="RoomType">
+		<xs:sequence>
+			<xs:element	name="Category"
+						type="commons:RoomCategoryEnum"
+						minOccurs="0"
+						maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103092</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="Level"
+						type="commons:Level"
+						minOccurs="0"
+						maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103093</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="RoomDimensions"
+						type="commons:PlanarDimensionsType"
+						minOccurs="0"
+						maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103094</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="RoomHeight"
+						type="commons:SecureMeasurement"
+						minOccurs="0"
+						maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103095</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="Description"
+						type="commons:SecureString"
+						minOccurs="0"
+						maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103096</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="InteriorDetail"
+						type="commons:InteriorDetailType"
+						minOccurs="0"
+						maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103097</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:any	namespace="##other"
+					minOccurs="0"
+					maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute	name="otherTypeDescription"
+					type="xs:string"
+					use="optional">
+			<xs:annotation>
+				<xs:documentation>
+				</xs:documentation>
+				<xs:appinfo>
+					<retsid>103098</retsid>
+					<example/>
+				</xs:appinfo>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute	ref="commons:isMaster" 
+					use="optional">
+			<xs:annotation>
+				<xs:documentation>
+				</xs:documentation>
+				<xs:appinfo>
+					<retsid>103099</retsid>
+					<example/>
+				</xs:appinfo>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="ShowingInformationType">
+		<xs:sequence>
+			<xs:element name="Remarks" type="commons:SecureRemark" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>
+						In an MLS system, remarks that detail the
+						seller's instructions for showing the
+						subject property. Showing instructions may
+						include: contact information, showing times,
+						notice required or other information.
+						These remarks are priveledged and are not
+						for public viewing.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>100389</retsid>
+						<example/>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="OccupancyState" type="commons:OccupancyStateEnum" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						The current occupancy state of the property.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>100390</retsid>
+						<example>Vacant</example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Lockbox" type="commons:LockboxType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>100391</retsid>
+						<example/>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="RequiresAppointment" type="commons:SecureBoolean" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Showing is by appointment only
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>100396</retsid>
+						<example>true</example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="AppointmentPhoneNumber" type="commons:Phone" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						The contact telephone number to make an
+						appointment.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>100397</retsid>
+						<example/>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Contact" type="commons:ContactablePerson" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>
+						Contact information related to the showing
+						of the listing.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>100392</retsid>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ShowingAccess" type="commons:SecureString" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>
+						Provides information about access to
+						the listing property.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>100393</retsid>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SiloCapacityType">
+		<xs:simpleContent>
+			<xs:extension base="commons:SecureDecimal">
+				<xs:attribute ref="commons:weightUnits">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>103100</retsid>
+							<example/>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:attribute>
+				<xs:attribute ref="commons:measurementSource">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>103101</retsid>
+							<example/>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="SimpleGeographicData">
+		<xs:sequence>
+			<xs:element name="Latitude" type="commons:Latitude" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103102</retsid>
+						<example/>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Longitude" type="commons:Longitude" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103103</retsid>
+						<example/>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Elevation" type="commons:SecureString" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103104</retsid>
+						<example/>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="MapCoordinate" type="commons:MapCoordinate" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103105</retsid>
+						<example/>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Directions" type="commons:Directions" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103106</retsid>
+						<example/>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="TenantResponsible">
+		<xs:sequence>
+			<xs:element name="TenantResponsibility" type="commons:SecureString" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103107</retsid>
+						<example/>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="TenantRights">
+		<xs:sequence>
+			<xs:element name="TenantRight" type="commons:SecureString" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103108</retsid>
+						<example/>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="TradeOptions">
+		<xs:sequence>
+			<xs:element name="TradeOption" type="commons:TradeOption" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103109</retsid>
+						<example/>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Utility">
+		<xs:sequence>
+			<xs:element name="Category" type="commons:UtilityEnum">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103110</retsid>
+						<example/>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:any namespace="##other" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="otherTypeDescription" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation>
+				</xs:documentation>
+				<xs:appinfo>
+					<retsid>103111</retsid>
+					<example/>
+				</xs:appinfo>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+
+	<!--MISMO REPI Types-->
+	<xs:complexType name="AtticDetails">
+		<xs:sequence>
+			<xs:element name="SpaceDetail" type="commons:SpaceDetailType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103112</retsid>
+						<example/>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Stairs" type="commons:SecureBoolean" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103113</retsid>
+						<example/>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="DropStair" type="commons:SecureBoolean" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103114</retsid>
+						<example/>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Scuttle" type="commons:SecureBoolean" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103115</retsid>
+						<example/>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Insulation" type="commons:InsulationType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103116</retsid>
+						<example/>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:any namespace="##other" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Balcony">
+		<xs:sequence>
+			<xs:element name="Description" type="commons:SecureString" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103117</retsid>
+						<example/>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="AreaTotal" type="commons:Area" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103118</retsid>
+						<example/>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:any namespace="##other" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="BasementDetails">
+		<xs:sequence>
+			<xs:element name="SpaceDetail" type="commons:SpaceDetailType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103119</retsid>
+						<example/>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CeilingDescription" type="commons:SecureString" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103120</retsid>
+						<example/>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="OutsideEntryDescription" type="commons:SecureString" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103121</retsid>
+						<example/>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="FloorDrain" type="commons:SecureBoolean" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103122</retsid>
+						<example/>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:any namespace="##other" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="BathWainscotMaterials">
+		<xs:sequence>
+			<xs:element name="Description" type="commons:SecureString" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103123</retsid>
+						<example/>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Ceramic" type="commons:SecureBoolean" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103124</retsid>
+						<example/>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Drywall" type="commons:SecureBoolean" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103125</retsid>
+						<example/>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Plaster" type="commons:SecureBoolean" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103126</retsid>
+						<example/>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Marlite" type="commons:SecureBoolean" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103127</retsid>
+						<example/>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Fiberglass" type="commons:SecureBoolean" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103128</retsid>
+						<example/>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Deck">
+		<xs:sequence>
+			<xs:element name="Description" type="commons:SecureString" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103129</retsid>
+						<example/>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Material" type="commons:SecureString" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103130</retsid>
+						<example/>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="AreaTotal" type="commons:Area" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103131</retsid>
+						<example/>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:any namespace="##other" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="FoundationDetails">
+		<xs:sequence>
+			<xs:element name="SlabDescription" type="commons:SecureString" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103132</retsid>
+						<example/>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CrawlSpaceDescription" type="commons:SecureString" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103133</retsid>
+						<example/>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="BasementDescription" type="commons:SecureString" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103134</retsid>
+						<example/>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="SumpPumpDescription" type="commons:SecureString" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103135</retsid>
+						<example/>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="DampnessDescription" type="commons:SecureString" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103136</retsid>
+						<example/>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="SettlementDescription" type="commons:SecureString" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103137</retsid>
+						<example/>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="InfestationDescription" type="commons:SecureString" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103138</retsid>
+						<example/>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:any namespace="##other" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Porch">
+		<xs:sequence>
+			<xs:element name="Description" type="commons:SecureString" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103139</retsid>
+						<example/>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="AreaTotal" type="commons:Area" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103140</retsid>
+						<example/>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:any namespace="##other" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="RentLeaseDatesType">
+		<xs:sequence>
+			<xs:element name="BeginDate" type="xs:dateTime" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103141</retsid>
+						<example/>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="EndDate" type="xs:dateTime" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103142</retsid>
+						<example/>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Term" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103143</retsid>
+						<example/>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SpaceDetailType">
+		<xs:sequence>
+			<xs:element name="AreaTotal" type="commons:Area" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103144</retsid>
+						<example/>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="WallMaterial" type="commons:WallMaterialEnum" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103145</retsid>
+						<example/>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="FloorMaterial" type="commons:FlooringMaterialEnum" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103146</retsid>
+						<example/>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Heated" type="commons:SecureBoolean" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103147</retsid>
+						<example/>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Finished" type="commons:SecureBoolean" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103148</retsid>
+						<example/>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="FinishedPercent" type="commons:SecureDecimal" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103149</retsid>
+						<example/>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="FinishDescription" type="commons:SecureString" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>103150</retsid>
+						<example/>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

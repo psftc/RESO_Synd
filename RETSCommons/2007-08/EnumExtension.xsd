@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+	targetNamespace="http://www.example.org/EnumExtension" 
+	xmlns:tns="http://www.example.org/EnumExtension" 
+	xmlns:commons="http://rets.org/xsd/RETSCommons/2007-08"
+	elementFormDefault="qualified"
+	attributeFormDefault="unqualified">
+
+	<xs:import	namespace="http://rets.org/xsd/RETSCommons/2007-08"
+					schemaLocation="../../../xsd/RETSCommons/2007-08/RETSCommons.xsd"/>
+
+	<!-- The below example creates a custom enum type by adding values through the union mechanism. -->
+<!--	<xs:simpleType name="ExtraFlooringMaterialEnum"> 
+		<xs:union memberTypes="commons:FlooringMaterialEnum">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="Mud"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:union>
+	</xs:simpleType>
+-->
+	<!-- Define a type allowing for an attribute to contain the value for Other. -->
+
+	<xs:complexType name="FlooringMaterialEnumWithValue">
+		<xs:simpleContent>
+			<xs:extension base="commons:FlooringMaterialEnum">
+				<xs:attribute name="otherValue" type="xs:string" use="optional"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	
+	
+</xs:schema>

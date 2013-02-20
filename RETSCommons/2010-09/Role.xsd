@@ -1,0 +1,114 @@
+<?xml version="1.0"?>
+<xs:schema	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+				xmlns:commons="http://rets.org/xsd/RETSCommons"
+				targetNamespace="http://rets.org/xsd/RETSCommons"
+				elementFormDefault="qualified"
+				attributeFormDefault="unqualified">
+
+	<!--
+		(C)2007 National Association of REALTORS(R). All Rights Reserved
+
+		(C) 2010 Falcon Technologies Corporation. All Rights Reserved
+
+		Tab stops
+		:set ts=3
+
+		File History
+		======================
+		$Header: Role.xsd, 5, 1/24/08 11:30:35 AM PST, Paul Stusiak$
+		
+
+		$Log:
+		 5    055_RETS_Standard 1.4         1/24/08 11:30:35 AM PSTPaul Stusiak
+		      correct copyright notice language
+		 4    055_RETS_Standard 1.3         11/29/07 10:15:44 AM PSTPaul Stusiak
+		      add documentation for enumerations
+		 3    055_RETS_Standard 1.2         10/8/07 1:22:16 PM PDT Paul Stusiak
+		      Update version timestamp
+		 2    055_RETS_Standard 1.1         7/9/07 9:55:05 AM PDT  Gina Accawi
+		      Remove role union type.
+		 1    055_RETS_Standard 1.0         7/9/07 2:01:44 AM PDT  Paul Stusiak    
+		$
+		======================
+	-->
+
+	<xs:annotation>
+		<xs:documentation>
+			Elements related to a Role that a Person,
+			Member or Team may have.
+
+			Enumerations are expected to be implemented as
+			lookup lists. The schema use the human readable
+			form of the lookup list rather than a code value.
+			
+			Systems are permitted to implement any internal
+			method for storing such enumerations but MUST
+			expose the list values using the data values
+			of the appropriate enumeration.
+			
+			Systems that have fewer values in a particular list do not
+			need to implement the additional enumeration values since they
+			will never be visible.
+			
+			Systems that have more values in a particular list should expose the
+			additional values in the metadata and use the extension mechanism of
+			setting the element value to 'Other' and putting the extension data into
+			the otherDescription attribute.
+		</xs:documentation>
+	</xs:annotation>
+
+	<xs:include schemaLocation="Primitives.xsd"/>
+
+	<!-- Types -->
+	<xs:complexType name="ParticipantRoleEnum">
+		<xs:simpleContent>
+			<xs:restriction base="commons:OtherEnumerationDescriptionString">
+				<xs:enumeration value="Listing"/>
+				<xs:enumeration value="Co-Listing"/>
+				<xs:enumeration value="Selling"/>
+				<xs:enumeration value="Co-Selling"/>
+				<xs:enumeration value="Entry"/>
+				<xs:enumeration value="Assistant"/>
+				<xs:enumeration value="Owner"/>
+				<xs:enumeration value="Occupant"/>
+				<xs:enumeration value="Buyer"/>
+				<xs:enumeration value="Seller"/>
+				<xs:enumeration value="Service">
+					<xs:annotation>
+						<xs:documentation>
+							Participant is providing a service during the
+							transaction.
+						</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Other"/>
+			</xs:restriction>
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<xs:complexType name="TeamRoleEnum">
+		<xs:simpleContent>
+			<xs:restriction base="commons:OtherEnumerationDescriptionString">
+				<xs:enumeration value="Team Lead">
+					<xs:annotation>
+						<xs:documentation>
+							The team leader or manager.
+						</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Marketing Lead">
+					<xs:annotation>
+						<xs:documentation>
+							The primary marketing team member.
+						</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Photographer"/>
+				<xs:enumeration value="Member"/>
+				<xs:enumeration value="Marketing Member"/>
+				<xs:enumeration value="Other"/>
+			</xs:restriction>
+		</xs:simpleContent>
+	</xs:complexType>
+
+</xs:schema>

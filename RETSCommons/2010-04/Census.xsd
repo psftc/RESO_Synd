@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+				xmlns:commons="http://rets.org/xsd/RETSCommons/2010-04"
+				targetNamespace="http://rets.org/xsd/RETSCommons/2010-04"
+				elementFormDefault="qualified"
+				attributeFormDefault="unqualified">
+
+	<!--
+		(C)2007 National Association of REALTORS(R). All Rights Reserved
+
+		(C) 2010 Falcon Technologies Corporation. All Rights Reserved.
+
+		Tab stops
+		:set ts=3
+
+		File History
+		======================
+		$Header: Census.xsd, 7, 1/24/08 11:30:32 AM PST, Paul Stusiak$
+		
+
+		$Log:
+		 7    055_RETS_Standard 1.6         1/24/08 11:30:32 AM PSTPaul Stusiak
+		      correct copyright notice language
+		 6    055_RETS_Standard 1.5         10/7/07 10:44:42 PM PDTPaul Stusiak
+		      general clean up of the schema, add missing retsid as necessary.
+		 5    055_RETS_Standard 1.4         5/1/07 2:36:59 PM PDT  Paul Stusiak
+		      Update the version timestamp, make the schema relative again,
+		      normalize the date related typing to use SecureDateTime and naming to
+		      be of the form XXXDateTime
+		 4    055_RETS_Standard 1.3         4/3/07 1:43:55 AM PDT  Paul Stusiak
+		      change namespace to remote location (www.ftc2.com) for testing
+		 3    055_RETS_Standard 1.2         4/2/07 11:26:53 AM PDT Paul Stusiak
+		      change namespace to match responding server and to use the URI
+		      versioning suggested by both HP and XFront
+		 2    055_RETS_Standard 1.1         3/30/07 6:20:19 PM PDT Paul Stusiak
+		      Update of the versionTimestamp and the namespace (namespace to
+		      200704). Change formating to a standard format
+		 1    055_RETS_Standard 1.0         3/16/07 11:46:22 AM PDTPaul Stusiak    
+		$
+		======================
+	-->
+
+	<xs:annotation>
+		<xs:documentation>
+			Elements related to census information about the property
+
+			See http://wwww.census.gov/geo/www/GARM/Ch10GARM.pdf
+			or
+			http://www.census.gov/geo/www/
+
+			and
+			http://www.census.gov/geo/www/fips/fips.html
+
+			This work is based on the 2000 Census information
+		</xs:documentation>
+	</xs:annotation>
+
+	<xs:simpleType name="StateCode">
+		<xs:annotation>
+			<xs:documentation>
+				A two-digit FIPS (Federal Information Processing
+				Standards) code that identifies the state where the
+				property is located.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="CountyCode">
+		<xs:annotation>
+			<xs:documentation>
+			A three-digit FIPS (Federal Information Processing
+			Standards) code that identifies the county where the
+			property is located.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="CensusTract">
+		<xs:annotation>
+			<xs:documentation>
+				A census tract is a small geographic area. Census
+				2000 assigned census tract numbers to all areas of
+				the U.S. and some U.S. territories and possessions.
+				Census tract numbers are unique within a county.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="6"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="BlockGroup">
+		<xs:annotation>
+			<xs:documentation>
+				A Block Group is a subdivision of a census tract
+				or a block numbering area. A block group consists
+				of all the blocks within a census tract beginning
+				with the same number. Block group is the smallest
+				geographic unit for which the Census Bureau
+				tabulates sample data.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Block">
+		<xs:annotation>
+			<xs:documentation>
+				A block is a subdivision of a block group. Blocks
+				always begin with the same first number as the
+				BlockGroup they belong to.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="CensusUniqueId">
+		<xs:annotation>
+			<xs:documentation>
+				A concatenation of state, county, census and
+				block codes that uniquely identifies a location.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="15"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="CensusSubCounty">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="5"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<!-- Complex Types -->
+	<xs:complexType name="CensusGeography">
+		<xs:sequence>
+			<xs:element	name="StateCode"
+							type="commons:StateCode"
+							minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<retsid>100042</retsid>
+						<example>06</example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="CountyCode"
+							type="commons:CountyCode"
+							minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<retsid>100043</retsid>
+						<example>013</example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="CensusSubCounty"
+							type="commons:CensusSubCounty"
+							minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<retsid>100044</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="CensusTract"
+							type="commons:CensusTract"
+							minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<retsid>100045</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="BlockGroup"
+							type="commons:BlockGroup"
+							minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<retsid>100046</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="Block"
+							type="commons:Block"
+							minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<retsid>100047</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="CensusUniqueId"
+							type="commons:CensusUniqueId"
+							minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<retsid>100048</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

@@ -1,0 +1,2074 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+				xmlns:commons="http://rets.org/xsd/RETSCommons/2007-08"
+				targetNamespace="http://rets.org/xsd/RETSCommons/2007-08"
+				elementFormDefault="qualified"
+				attributeFormDefault="unqualified">
+
+	<!--
+		(C)2007 National Association of REALTORS(R). All Rights Reserved
+
+		Tab stops
+		:set ts=3
+
+		File History
+		======================
+		$Header: Financial.xsd, 30, 3/31/08 1:09:26 AM PDT, Paul Stusiak$	
+
+		$Log:
+		 30   055_RETS_Standard 1.29        3/31/08 1:09:26 AM PDT Paul Stusiak
+		      work in progress checkin against change requests including the RCP for
+		       the adopted schemas
+		 29   055_RETS_Standard 1.28        1/24/08 11:30:33 AM PSTPaul Stusiak
+		      correct copyright notice language
+		 28   055_RETS_Standard 1.27        11/29/07 10:12:10 AM PSTPaul Stusiak
+		      Multiple change requests from Boston, Calgary meetings
+		 27   055_RETS_Standard 1.26        11/22/07 1:52:47 AM PSTPaul Stusiak
+		      Work in progress check-in
+		 26   055_RETS_Standard 1.25        10/8/07 2:45:02 PM PDT Gina Accawi
+		      Create new definition for the PriceWithOptionalFrequency, do not
+		      restrict a base type.
+		 25   055_RETS_Standard 1.24        10/7/07 10:44:42 PM PDTPaul Stusiak
+		      general clean up of the schema, add missing retsid as necessary.
+		 24   055_RETS_Standard 1.23        9/26/07 7:40:35 AM PDT Gina Accawi
+		      Add details for when a property is currently leased or rented.
+		 23   055_RETS_Standard 1.22        9/25/07 2:37:45 PM PDT Gina Accawi
+		      Modify listing contract information structure. Include Rent/Lease
+		      dates in contract information.
+		 22   055_RETS_Standard 1.21        9/25/07 11:59:26 AM PDTGina Accawi
+		      Restructure listing complex types.
+		 21   055_RETS_Standard 1.20        9/25/07 8:06:06 AM PDT Paul Stusiak
+		      Reinstate documentation changes
+		 20   055_RETS_Standard 1.19        9/25/07 7:52:10 AM PDT Gina Accawi
+		      Clean up of financial types.
+		 19   055_RETS_Standard 1.18        9/25/07 6:21:34 AM PDT Paul Stusiak
+		      Add documentation and rename elements
+		 18   055_RETS_Standard 1.17        9/24/07 9:00:35 AM PDT Gina Accawi
+		      Create PriceWithOptionalFrequency type.
+		 17   055_RETS_Standard 1.16        7/24/07 10:44:27 PM PDTPaul Stusiak
+		      Add retsid documentation pattern
+		 16   055_RETS_Standard 1.15        7/6/07 11:03:33 AM PDT Paul Stusiak
+		      Standardized enumeration extensibility across Features.xsd.
+		 15   055_RETS_Standard 1.14        7/3/07 1:04:54 AM PDT  Paul Stusiak
+		      General clean up of Property. Add modification timestamp, remove and
+		      containerize complexTypes as needed.
+		 14   055_RETS_Standard 1.13        5/2/07 1:11:44 PM PDT  Paul Stusiak
+		      modify element name to resolve code generation error - reserved word
+		      Class
+		 13   055_RETS_Standard 1.12        5/1/07 2:36:59 PM PDT  Paul Stusiak
+		      Update the version timestamp, make the schema relative again,
+		      normalize the date related typing to use SecureDateTime and naming to
+		      be of the form XXXDateTime
+		 12   055_RETS_Standard 1.11        4/13/07 11:54:30 AM PDTPaul Stusiak
+		      Pretty-print update to limit body width to less than 70 characters for
+		       review purposes.
+		 11   055_RETS_Standard 1.10        4/3/07 4:59:29 PM PDT  Paul Stusiak
+		      use url resolution for include, import to test schema validation
+		 10   055_RETS_Standard 1.9         4/3/07 1:43:56 AM PDT  Paul Stusiak
+		      change namespace to remote location (www.ftc2.com) for testing
+		 9    055_RETS_Standard 1.8         4/2/07 11:26:54 AM PDT Paul Stusiak
+		      change namespace to match responding server and to use the URI
+		      versioning suggested by both HP and XFront
+		 8    055_RETS_Standard 1.7         3/30/07 6:20:28 PM PDT Paul Stusiak
+		      Update of the versionTimestamp and the namespace (namespace to
+		      200704). Change formating to a standard format
+		 7    055_RETS_Standard 1.6         3/30/07 12:53:34 PM PDTPaul Stusiak
+		      Change file name to match most complex type definition
+		 6    055_RETS_Standard 1.5         3/30/07 12:49:46 PM PDTPaul Stusiak
+		      Change namespace to commons. Increase the enumerations, clean up
+		      Mortgage, move Investment and Fees from RETSCommons to here.
+		 5    055_RETS_Standard 1.4         3/30/07 12:39:25 AM PDTPaul Stusiak
+		      remove attribute group reference, use simple type instead
+		 4    055_RETS_Standard 1.3         3/7/07 10:47:09 PM PST Paul Stusiak
+		      Clean up the project information for the purposes of document
+		      generation. Added trial annotation format for Gina's review. Made
+		      modification to document format. Changed namespace to more regular
+		      namespace format.
+		 3    055_RETS_Standard 1.2         2/28/07 12:47:50 AM PSTPaul Stusiak
+		      add standard header and refactoring RETSCommons changes
+		 2    055_RETS_Standard 1.1         2/22/07 3:34:47 PM PST Gina Accawi
+		      Remove all references to the schemaLocation as being
+		      http://retsserver.realtors.org:8080/xsd/.  These references have been
+		      changed to be relative path (as the current directory). Now,
+		      regardless of where they are published, the referential internal
+		      integrity will remain. The assumption is that these will all reside as
+		       neighbors on the target distribution server.
+		 1    055_RETS_Standard 1.0         2/22/07 2:59:28 PM PST Gina Accawi     
+		$
+		======================
+	-->
+	
+	<xs:annotation>
+		<xs:documentation>
+			Elements related to a Listing financing.
+
+			Enumerations are expected to be implemented as
+			lookup lists. The schema use the human readable
+			form of the lookup list rather than a code value.
+			
+			Systems are permitted to implement any internal
+			method for storing such enumerations but MUST
+			expose the list values using the data values
+			of the appropriate enumeration.
+			
+			Systems that have fewer values in a particular list do not
+			need to implement the additional enumeration values since they
+			will never be visible.
+			
+			Systems that have more values in a particular list should expose the
+			additional values in the metadata and use the extension mechanism of
+			setting the element value to 'Other' and putting the extension data into
+			the otherDescription attribute.
+		</xs:documentation>
+	</xs:annotation>
+
+	<xs:include schemaLocation="Primitives.xsd"/>
+
+	<!-- Enumerations -->
+	<xs:complexType name="MortgageRankEnum">
+		<xs:annotation>
+			<xs:documentation>
+				An enumeration of the order of precedence
+				to collect against the asset for the different
+				classes of mortgage.
+			</xs:documentation>
+			<xs:appinfo>
+				<example>First</example>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:restriction base="commons:OtherEnumerationDescriptionString">
+				<xs:enumeration value="First">
+					<xs:annotation>
+						<xs:appinfo>
+							<retsid>101246</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Second">
+					<xs:annotation>
+						<xs:appinfo>
+							<retsid>101247</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Unknown">
+					<xs:annotation>
+						<xs:appinfo>
+							<retsid>101248</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Other">
+					<xs:annotation>
+						<xs:appinfo>
+							<retsid>101249</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+			</xs:restriction>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="MortgageClassificationEnum">
+		<xs:annotation>
+			<xs:documentation>
+				A list of some well known mortgage
+				classifications
+			</xs:documentation>
+			<xs:appinfo>
+				Adjustable Rate
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:restriction base="commons:OtherEnumerationDescriptionString">
+				<xs:enumeration value="Adjustable Rate">
+					<xs:annotation>
+						<xs:documentation>
+							Also known as ARM, the interest rate
+							may be adjusted during the term of the
+							agreement.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101250</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Alternative Mortgage Instrument">
+					<xs:annotation>
+						<xs:documentation>
+							A general term to describe mortgage
+							types that are not fixed in term.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101251</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Balloon">
+					<xs:annotation>
+						<xs:documentation>
+							A type of fixed rate mortgage that
+							starts with a low rate for a period of
+							five to seven years then is ended with
+							a single large payment for all the
+							remaining principal.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101252</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Biweekly">
+					<xs:annotation>
+						<xs:appinfo>
+							<retsid>101253</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Capped Rate">
+					<xs:annotation>
+						<xs:appinfo>
+							<retsid>101254</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Chattel">
+					<xs:annotation>
+						<xs:documentation>
+							A loan secured against personal 
+							property
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101255</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Closed Rate">
+					<xs:annotation>
+						<xs:appinfo>
+							<retsid>101256</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Conventional">
+					<xs:annotation>
+						<xs:appinfo>
+							<retsid>101257</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Convertible">
+					<xs:annotation>
+						<xs:appinfo>
+							<retsid>101258</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="FHA">
+					<xs:annotation>
+						<xs:documentation>
+							A load arranged through the
+							Federal Housing Administration
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101259</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Fixed">
+					<xs:annotation>
+						<xs:documentation>
+							The interest rate is fixed for the
+							term of the agreement.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101260</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Graduated Payment">
+					<xs:annotation>
+						<xs:documentation>
+							A form of fixed price mortgage where
+							the payment increases from an initial
+							amount to a final amount.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101261</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Growing Equity">
+					<xs:annotation>
+						<xs:documentation>
+							A Hybrid is a generic description
+							of a loan that starts as one type
+							of loan (fixed or adjustable) then
+							converts to the opposite type of
+							loan.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101262</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="High Ratio">
+					<xs:annotation>
+						<xs:documentation>
+							A Hybrid is a generic description
+							of a loan that starts as one type
+							of loan (fixed or adjustable) then
+							converts to the opposite type of
+							loan.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101263</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Hybrid ARM">
+					<xs:annotation>
+						<xs:documentation>
+							A Hybrid is a generic description
+							of a loan that starts as one type
+							of loan (fixed or adjustable) then
+							converts to the opposite type of
+							loan.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101264</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Interest-Only">
+					<xs:annotation>
+						<xs:documentation>
+							A loan that starts as an interest
+							only payment that then converts
+							to a regular interest and
+							principal payment.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101265</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Level-Payment">
+					<xs:annotation>
+						<xs:documentation>
+							A mortgage where the periodic payment
+							amount is kept constant.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101266</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Open">
+					<xs:annotation>
+						<xs:documentation>
+							A form of fixed rate loan where the
+							term is short, typically six months
+							to a year while the amortization
+							term is long, typically 20 to 40
+							years.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101267</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Multi-Step">
+					<xs:annotation>
+						<xs:documentation>
+							An adjustable rate mortgage loan that
+							provides several different options
+							for payments, typically resulting in
+							quicker payout.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101268</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Option ARM">
+					<xs:annotation>
+						<xs:documentation>
+							An adjustable rate mortgage loan that
+							provides several different options
+							for payments, typically resulting in
+							quicker payout.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101269</retsid>
+						</xs:appinfo>
+					</xs:annotation>				
+				</xs:enumeration>
+				<xs:enumeration value="Price Level Adjusted">
+					<xs:annotation>
+						<xs:documentation>
+							A form of graduated payment mortgage
+							that the rate of interest remains
+							constant while the outstanding
+							principal is adjusted for inflation.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101270</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Piggyback">
+					<xs:annotation>
+						<xs:documentation>
+							Also known as Split-Loan.
+							A loan where a a large loan is
+							split into two smaller loans.
+							Typically, a fixed-rate and
+							an adjustable-rate loan are offered
+							without a penalty for the 
+							secondary financing.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101271</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Private">
+					<xs:annotation>
+						<xs:documentation>
+							Also known as hard-money, the mortgage
+							agreement has been negotiated between
+							private parties outside the normal
+							mortgage channels.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101272</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Reverse">
+					<xs:annotation>
+						<xs:documentation>
+							A cash-advance loan secured against
+							the property that isn't called until
+							the home-owner moves or dies.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101273</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="RHS">
+					<xs:annotation>
+						<xs:documentation>
+							A loan arranged through the Rural
+							Housing Service, part of the
+							US Department of Agriculture.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101274</retsid>
+						</xs:appinfo>
+					</xs:annotation>	
+				</xs:enumeration>
+				<xs:enumeration value="Shared Appreciation">
+					<xs:annotation>
+						<xs:documentation>
+							A reduced rate loan where the
+							reduced rate is offset by a sharing
+							of the appreciation of the property's
+							value (principal)
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101275</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Two-Step">
+					<xs:annotation>
+						<xs:documentation>
+							A hybrid ARM with a fixed rate
+							for a part of the term, typically
+							5 or 7 years, followed by a variable
+							rate for the remainder of the term.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101276</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="VA">
+					<xs:annotation>
+						<xs:documentation>
+							A loan arranged through the
+							Veterans Affairs
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101277</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="15 year">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101278</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Unknown">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101279</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Other">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101280</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Other-Federal">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101604</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Other-State">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101281</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Other-VA">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101282</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="None">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101283</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+			</xs:restriction>
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<!-- Types -->
+	
+	<xs:complexType name="ClosingCostsType">
+		<xs:simpleContent>
+			<xs:extension base="commons:SecureMoney">
+				<xs:annotation>
+					<xs:documentation>
+						Costs associated with completing
+						a transaction. 
+					</xs:documentation>
+					<xs:appinfo>
+						12000
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="ConcessionsType">
+		<xs:annotation>
+			<xs:documentation>
+				A collection of concessions a party is 
+				willing to make.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element	name="Concession"
+							type="commons:MonetaryValueDescriptionPairType"
+							minOccurs="0"
+							maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>100084</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="EarnestMoneyType">
+		<xs:simpleContent>
+			<xs:extension base="commons:SecureMoney">
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<!-- Fees Types -->
+	<xs:complexType name="Fee">
+		<xs:simpleContent>
+			<xs:extension base="commons:SecureMoney">
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="FeeWithFrequency">
+		<xs:simpleContent>
+			<xs:extension base="commons:SecureMoney">
+				<xs:attribute ref="commons:currencyPeriod">
+					<xs:annotation>
+						<xs:appinfo>
+							<retsid>100086</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="PriceWithOptionalFrequency">
+		<xs:simpleContent>
+			<xs:extension base="commons:SecureMoney">
+				<xs:attribute ref="commons:currencyPeriod" use="optional">
+					<xs:annotation>
+						<xs:appinfo>
+							<retsid>100087</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="GrossIncomeType">
+		<xs:annotation>
+			<xs:documentation>
+				A Money value representing either an
+				individual's total personal income before
+				taking taxes or deductions into account
+				OR a company's revenue minus the cost of goods
+				sold. Formatting is defined by the currency
+				attribute, and the periods in which the
+				income amount occurs are defined by the
+				period attribute.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="commons:SecureMoney">
+				<xs:attribute ref="commons:currencyPeriod">
+					<xs:annotation>
+						<xs:appinfo>
+							<retsid>100088</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="MortgageAmountType">
+		<xs:annotation>
+			<xs:documentation>
+				The total amount of a loan secured by the
+				collateral of some specified real estate
+				property that the borrower is obliged to
+				pay back with predetermined set of payments.
+				Currency attribute provides the
+				formatting information.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="commons:SecureMoney"/>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="MortgagePaymentType">
+		<xs:simpleContent>
+			<xs:extension base="commons:SecureMoney">
+				<xs:annotation>
+					<xs:documentation>
+						The mortgage payment amount and period.
+					</xs:documentation>
+					<xs:appinfo>
+						2286.37
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:attribute ref="commons:currencyPeriod">
+					<xs:annotation>
+						<xs:appinfo>
+							Month
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="NetIncomeType">
+		<xs:annotation>
+			<xs:documentation>
+				Number representing an individual's or
+				company's income after all taxes have
+				been deducted.  Formatting is defined by
+				the currency attribute, and the periods in
+				which the income amount occurs are defined
+				by the period attribute.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="commons:SecureMoney"/>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="RentIncomeType">
+		<xs:annotation>
+			<xs:documentation>
+				Number representing income received
+				from rental properties. Formatting is
+				defined by the currency attribute and
+				the periods in which the income amount
+				occurs are defined by the period attribute.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="commons:SecureMoney"/>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="SecurityDepositsType">
+		<xs:annotation>
+			<xs:documentation>
+				A collection of security deposits specified
+				for a rental.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element	name="SecurityDeposit"
+							type="commons:MonetaryValueDescriptionPairType"
+							minOccurs="0"
+							maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>100085</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="VacancyFactorType">
+		<xs:annotation>
+			<xs:documentation>
+			The amount of gross revenue that pro forma
+			income statements anticipate will be lost
+			because of vacancies, often expressed as a
+			percentage of the total rentable square
+			footage available in a building or project.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="commons:SecureDecimal"/>
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<xs:complexType name="AssumableType">
+		<xs:sequence>
+			<xs:element	name="IsAssumable"
+							type="commons:SecureBoolean"
+							minOccurs="0"
+							maxOccurs="1">
+				<xs:annotation>
+					<xs:appinfo>
+						<retsid>100089</retsid>
+						<example>true</example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="MortgageRank"
+							type="commons:MortgageRankEnum"
+							minOccurs="0"
+							maxOccurs="4">
+				<xs:annotation>
+					<xs:appinfo>
+						<retsid>100090</retsid>
+						<example>First</example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="MortgageConditionsType">
+		<xs:annotation>
+			<xs:documentation>
+				A string describing conditions attached to
+				the mortgage.
+			</xs:documentation>
+			<xs:appinfo>
+				Contact seller for more details
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element	name="MortgageCondition"
+							type="xs:string"
+							minOccurs="0"
+							maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:appinfo>
+						<retsid>100091</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="MortgageType">
+		<xs:sequence>
+			<xs:element	name="HasClearTitle"
+							type="xs:boolean"
+							minOccurs="0"
+							maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Flag to indicate that the property is
+						owned outright
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>100092</retsid>
+						<example>false</example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="MortgageRank"
+							type="commons:MortgageRankEnum"
+							minOccurs="0"
+							maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						The primacy of the mortgage against the
+						asset in the event of a default.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>100093</retsid>
+						<example>First</example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="MortgageClassification"
+							type="commons:MortgageClassificationEnum"
+							minOccurs="0"
+							maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						The type of mortgage selected from an
+						enumeration of mortgage types.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>100094</retsid>
+						<example>Conventional</example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="ProductName"
+							type="commons:SecureString"
+							minOccurs="0"
+							maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						The mortgage product name, typically a
+						name that the mortgage vendor markets
+						the mortgage under.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>100095</retsid>
+						<example>Happy Valley Bank Homeprime Capped</example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="MortgageVendorName"
+							type="commons:SecureString"
+							minOccurs="0"
+							maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						The name of the lending party
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>100096</retsid>
+						<example>Happy Valley Bank</example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="MortgageAmount"
+							type="commons:MortgageAmountType"
+							minOccurs="0"
+							maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						The principal amount of the mortgage
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>100097</retsid>
+						<example>326000</example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="MortgagePayment"
+							type="commons:MortgagePaymentType"
+							minOccurs="0"
+							maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>100098</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="MortgageRate"
+							type="commons:SecureDecimal"
+							minOccurs="0"
+							maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>100099</retsid>
+						<example>6.97</example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="MortgageDate"
+							type="commons:SecureDateTime"
+							minOccurs="0"
+							maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>100100</retsid>
+						<example>2007-03-10T12:00:00-05:00</example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="MortgageConditions"
+							type="commons:SecureString"
+							minOccurs="0"
+							maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>100101</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="MortgageRenewalDate"
+							type="commons:SecureDateTime"
+							minOccurs="0"
+							maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>100102</retsid>
+						<example>2007-03-10T12:00:00-05:00</example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:any	namespace="##other"
+						minOccurs="0"
+						maxOccurs="unbounded">
+			</xs:any>
+		</xs:sequence>
+		<xs:attribute	name="isVerified"
+							type="xs:boolean"
+							use="optional">
+			<xs:annotation>
+				<xs:documentation>
+				</xs:documentation>
+				<xs:appinfo>
+					<retsid>100103</retsid>
+					<example>true</example>
+				</xs:appinfo>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="MortgagesType">
+		<xs:annotation>
+			<xs:documentation>
+				A collection of Mortgage
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element	name="Mortgage"
+							type="commons:MortgageType"
+							minOccurs="0"
+							maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>100104</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="InvestmentType">
+		<xs:sequence>
+			<xs:element	name="RentIncome"
+							type="commons:RentIncomeType"
+							minOccurs="0"
+							maxOccurs="1">
+				<xs:annotation>
+					<xs:appinfo>
+						<retsid>100105</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="GrossIncome"
+							type="commons:GrossIncomeType"
+							minOccurs="0"
+							maxOccurs="1">
+				<xs:annotation>
+					<xs:appinfo>
+						<retsid>100106</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="NetIncome"
+							type="commons:NetIncomeType"
+							minOccurs="0"
+							maxOccurs="1">
+				<xs:annotation>
+					<xs:appinfo>
+						<retsid>100107</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="VacancyFactor"
+							type="commons:VacancyFactorType"
+							minOccurs="0"
+							maxOccurs="1">
+				<xs:annotation>
+					<xs:appinfo>
+						<retsid>100108</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="Expenses"
+							type="commons:ExpensesType"
+							minOccurs="0"
+							maxOccurs="1">
+				<xs:annotation>
+					<xs:appinfo>
+						<retsid>100109</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:any	namespace="##other"
+						minOccurs="0"
+						maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="ExpensesType">
+		<xs:annotation>
+			<xs:documentation>
+				Money spent or costs incurred.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element	name="CondoCoopFee"
+							type="commons:FeeWithFrequency"
+							minOccurs="0"
+							maxOccurs="1">
+				<xs:annotation>
+					<xs:appinfo>
+						<retsid>100110</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="ElevatorUseFee"
+							type="commons:Fee"
+							minOccurs="0"
+							maxOccurs="1">
+				<xs:annotation>
+					<xs:appinfo>
+						<retsid>100111</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="FrontFootFee"
+							type="commons:Fee"
+							minOccurs="0"
+							maxOccurs="1">
+				<xs:annotation>
+					<xs:appinfo>
+						<retsid>100112</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="HOAFee"
+							type="commons:FeeWithFrequency"
+							minOccurs="0"
+							maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						A fee paid by the homeowner to the
+						association that governs a condominium
+						complex for their part of the
+						maintenance and management of the
+						project. Formatting is specified by
+						the currency attribute and the period
+						attribute signifies how often the fee
+						is payable (monthly, quarterly, etc.).
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>100113</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="HOATransferFee"
+							type="commons:Fee"
+							minOccurs="0"
+							maxOccurs="1">
+				<xs:annotation>
+					<xs:appinfo>
+						<retsid>100114</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="MoveInFee"
+							type="commons:Fee"
+							minOccurs="0"
+							maxOccurs="1">
+				<xs:annotation>
+					<xs:appinfo>
+						<retsid>100115</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="PetDeposit"
+							type="commons:Fee"
+							minOccurs="0"
+							maxOccurs="1">
+				<xs:annotation>
+					<xs:appinfo>
+						<retsid>100116</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="ProcessingFee"
+							type="commons:Fee"
+							minOccurs="0"
+							maxOccurs="1">
+				<xs:annotation>
+					<xs:appinfo>
+						<retsid>100117</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="RepairDeductible"
+							type="commons:Fee"
+							minOccurs="0"
+							maxOccurs="1">
+				<xs:annotation>
+					<xs:appinfo>
+						<retsid>100118</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="WaterSewerHookup"
+							type="commons:Fee"
+							minOccurs="0"
+							maxOccurs="1">
+				<xs:annotation>
+					<xs:appinfo>
+						<retsid>100119</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="TenantPays"
+							type="commons:Fee"
+							minOccurs="0"
+							maxOccurs="1">
+				<xs:annotation>
+					<xs:appinfo>
+						<retsid>100120</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="OwnerPays"
+							type="commons:Fee"
+							minOccurs="0"
+							maxOccurs="1">
+				<xs:annotation>
+					<xs:appinfo>
+						<retsid>100121</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:any	namespace="##other"
+						minOccurs="0"
+						maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="LeaseType">
+		<xs:sequence>
+			<xs:element	name="LeaseType"
+							type="commons:SecureString"
+							minOccurs="0"
+							maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						A description of the lease type
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>100122</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="LeaseAmount"
+							type="commons:SecureMoney"
+							minOccurs="0"
+							maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						The amount of the lease.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>100123</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<!-- Aggregation Types -->
+	<xs:complexType name="LeaseFinancialType">
+		<xs:sequence>
+			<xs:element	name="Lease"
+							type="commons:LeaseType"
+							minOccurs="0"
+							maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						A collection of leases - there may
+						be separate lease pricing for the
+						buildings and land.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>100124</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="LeaseExpiryDate"
+							type="commons:SecureDateTime"
+							minOccurs="0"
+							maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						The agreement expiration date.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>100125</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="LeaseRenewalDate"
+							type="commons:SecureDateTime"
+							minOccurs="0"
+							maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						The date when the renewal option must
+						be exercised.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>100126</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="HasLeaseRenewalOption"
+							type="commons:nullable-boolean"
+							minOccurs="0"
+							maxOccurs="1">
+				<xs:annotation>
+					<xs:appinfo>
+						<retsid>100127</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="HasPurchaseOption"
+							type="commons:nullable-boolean"
+							minOccurs="0"
+							maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						The lease can be converted to
+						a purchase agreement.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>100134</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="IsAssignable"
+							type="commons:nullable-boolean"
+							minOccurs="0"
+							maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Lessee may assign lease to a third-party
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>100128</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="IsAssumable"
+							type="commons:nullable-boolean"
+							minOccurs="0"
+							maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Lessee may assume an existing lease
+						from a third-party
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>100129</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="IsAttornable"
+							type="commons:nullable-boolean"
+							minOccurs="0"
+							maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Lessor may assign lease to a third-party
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>100130</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="IsLeased"
+							type="commons:nullable-boolean"
+							minOccurs="0"
+							maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Indicates that the property is
+						currently leased.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>100131</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>			
+			<xs:element	name="LeaseRemarks"
+							type="commons:SecureRemark"
+							minOccurs="0"
+							maxOccurs="1">
+				<xs:annotation>
+					<xs:appinfo>
+						<retsid>100136</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="PurchaseOptionUpFrontFee"
+							type="commons:SecureMoney"
+							minOccurs="0"
+							maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Up front fee for a PurchaseOption
+						lease
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>100135</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="TransferFees"
+							type="commons:SecureMoney"
+							minOccurs="0"
+							maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Fees involved in transferring the lease
+						or converting the lease
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>100132</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="TenantPays"
+							type="commons:SecureString"
+							minOccurs="0"
+							maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>
+						Tenant is responsible for paying a
+						proportional share of recoverable
+						expenses. Also known as Net Lease.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>100133</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="RentClosingFinancialType">
+		<xs:sequence>
+			<xs:element	name="IsFurnished"
+							type="commons:nullable-boolean"
+							minOccurs="0"
+							maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Flag indicating that the property
+						is rented furnished
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>101204</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="IsShortTerm"
+							type="commons:nullable-boolean"
+							minOccurs="0"
+							maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Flag indicating that the property is
+						rented for a short term.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>101205</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="RentFinancial"
+							type="commons:RentFinancialType"
+							minOccurs="0"
+							maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>101207</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="RentCurrentFinancialType">
+		<xs:sequence>
+			<xs:element	name="CurrentRentRate"
+							type="commons:FeeWithFrequency"
+							minOccurs="0"
+							maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Current amount of money required per
+						period for use.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>100140</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="CurrentSecurityDeposits"
+							type="commons:SecurityDepositsType"
+							minOccurs="0"
+							maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Current amount of money required as
+						a security deposit
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>100145</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="IsRented"
+							type="commons:nullable-boolean"
+							minOccurs="0"
+							maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Indicates that the property is
+						currently rented.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>100149</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="IsRentControlled"
+							type="commons:nullable-boolean"
+							minOccurs="0"
+							maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Flag indicating that the property
+						is rent controlled.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>100150</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="RentListingFinancialType">
+		<xs:sequence>
+			<xs:element	name="IsAvailableFurnished"
+							type="commons:nullable-boolean"
+							minOccurs="0"
+							maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Flag indicating that the property
+						is available furnished
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>100147</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="IsAvailableShortTerm"
+							type="commons:nullable-boolean"
+							minOccurs="0"
+							maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Flag indicating that the property is
+						available short term.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>100148</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="RentFurnishedRate"
+							type="commons:FeeWithFrequency"
+							minOccurs="0"
+							maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Amount of money required per period
+						for use of a furnished property.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>100138</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="RentShortTermRate"
+							type="commons:FeeWithFrequency"
+							minOccurs="0"
+							maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Amount of money required per period
+						for short term use.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>100139</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="RentFinancial"
+							type="commons:RentFinancialType"
+							minOccurs="0"
+							maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>101206</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="RentFinancialType">
+		<xs:sequence>
+			<xs:element	name="OccupancyDate"
+							type="xs:dateTime"
+							minOccurs="0"
+							maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						The date the rental property is 
+						available for occupancy.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>100151</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="OtherSecurityDeposits"
+							type="commons:SecurityDepositsType"
+							minOccurs="0"
+							maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Current amount of money required as
+						a security deposit unclassified.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>100146</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="RentRate"
+							type="commons:FeeWithFrequency"
+							minOccurs="0"
+							maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Amount of money required per period
+						for use.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>100137</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="RequiresTenantBoardApproval"
+							type="commons:nullable-boolean"
+							minOccurs="0"
+							maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Flag indicating that the property has
+						a tenant approval process.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>100142</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="RequiresSecurityDeposit"
+							type="commons:nullable-boolean"
+							minOccurs="0"
+							maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Flag indicating that the property has
+						an up front security deposit.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>100143</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="SecurityDeposits"
+							type="commons:SecurityDepositsType"
+							minOccurs="0"
+							maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Amount of money required as a
+						security deposit
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>100144</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="TenantApplicationFee"
+							type="commons:SecureMoney"
+							minOccurs="0"
+							maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						The required fee when applying for  
+						rent.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>100152</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="TenantApplicationDescription"
+							type="commons:SecureString"
+							minOccurs="0"
+							maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Any description about the rent 
+						application or application fee.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>100153</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="TenantPays"
+							type="commons:SecureString"
+							minOccurs="0"
+							maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Tenant is responsible for paying a
+						proportional share of recoverable
+						expenses.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>100141</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PurchaseClosingFinancialType">
+		<xs:sequence>
+			<xs:element	name="BuyerFinancing"
+							type="xs:string"
+							minOccurs="0"
+							maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>
+						The financial instrument(s) actually
+						used to purchase the property.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>100160</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="ClosingCosts"
+							type="commons:ClosingCostsType"
+							minOccurs="0"
+							maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						The ancillary costs associated with
+						the purchase of the property.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>100155</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="EarnestMoney"
+							type="commons:SecureMoney"
+							minOccurs="0"
+							maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Money used to bind the sales agreement.
+						Also known as Deposit money,
+						although deposit money connotes
+						refundability while earnest money
+						is typically non-refundable.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>101202</retsid>
+						<example>25000</example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="SellerConcessions"
+							type="commons:ConcessionsType"
+							minOccurs="0"
+							maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Concessions the seller agrees to.
+						This may include to pay or provide
+						for, in part or whole of the buyer's
+						closing costs. May be money or goods.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>100158</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="SellerTerms"
+							type="commons:SecureString"
+							minOccurs="0"
+							maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>
+						The types of financing the seller
+						will accept at the time of listing.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>101203</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="TermsOfSale"
+							type="commons:SecureString"
+							minOccurs="0"
+							maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>
+						Financing terms agreed between the buyer
+						and seller.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>100159</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PurchaseFinancialType">
+		<xs:sequence>
+			<xs:element	name="EarnestMoney"
+							type="commons:SecureMoney"
+							minOccurs="0"
+							maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Money used to bind the sales agreement.
+						Also known as Deposit money,
+						although deposit money connotes
+						refundability while earnest money
+						is typically non-refundable.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>100154</retsid>
+						<example>25000</example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="MayAssumeMortgage"
+							type="commons:AssumableType"
+							minOccurs="0"
+							maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Purchaser may assume the existing
+						mortgage.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>100156</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="SellerTerms"
+							type="commons:SecureString"
+							minOccurs="0"
+							maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>
+						The types of financing the seller 
+						will accept at the time of listing.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>100157</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ClosingFinancialType">
+		<xs:sequence>
+			<xs:element	name="Purchase"
+							type="commons:PurchaseClosingFinancialType"
+							minOccurs="0"
+							maxOccurs="1">
+				<xs:annotation>
+					<xs:appinfo>
+						<retsid>101613</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="Lease"
+							type="commons:LeaseFinancialType"
+							minOccurs="0"
+							maxOccurs="1">
+				<xs:annotation>
+					<xs:appinfo>
+						<retsid>101614</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="Rent"
+							type="commons:RentClosingFinancialType"
+							minOccurs="0"
+							maxOccurs="1">
+				<xs:annotation>
+					<xs:appinfo>
+						<retsid>101615</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="ListingFinancialType">
+		<xs:sequence>
+			<xs:element	name="Purchase"
+							type="commons:PurchaseFinancialType"
+							minOccurs="0"
+							maxOccurs="1">
+				<xs:annotation>
+					<xs:appinfo>
+						<retsid>100161</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="Lease"
+							type="commons:LeaseFinancialType"
+							minOccurs="0"
+							maxOccurs="1">
+				<xs:annotation>
+					<xs:appinfo>
+						<retsid>100162</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="Rent"
+							type="commons:RentListingFinancialType"
+							minOccurs="0"
+							maxOccurs="1">
+				<xs:annotation>
+					<xs:appinfo>
+						<retsid>100163</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PropertyFinancialType">
+		<xs:sequence>
+			<xs:element	name="CurrentLease"
+							type="commons:LeaseFinancialType"
+							minOccurs="0"
+							maxOccurs="1">
+				<xs:annotation>
+					<xs:appinfo>
+						<retsid>100164</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="CurrentRent"
+							type="commons:RentCurrentFinancialType"
+							minOccurs="0"
+							maxOccurs="1">
+				<xs:annotation>
+					<xs:appinfo>
+						<retsid>101201</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="Investment"
+							type="commons:InvestmentType"
+							minOccurs="0"
+							maxOccurs="1">
+				<xs:annotation>
+					<xs:appinfo>
+						<retsid>100165</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="Mortgages"
+							type="commons:MortgagesType"
+							minOccurs="0"
+							maxOccurs="1">
+				<xs:annotation>
+					<xs:appinfo>
+						<retsid>100166</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

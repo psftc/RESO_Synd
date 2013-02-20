@@ -1,0 +1,472 @@
+<?xml version="1.0"?>
+<xs:schema	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+				xmlns:commons="http://rets.org/xsd/RETSCommons"
+				targetNamespace="http://rets.org/xsd/RETSCommons"
+				elementFormDefault="qualified"
+				attributeFormDefault="unqualified">
+
+	<!--
+		(C)2007 National Association of REALTORS(R). All Rights Reserved
+
+		(C) 2010 Falcon Technologies Corporation. All Rights Reserved.
+
+		Tab stops
+		:set ts=3
+
+		File History
+		======================
+		$Header: Person.xsd, 31, 3/31/08 1:09:27 AM PDT, Paul Stusiak$
+		
+
+		$Log:
+		 31   055_RETS_Standard 1.30        3/31/08 1:09:27 AM PDT Paul Stusiak
+		      work in progress checkin against change requests including the RCP for
+		       the adopted schemas
+		 30   055_RETS_Standard 1.29        1/24/08 11:30:34 AM PSTPaul Stusiak
+		      correct copyright notice language
+		 29   055_RETS_Standard 1.28        10/8/07 1:22:14 PM PDT Paul Stusiak
+		      Update version timestamp
+		 28   055_RETS_Standard 1.27        10/7/07 10:44:43 PM PDTPaul Stusiak
+		      general clean up of the schema, add missing retsid as necessary.
+		 27   055_RETS_Standard 1.26        10/2/07 2:33:10 PM PDT Gina Accawi
+		      Rename ContactMethod to ContactMethods. Add values to the
+		      PhoneTypeEnum.
+		 26   055_RETS_Standard 1.25        10/2/07 12:19:28 PM PDTGina Accawi
+		      Create reusable type for systemId. Reference it where used. Ensure
+		      there is a systemId on the primary single and optional on plural
+		      version of resource payloads.
+		 25   055_RETS_Standard 1.24        7/26/07 2:11:21 PM PDT Gina Accawi
+		      Ensure a modification timestamp is present.
+		 24   055_RETS_Standard 1.23        7/25/07 11:03:14 AM PDTGina Accawi
+		      Remove include for Role.xsd. No longer needed.
+		 23   055_RETS_Standard 1.22        7/24/07 10:45:39 PM PDTPaul Stusiak
+		      Remove RoleContactablePerson
+		 22   055_RETS_Standard 1.21        7/24/07 5:09:02 PM PDT Paul Stusiak
+		      add keys to Participant and Person, update the entities to support
+		      this, make the files have a common pattern.
+		 21   055_RETS_Standard 1.20        7/24/07 2:26:10 PM PDT Paul Stusiak
+		      temp check in.
+		 20   055_RETS_Standard 1.19        7/9/07 8:05:43 AM PDT  Gina Accawi
+		      Add reference to the role schema.
+		 19   055_RETS_Standard 1.18        7/9/07 2:00:58 AM PDT  Paul Stusiak
+		      Rework of CR 80 to change the way that Role, Team, Person and Member
+		      interact as Participants. Person, Member and Team now take on a Role
+		      when acting as a Participant for a Listing (or Transaction)
+		 18   055_RETS_Standard 1.17        7/6/07 1:40:16 PM PDT  Gina Accawi
+		      Listing participants now have a role in the listing. Additionally,
+		      team members have a team role. 
+		 17   055_RETS_Standard 1.16        7/5/07 2:28:49 PM PDT  Gina Accawi
+		      Remove Address.xsd, no longer needed.
+		 16   055_RETS_Standard 1.15        7/5/07 2:12:30 PM PDT  Gina Accawi
+		      Add gender, languages, birthdate to person. Remove address from
+		      contactable person, it is now in the ContactMethods.
+		 15   055_RETS_Standard 1.14        6/27/07 9:48:24 AM PDT Gina Accawi
+		      Case consistency for attribute names.
+		 14   055_RETS_Standard 1.13        6/26/07 1:05:15 PM PDT Gina Accawi
+		      Rename ContactInformation to ContactMethod.
+		 13   055_RETS_Standard 1.12        6/25/07 3:17:14 PM PDT Gina Accawi
+		      Correct reference to ContactInformation to ContactMethods as per CR
+		      53.
+		 12   055_RETS_Standard 1.11        6/14/07 3:03:54 PM PDT Gina Accawi
+		      Correct reference for Phone.xsd, which is renamed
+		      ContactInformation.xsd.
+		 11   055_RETS_Standard 1.10        5/10/07 3:06:56 PM PDT Gina Accawi
+		      Add RoleContactablePerson for TMS schema use. Is a ContactablePerson
+		      with the addition of a Role attribute.
+		 10   055_RETS_Standard 1.9         5/1/07 2:36:59 PM PDT  Paul Stusiak
+		      Update the version timestamp, make the schema relative again,
+		      normalize the date related typing to use SecureDateTime and naming to
+		      be of the form XXXDateTime
+		 9    055_RETS_Standard 1.8         4/13/07 11:54:31 AM PDTPaul Stusiak
+		      Pretty-print update to limit body width to less than 70 characters for
+		       review purposes.
+		 8    055_RETS_Standard 1.7         4/3/07 4:59:31 PM PDT  Paul Stusiak
+		      use url resolution for include, import to test schema validation
+		 7    055_RETS_Standard 1.6         4/3/07 1:43:59 AM PDT  Paul Stusiak
+		      change namespace to remote location (www.ftc2.com) for testing
+		 6    055_RETS_Standard 1.5         4/2/07 11:26:57 AM PDT Paul Stusiak
+		      change namespace to match responding server and to use the URI
+		      versioning suggested by both HP and XFront
+		 5    055_RETS_Standard 1.4         3/30/07 6:20:06 PM PDT Paul Stusiak
+		      Update of the versionTimestamp and the namespace (namespace to
+		      200704). Change formating to a standard format
+		 4    055_RETS_Standard 1.3         3/21/07 4:16:53 PM PDT Paul Stusiak
+		      move annotation, change some of the element names
+		 3    055_RETS_Standard 1.2         3/7/07 10:58:16 PM PST Paul Stusiak
+		      Clean up the project information for the purposes of document
+		      generation.
+		 2    055_RETS_Standard 1.1         2/28/07 1:55:58 PM PST Paul Stusiak
+		      correction for ContactInformation refactoring - now in Phone.xsd
+		 1    055_RETS_Standard 1.0         2/28/07 12:26:38 AM PSTPaul Stusiak
+		      completion of first cut at refactoring out from RETSCommons.xsd
+		$
+		======================
+	-->
+
+	<xs:annotation>
+		<xs:documentation>
+			Elements related to a Person entity.
+		</xs:documentation>
+	</xs:annotation>
+
+	<xs:import  namespace="http://www.w3.org/XML/1998/namespace"
+					schemaLocation="http://www.w3.org/2001/xml.xsd"/>
+
+	<xs:include schemaLocation="Primitives.xsd"/>
+	<xs:include schemaLocation="ContactMethods.xsd"/>
+
+	<!-- Types -->
+	<xs:complexType name="FirstName">
+		<xs:simpleContent>
+			<xs:extension base="xs:string"/>
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<xs:complexType name="MiddleName">
+		<xs:simpleContent>
+			<xs:extension base="xs:string"/>
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<xs:complexType name="LastName">
+		<xs:simpleContent>
+			<xs:extension base="xs:string"/>
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<xs:complexType name="NickName">
+		<xs:simpleContent>
+			<xs:extension base="xs:string"/>
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<xs:complexType name="Title">
+		<xs:simpleContent>
+			<xs:extension base="xs:string"/>
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<xs:complexType name="Suffix">
+		<xs:simpleContent>
+			<xs:extension base="xs:string"/>
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<xs:complexType name="CompleteName">
+		<xs:annotation>
+			<xs:documentation>
+				A person's entire given name.  May consist of a
+				combination of one or more of: title, first name,
+				middle name, nick name, surname and suffix with
+				whitespace. An example is
+				"Dr. Edwin E. 'Buzz' Aldrin Jr.". Often the nick name is
+				surrounded by quotation marks, either single or double.
+			</xs:documentation>
+			<xs:appinfo>
+				Dr. Edwin E. 'Buzz' Aldrin Jr.
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="commons:SecureString"/>
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<xs:complexType name="Person">
+		<xs:sequence>
+			<xs:element name="PersonKey"
+							type="commons:resource-key"
+							minOccurs="1"
+							maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						A unique identifier for this record.
+						This may be a number, or other string
+						that can include URI or other forms.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>100001</retsid>
+						<example>http://www.example.com/mls/633242434</example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="PersonalTitle"
+							type="commons:Title"
+							minOccurs="0"
+							maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						The well known prefixes of Mr, Ms, Miss, Mrs or
+						an officially granted name, prefixed to the first
+						name. It is also known as pre-nomial letters.
+						An example is Dr. or Ms. It may be abbreviated.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>100002</retsid>
+						<example>Dr</example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="FirstName"
+							type="commons:FirstName"
+							minOccurs="0"
+							maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						A person's name that precedes the surname.
+						An example is "Edwin".
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>100003</retsid>
+						<example>Edwin</example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="MiddleName"
+							type="commons:MiddleName"
+							minOccurs="0"
+							maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						A person's name that precedes the surname. It may
+						consist of an initial or several complete names.
+						An example is "E."
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>100004</retsid>
+						<example>E</example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="NickName"
+							type="commons:NickName"
+							minOccurs="0"
+							maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						A familiar or descriptive name with no legal
+						standing. An example is "Buzz"
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>100005</retsid>
+						<example>Buzz</example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="LastName"
+							type="commons:LastName"
+							minOccurs="0"
+							maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						A person's surname.
+						An example is "Aldrin"
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>100006</retsid>
+						<example>Aldrin</example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="Suffix"
+							type="commons:Suffix"
+							minOccurs="0"
+							maxOccurs="10">
+				<xs:annotation>
+					<xs:documentation>
+						An academic, honorary or social name appended
+						following the family name. It is also known as
+						post-nomial letters. An example is Jr. or DDS.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>100007</retsid>
+						<example>Jr</example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Birthdate"
+							type="xs:date"
+							minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+						Date of birth for the person.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>100008</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>		
+			</xs:element>
+			<xs:element name="Gender"
+							type="commons:gender"
+							minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+						The gender of the person.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>100009</retsid>
+						<example>male</example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Languages"
+							type="xs:string"
+							minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+						Languages spoken by the person.
+
+						Expected use is that the ISO language tag
+						will be used, separated by a comma.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>100010</retsid>
+						<example>en, de, es</example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="ModificationTimestamp"
+							type="commons:ModificationTimestamp"
+							minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+						The time stamp of the last change to this
+						record.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>100011</retsid>
+						<example>2007-03-11T12:00:00-05:00</example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:any	namespace="##other"
+						minOccurs="0"
+						maxOccurs="30"/>
+		</xs:sequence>
+		<xs:attribute	ref="commons:isgSecurityClass"
+							use="required">
+			<xs:annotation>
+				<xs:documentation>
+				</xs:documentation>
+				<xs:appinfo>
+					<retsid>100012</retsid>
+					<example></example>
+				</xs:appinfo>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute	ref="xml:lang"
+							use="optional">
+			<xs:annotation>
+				<xs:documentation>
+					The preferred locale/language of this person.
+
+					The values are formed using the language tags
+					defined in RFC 3066, using the lang code and
+					country code from ISO 639 and ISO 3166
+					http://www.loc.gov/standards/iso639-2/php/code_list.php
+					http://www.iso.org/iso/en/prods-services/iso3166ma/index.html
+
+					This form is <!-- <ISOLangCode>[-<ISOCountryCode>] -->
+					(ignore the xml comment tags)
+
+					Note that the separator is the dash '-' and not the
+					underscore character.
+					
+					Valid values include en, en-US and other combinations of
+					the code sets.
+
+					If omitted, the lang values is assumed to be en.
+
+					Further note that like the xml:lang attribute, this
+					element should be treated as case-insensitive. That is,
+					the values en-us, en-US, En-us and any other case
+					combination should be treated as identical.
+				</xs:documentation>
+				<xs:appinfo>
+					<retsid>100013</retsid>
+					<example>en-US</example>
+				</xs:appinfo>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="systemId" type="commons:system-id" use="optional">
+			<xs:annotation>
+				<xs:documentation>
+					An identifier of the system that a person
+					'belongs' to when the event involves more than
+					one system.
+				</xs:documentation>
+				<xs:appinfo>
+					<retsid>100014</retsid>
+					<example></example>
+				</xs:appinfo>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute	name="versionTimestamp"
+							type="xs:dateTime"
+							use="required"
+							fixed="2007-10-08T16:27:23Z">
+			<xs:annotation>
+				<xs:appinfo>
+					<retsid>100015</retsid>
+				</xs:appinfo>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+
+	<xs:complexType name="ContactablePerson">
+		<xs:sequence>
+			<xs:element	name="Person"
+							type="commons:Person"
+							minOccurs="0"
+							maxOccurs="1">
+				<xs:annotation>
+					<xs:appinfo>
+						<retsid>100016</retsid>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="ContactMethods"
+							type="commons:ContactMethods"
+							minOccurs="0">
+				<xs:annotation>
+					<xs:appinfo>
+						<retsid>101612</retsid>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="BusinessName"
+							type="xs:string"
+							minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+						Legal or well known (DBA) name for the business
+						associated with the entity.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>100017</retsid>
+						<example>Acme Homefinders</example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:any		namespace="##other"
+							minOccurs="0"
+							maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute	name="systemUserGUId"
+							type="xs:string"
+							use="optional">
+			<xs:annotation>
+				<xs:documentation>
+					An optional attribute when a system has additional
+					information stored associated with this person. Many
+					systems will not have any other information or may
+					choose to suppress this value.
+				</xs:documentation>
+				<xs:appinfo>
+					<retsid>100018</retsid>
+					<example>317782231</example>
+				</xs:appinfo>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+</xs:schema>

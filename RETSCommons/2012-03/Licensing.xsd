@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+				xmlns:commons="http://rets.org/xsd/RETSCommons/2012-03"
+				targetNamespace="http://rets.org/xsd/RETSCommons/2012-03"
+			elementFormDefault="qualified"
+			attributeFormDefault="unqualified">
+
+	<!--
+		(C)2008 National Association of REALTORS(R). All Rights Reserved
+
+		(C) 2010, 2011,2012 Falcon Technologies Corporation. All Rights Reserved.
+
+		Tab stops
+		:set ts=3
+
+		File History
+		======================
+		2012-02-06	Paul Stusiak	Update the filestructure for version 2012-03
+
+		$Header: Licensing.xsd, 6, 4/1/08 4:50:14 PM PDT, Paul Stusiak$
+
+		$Log:
+		 6    055_RETS_Standard 1.5         4/1/08 4:50:14 PM PDT  Paul Stusiak
+		      add StateOrProvince to licensing
+		 5    055_RETS_Standard 1.4         3/31/08 1:09:27 AM PDT Paul Stusiak
+		      work in progress checkin against change requests including the RCP for
+		       the adopted schemas
+		 4    055_RETS_Standard 1.3         2/27/08 11:57:39 AM PSTPaul Stusiak
+		      Add an enumeration to the Licensing type
+		 3    055_RETS_Standard 1.2         1/24/08 12:45:00 PM PSTPaul Stusiak
+		      corrected the copyright notice
+		 2    055_RETS_Standard 1.1         10/7/07 10:44:43 PM PDTPaul Stusiak
+		      general clean up of the schema, add missing retsid as necessary.
+		 1    055_RETS_Standard 1.0         8/1/07 10:53:35 AM PDT Gina Accawi     
+		$
+		======================
+	-->
+
+	<xs:annotation>
+		<xs:documentation>
+			A generalized type description for real estate licensing.
+		</xs:documentation>
+	</xs:annotation>
+
+	<xs:include schemaLocation="Primitives.xsd"/>
+	<xs:include schemaLocation="Address.xsd"/>
+	
+	<!-- Enumerations -->
+	<xs:complexType name="LicenseCategoryEnum">
+		<xs:annotation>
+			<xs:documentation>
+				The values that a license may take. These licenses
+				are typically issued by the State or Province where
+				the person is practising.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:restriction base="commons:OtherEnumerationDescriptionString">
+				<!-- Real Estate -->
+				<xs:enumeration value="Real Estate Broker">
+					<xs:annotation>
+						<xs:documentation>
+							Broker is synonymous with Broker of Record
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101418</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Salesperson">
+					<xs:annotation>
+						<xs:documentation>
+							A licensed real estate sales person, also
+							known as an agent in some jurisdictions
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101419</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Auctioneer">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101420</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<!-- Appraisal -->
+				<xs:enumeration value="Certified General Appraiser">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101421</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Certified Residential Appraiser">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101422</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Licensed Appraiser">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101426</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>			
+				<xs:enumeration value="Registered Appraiser">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101428</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<!-- Leasing -->
+				<xs:enumeration value="Leasing Agent">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101423</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<!-- Mortgage -->
+				<xs:enumeration value="Mortgage Broker">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101424</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<!-- Inspection -->
+				<xs:enumeration value="Apprentice Inspector">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101425</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Licensed Inspector">
+					<xs:annotation>
+						<xs:documentation>
+							Also known as a Real Estate Inspector
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101427</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Registered Inspector">
+					<xs:annotation>
+						<xs:documentation>
+							Also known as a Professional Inspector
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101429</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<!-- Rental -->
+				<xs:enumeration value="Property Management">
+					<xs:annotation>
+						<xs:documentation>
+							A person licensed to manage property
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101656</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Rental Property Management">
+					<xs:annotation>
+						<xs:documentation>
+							A person licensed to manage property
+							and to collect rents. In some jurisdictions, this
+							is synonymous with either Real Estate Broker or
+							Salesperson.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101657</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Unknown">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101430</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Other">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101431</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+			</xs:restriction>
+		</xs:simpleContent>
+	</xs:complexType>
+	
+	<!-- Types -->
+	<xs:complexType	name="ProfessionalLicenseType">
+		<xs:sequence>
+			<xs:element	name="LicenseCategory"
+						type="commons:LicenseCategoryEnum"
+						minOccurs="1"
+						maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						The type of professional license. This will
+						vary based on the local types and
+						jurisdictions.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>100078</retsid>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="LicenseNumber"
+						type="commons:SecureString"
+						minOccurs="1"
+						maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						The License Number.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>100079</retsid>
+						<example>PA-6678921-a</example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="Jurisdiction"
+						type="commons:SecureString"
+						minOccurs="1"
+						maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						A string representing the jurisdiction
+						that the license issuing body is located.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>100080</retsid>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="StateOrProvince"
+							type="commons:StateOrProvinceType"
+							minOccurs="0"
+							maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						The license issuing body State.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>101655</retsid>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="LicenseStartDateTime"
+						type="commons:SecureDateTime"
+						minOccurs="0"
+						maxOccurs="1">
+				<xs:annotation>
+					<xs:appinfo>
+						<retsid>100081</retsid>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="LicenseExpirationDateTime"
+						type="commons:SecureDateTime"
+						minOccurs="0"
+						maxOccurs="1">
+				<xs:annotation>
+					<xs:appinfo>
+						<retsid>100082</retsid>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="LicenseTransferDateTime"
+						type="commons:SecureDateTime"
+						minOccurs="0"
+						maxOccurs="1">
+				<xs:annotation>
+					<xs:appinfo>
+						<retsid>100083</retsid>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

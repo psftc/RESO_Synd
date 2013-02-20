@@ -1,0 +1,751 @@
+<?xml version="1.0"?>
+<xs:schema	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+				xmlns:commons="http://rets.org/xsd/RETSCommons/2007-08"
+				targetNamespace="http://rets.org/xsd/RETSCommons/2007-08"
+				elementFormDefault="qualified"
+				attributeFormDefault="unqualified">
+
+	<!--
+		(C)2007 National Association of REALTORS(R). All Rights Reserved
+
+		Tab stops
+		:set ts=3
+		
+		File History
+		======================
+		$Header: ContactMethods.xsd, 30, 3/31/08 1:09:26 AM PDT, Paul Stusiak$
+		
+		$Log:
+		 30   055_RETS_Standard 1.29        3/31/08 1:09:26 AM PDT Paul Stusiak
+		      work in progress checkin against change requests including the RCP for
+		       the adopted schemas
+		 29   055_RETS_Standard 1.28        2/21/08 12:55:52 PM PSTGina Accawi
+		      Modify enum values to add whitespace where necessary.
+		 28   055_RETS_Standard 1.27        1/24/08 11:30:32 AM PSTPaul Stusiak
+		      correct copyright notice language
+		 27   055_RETS_Standard 1.26        10/7/07 10:44:42 PM PDTPaul Stusiak
+		      general clean up of the schema, add missing retsid as necessary.
+		 26   055_RETS_Standard 1.25        10/2/07 2:33:09 PM PDT Gina Accawi
+		      Rename ContactMethod to ContactMethods. Add values to the
+		      PhoneTypeEnum.
+		 25   055_RETS_Standard 1.24        7/25/07 12:11:09 AM PDTPaul Stusiak
+		      add retsid documentation pattern
+		 24   055_RETS_Standard 1.23        7/6/07 9:30:50 AM PDT  Paul Stusiak
+		      Change enumerations to use common format of
+		      OtherEnumerationDescriptionString for Rooms change CR 29
+		 23   055_RETS_Standard 1.22        7/5/07 2:09:35 PM PDT  Gina Accawi
+		      Remove commented out code. Move email address above email. Add
+		      address. Allow otherDescription for type enums. Move preference type
+		      to primitives.
+		 22   055_RETS_Standard 1.21        7/5/07 12:06:58 PM PDT Gina Accawi
+		      Create privacy type attribute for contact information items. 
+		 21   055_RETS_Standard 1.20        7/5/07 11:50:27 AM PDT Gina Accawi
+		      Add Showing for phone. Add email type enumeration. Add preference
+		      order type and elements. Make Email a sequence. Make other contact
+		      information a sequence with a preference order. 
+		 20   055_RETS_Standard 1.19        6/26/07 1:05:12 PM PDT Gina Accawi
+		      Rename ContactInformation to ContactMethod.
+		 19   055_RETS_Standard 1.18        6/25/07 3:15:39 PM PDT Gina Accawi     
+		 18   055_RETS_Standard 1.17        6/21/07 6:51:32 PM PDT Paul Stusiak    
+		 17   055_RETS_Standard 1.16        6/14/07 3:16:31 PM PDT Gina Accawi
+		      Update documentation for rename.
+		 16   055_RETS_Standard 1.15        6/14/07 3:01:58 PM PDT Gina Accawi     
+		 15   055_RETS_Standard 1.14        6/13/07 2:17:35 PM PDT Gina Accawi
+		      Include comments on suggested type and category design modification
+		      where rather than element names indicating category: Office, Home,
+		      etc. for a phone number an included child element does so. Also,
+		      include the type and category enumerations.
+		 14   055_RETS_Standard 1.13        5/2/07 12:55:29 PM PDT Paul Stusiak
+		      remove pattern match for email type
+		 13   055_RETS_Standard 1.12        5/1/07 2:36:59 PM PDT  Paul Stusiak
+		      Update the version timestamp, make the schema relative again,
+		      normalize the date related typing to use SecureDateTime and naming to
+		      be of the form XXXDateTime
+		 12   055_RETS_Standard 1.11        4/13/07 11:54:31 AM PDTPaul Stusiak
+		      Pretty-print update to limit body width to less than 70 characters for
+		       review purposes.
+		 11   055_RETS_Standard 1.10        4/13/07 11:26:59 AM PDTPaul Stusiak
+		      uncomment stronger pattern matching for the email address.
+		 10   055_RETS_Standard 1.9         4/3/07 4:59:31 PM PDT  Paul Stusiak
+		      use url resolution for include, import to test schema validation
+		 9    055_RETS_Standard 1.8         4/3/07 12:43:42 PM PDT Paul Stusiak
+		      Added documentation and appinfo.
+		 8    055_RETS_Standard 1.7         4/3/07 1:43:59 AM PDT  Paul Stusiak
+		      change namespace to remote location (www.ftc2.com) for testing
+		 7    055_RETS_Standard 1.6         4/2/07 11:26:57 AM PDT Paul Stusiak
+		      change namespace to match responding server and to use the URI
+		      versioning suggested by both HP and XFront
+		 6    055_RETS_Standard 1.5         3/30/07 6:20:07 PM PDT Paul Stusiak
+		      Update of the versionTimestamp and the namespace (namespace to
+		      200704). Change formating to a standard format
+		 5    055_RETS_Standard 1.4         3/19/07 9:12:48 PM PDT Paul Stusiak
+		      Add SecurePhone type, reformat to standard type, add AlternatePhone
+		      and OtherContact
+		 4    055_RETS_Standard 1.3         3/7/07 10:58:50 PM PST Paul Stusiak
+		      Clean up the project information for the purposes of document
+		      generation.
+		 3    055_RETS_Standard 1.2         3/6/07 1:51:57 PM PST  Paul Stusiak
+		      Added tab stop information, attempted more complex validation,
+		      unsuccessfully.
+		 2    055_RETS_Standard 1.1         2/28/07 12:26:38 AM PSTPaul Stusiak
+		      completion of first cut at refactoring out from RETSCommons.xsd
+		 1    055_RETS_Standard 1.0         2/27/07 7:14:31 PM PST Paul Stusiak    
+		$
+		======================
+	-->
+
+	<xs:annotation>
+		<xs:documentation>
+			Types and Elements related to telephone or other
+			communications identification.
+		</xs:documentation>
+	</xs:annotation>
+
+	<xs:include schemaLocation="Address.xsd"/>
+	<xs:include schemaLocation="Primitives.xsd"/>
+
+	<!-- Types -->
+	<xs:simpleType name="affix">
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	<xs:simpleType name="desc">
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	<xs:complexType name="PhoneTypeEnum">
+			<xs:simpleContent>
+				<xs:restriction base="commons:OtherEnumerationDescriptionString">
+					<xs:enumeration value="Voice">
+						<xs:annotation>
+							<xs:appinfo>
+								<retsid>101624</retsid>
+							</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="Fax">
+						<xs:annotation>
+							<xs:appinfo>
+								<retsid>101625</retsid>
+							</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="Pager">
+						<xs:annotation>
+							<xs:appinfo>
+								<retsid>101626</retsid>
+							</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="SMS">
+						<xs:annotation>
+							<xs:appinfo>
+								<retsid>101627</retsid>
+							</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="TTY">
+						<xs:annotation>
+							<xs:appinfo>
+								<retsid>101628</retsid>
+							</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="Voicemail">
+						<xs:annotation>
+							<xs:appinfo>
+								<retsid>101629</retsid>
+							</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="Message Service">
+						<xs:annotation>
+							<xs:appinfo>
+								<retsid>101630</retsid>
+							</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="Other">
+						<xs:annotation>
+							<xs:appinfo>
+								<retsid>101631</retsid>
+							</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+				</xs:restriction>
+			</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="PhoneCategoryEnum">
+			<xs:simpleContent>
+				<xs:restriction base="commons:OtherEnumerationDescriptionString">
+					<xs:enumeration value="Office">
+						<xs:annotation>
+							<xs:appinfo>
+								<retsid>101632</retsid>
+							</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="Mobile">
+						<xs:annotation>
+							<xs:appinfo>
+								<retsid>101633</retsid>
+							</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="Home">
+						<xs:annotation>
+							<xs:appinfo>
+								<retsid>101634</retsid>
+							</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="Assistant">
+						<xs:annotation>
+							<xs:appinfo>
+								<retsid>101635</retsid>
+							</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="Team">
+						<xs:annotation>
+							<xs:appinfo>
+								<retsid>101636</retsid>
+							</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="Event">
+						<xs:annotation>
+							<xs:appinfo>
+								<retsid>101637</retsid>
+							</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="Conference">
+						<xs:annotation>
+							<xs:appinfo>
+								<retsid>101638</retsid>
+							</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="Showing">
+						<xs:annotation>
+							<xs:appinfo>
+								<retsid>101639</retsid>
+							</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="Other">
+						<xs:annotation>
+							<xs:appinfo>
+								<retsid>101640</retsid>
+							</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+				</xs:restriction>
+			</xs:simpleContent>
+	</xs:complexType>
+
+	<xs:complexType name="EmailTypeEnum">
+		<xs:simpleContent>
+			<xs:restriction base="commons:OtherEnumerationDescriptionString">
+				<xs:enumeration value="Agent">
+					<xs:annotation>
+						<xs:appinfo>
+							<retsid>101641</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="MLS">
+					<xs:annotation>
+						<xs:appinfo>
+							<retsid>101642</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Consumer">
+					<xs:annotation>
+						<xs:appinfo>
+							<retsid>101643</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Other">
+					<xs:annotation>
+						<xs:appinfo>
+							<retsid>101644</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+		</xs:restriction>
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<xs:complexType name="Phone">
+		<xs:annotation>
+			<xs:documentation>
+				The main type information for the phone type uses a
+				restriction applied to the string datatype to limit the
+				valid characters to the set of number representation
+				characters '0'-'9'.
+
+				This restriction results in the suppression of additional
+				characters often seen in representations of telephone
+				numbers.
+
+				Characters like '.', '(' ')' and others are used as
+				separators between the elements for human recognition.
+				Characters like '-', ' '(space) and '+' have a more
+				general use and may appear in certain standards bodies
+				references. However, in all cases, there is no important
+				information imparted in these characters and their use is
+				determined by local convention.
+
+				The whitespace and '+' suppression, along with
+				restricting the use of other characters are part of a
+				simplification choice made for several reasons:
+					1. The restriction to enforce the use of characters
+					other than numbers is more difficult to understand
+					and may not be properly supported in all tools.
+					2. Representations of the complete number are
+					locale specific. A telephone number is presented
+					differently based on culture.
+					3. Resolution between the stringnumeric and legacy
+					systems should be simplified. For string
+					representations, it is conversion by restriction. An
+					unparsed phone in a legacy system may have the form
+					+1 (888) 555-1212. This and other permutations should
+					be easily converted to the form presented here
+						<country-code>1</country-code>
+						<area-code>888</area-code>
+						<local-number>5551212</local-number>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="preference-order"
+				type="commons:preferenceOrderType">
+				<xs:annotation>
+					<xs:documentation>
+						Indicates the preference order within all the ContactMethods.
+						Highest preference is 0.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>100049</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="phone-preference-order"
+				type="commons:preferenceOrderType">
+				<xs:annotation>
+					<xs:documentation>
+						Indicates the preference order within all the Phones.
+						Highest preference is 0. 
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>100050</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="prefix"
+							type="commons:affix">
+				<xs:annotation>
+					<xs:documentation>
+						The prefix is the first portion of a telephone
+						number.
+
+						The prefix may be any string of values and
+						represents the access code to a telephone system.
+						This may be used to carry the call over an
+						alternate carrier or may be necessary when dialing
+						international or national calls. They may also be
+						necessary to connect to alternate phone systems
+						like satellite phone systems.
+
+						Generally, the access code is not represented in
+						domestic telephone number use.
+
+						Examples of access codes are:
+							0
+							00
+							9201010
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>100051</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="country-code"
+							type="commons:stringnumeric">
+				<xs:annotation>
+					<xs:documentation>
+						The country-code comes after the prefix and before
+						the area code.
+
+						The well-known ITU-T country calling codes as
+						defined in E.164. The schema does not enforce the
+						use of valid codes.
+
+						Additionally, the schema suppresses whitespace that
+						is normally present in printed examples.
+
+						Finally, the schema suppresses the '+' that is
+						normally present in printed examples.
+
+						Here are some examples of the country code and
+						location
+							+1 for the US
+							+1 444 for Bermuda
+							+44 for the UK
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>100052</retsid>
+						<example>1</example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="area-code"
+							type="commons:stringnumeric">
+				<xs:annotation>
+					<xs:documentation>
+						The area-code comes after the country code and
+						precedes the local-number.
+
+						The regional identifier (or overlay identifier)
+						applied by the national carrier regulation
+						authority.
+						
+						In some locales, the use of area code is mandatory
+						for dialing all numbers while in other it is only
+						necessary for dialing outside of the local calling
+						area.
+
+						The schema does not enforce the use of valid codes.
+
+						Additionally, the schema suppresses parentheses
+						that are normally present in printed examples.
+
+						Here are some examples of the country code and
+						location
+							(312) for the Chicago-IL US overlay
+							(020) for Amsterdam, the Netherlands calls
+							originating from within the country directed
+							to Amsterdam.
+
+						Within this schema, the example values will be
+							312
+							020
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>100053</retsid>
+						<example>888</example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="local-number"
+							type="commons:stringnumeric">
+				<xs:annotation>
+					<xs:documentation>
+						The access number to connect to a telephone. It
+						comes after the area-code.
+
+						The number of digits depends on the location. In
+						the North American Numbering Plan area, the number
+						is 7, while in other areas, there may be fewer or
+						more digits.
+
+						An example is 555-1212.
+
+						Within this schema, the example will be 5551212
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>100054</retsid>
+						<example>5551212</example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="extension"
+							type="commons:stringnumeric">
+				<xs:annotation>
+					<xs:documentation>
+						The extension is optional and comes after the
+						local-number.
+
+						It represents a more specific location, typically
+						the direct desk phone of a person within an office.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>100055</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="suffix"
+							type="commons:affix"/>
+			<xs:element name="phone-type"
+							 type="commons:PhoneTypeEnum">
+				<xs:annotation>
+					<xs:appinfo>
+						<retsid>100056</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="category"
+							  type="commons:PhoneCategoryEnum">
+				<xs:annotation>
+					<xs:appinfo>
+						<retsid>100057</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="description"
+							type="commons:desc">
+				<xs:annotation>
+					<xs:appinfo>
+						<retsid>100058</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute ref="commons:privacyType"
+						use="optional">
+			<xs:annotation>
+				<xs:documentation>
+					Provide a level of privacy for this phone number. 
+				</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+
+	<xs:complexType name="SecurePhone">
+		<xs:complexContent>
+			<xs:extension base="commons:Phone">
+				<xs:attribute	ref="commons:isgSecurityClass"
+									use="required">
+					<xs:annotation>
+						<xs:appinfo>
+							<retsid>100059</retsid>
+							<example></example>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:attribute>
+				<xs:attribute	ref="commons:visibilityFlag"
+									use="optional">
+					<xs:annotation>
+						<xs:appinfo>
+							<retsid>100060</retsid>
+							<example></example>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="EmailAddress">
+		<xs:annotation>
+			<xs:documentation>
+				Formatted string used to specify a standard electronic
+				mail message, formatted name@addess.domain.
+				This is defined in RFC 2822 (and some definitions in
+				RFC 2821).
+				It consists of a local part and a domain part separated
+				by the character '@'
+				
+				Note that RFC defines several forms of email address
+				that are fairly rare.
+				
+				Valid email addresses
+				someone@example.com
+				a.someone@example.com
+				a.one_two{}@some.example.com
+				!def!xyz%abc@local.example.com
+				some..one@example.com
+				
+				Invalid email addresses
+				.someone@example.com
+				someone.@example.com
+				@example.com
+				
+				Possibly valid email addresses that fail validation
+				some\@one@example.com
+				someone@b.com
+				someone@example.longdomain
+				
+				This pattern does not cover valid cases like quoted
+				local parts, escaping, character sets other than ASCII,
+				IP address, domain roots (.com) longer than 9 characters
+				and less than 2 and several other cases
+			</xs:documentation>
+			<xs:appinfo>
+				someone@example.com
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:restriction base="commons:SecureString">
+			</xs:restriction>
+		</xs:simpleContent>
+	</xs:complexType>
+	
+	<xs:complexType name="Email">
+		<xs:sequence>
+			<xs:element name="preference-order"
+							type="commons:preferenceOrderType">
+				<xs:annotation>
+					<xs:documentation>
+						Indicates the preference order within all the ContactMethods.
+						Highest preference is 0.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>100061</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="email-preference-order"
+							type="commons:preferenceOrderType">
+				<xs:annotation>
+					<xs:documentation>
+						Indicates the preference order within all the email addresses.
+						Highest preference is 0.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>100062</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="EmailAddress" 
+							type="commons:EmailAddress"
+							minOccurs="1"
+							maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						The email address itself.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>100063</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute ref="commons:privacyType"
+						use="optional">
+			<xs:annotation>
+				<xs:documentation>
+					Provide a level of privacy for this phone number. 
+				</xs:documentation>
+				<xs:appinfo>
+					<retsid>100064</retsid>
+					<example></example>
+				</xs:appinfo>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+
+	<xs:complexType name="OtherContact">
+		<xs:sequence>
+			<xs:element name="preference-order"
+							type="commons:preferenceOrderType">
+				<xs:annotation>
+					<xs:documentation>
+						Indicates the preference order within all the ContactMethods.
+						Highest preference is 0.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>100065</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="other-preference-order"
+							type="commons:preferenceOrderType">
+				<xs:annotation>
+					<xs:documentation>
+						Indicates the preference order within the other contact methods.
+						Highest preference is 0.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>100066</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Details"
+							type="xs:string">
+				<xs:annotation>
+					<xs:documentation>
+						Alternate raw contact string for sms, email page
+						or other addressable technology. 
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>100067</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute ref="commons:privacyType"
+						use="optional">
+			<xs:annotation>
+				<xs:documentation>
+					Provide a level of privacy for this phone number. 
+				</xs:documentation>
+				<xs:appinfo>
+					<retsid>100068</retsid>
+					<example></example>
+				</xs:appinfo>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+
+	<xs:complexType name="ContactMethods">
+		<xs:sequence>
+		<xs:element	name="Phone" 
+						type="commons:Phone"
+						minOccurs="0"
+						maxOccurs="unbounded">
+			<xs:annotation>
+					<xs:appinfo>
+						<retsid>100069</retsid>
+					</xs:appinfo>
+			</xs:annotation>
+		</xs:element>
+		<xs:element	name="Email"
+						type="commons:Email"
+						minOccurs="0"
+						maxOccurs="unbounded">
+			<xs:annotation>
+					<xs:appinfo>
+						<retsid>100070</retsid>
+					</xs:appinfo>
+			</xs:annotation>
+		</xs:element>
+		<xs:element	name="Address"
+						type="commons:Address"
+						minOccurs="0"
+						maxOccurs="unbounded">
+			<xs:annotation>
+					<xs:appinfo>
+						<retsid>100071</retsid>
+					</xs:appinfo>
+			</xs:annotation>
+		</xs:element>
+		<xs:element	name="OtherContact"
+						type="commons:OtherContact"
+						minOccurs="0"
+						maxOccurs="unbounded">
+			<xs:annotation>
+					<xs:appinfo>
+						<retsid>100072</retsid>
+					</xs:appinfo>
+			</xs:annotation>
+		</xs:element>
+		<xs:any	namespace="##other"
+					minOccurs="0"
+					maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

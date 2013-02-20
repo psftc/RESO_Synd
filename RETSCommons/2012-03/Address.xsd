@@ -1,0 +1,555 @@
+<?xml version="1.0"?>
+<xs:schema	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+				xmlns:commons="http://rets.org/xsd/RETSCommons/2012-03"
+				targetNamespace="http://rets.org/xsd/RETSCommons/2012-03"
+				elementFormDefault="qualified"
+				attributeFormDefault="unqualified">
+
+	<!--
+		(C)2007 National Association of REALTORS(R). All Rights Reserved
+
+		(C) 2010, 2011,2012 Falcon Technologies Corporation. All Rights Reserved.
+
+		Tab stops
+		:set ts=3
+
+		File History
+		======================
+		2012-02-06	Paul Stusiak	Update the filestructure for version 2012-03
+		
+		$Header: Address.xsd, 21, 15/04/09 4:41:02 PDT PM, Paul Stusiak$
+		
+		$Log:
+		 21   055_RETS_Standard 1.20        15/04/09 4:41:02 PDT PMPaul Stusiak
+		      trivial change to description for full address
+		 20   055_RETS_Standard 1.19        15/04/09 12:32:04 PDT PMGina Accawi
+		      Modify comment for FullStreetAddress
+		 19   055_RETS_Standard 1.18        31/03/08 1:09:25 PDT AMPaul Stusiak
+		      work in progress checkin against change requests including the RCP for
+		       the adopted schemas
+		 18   055_RETS_Standard 1.17        27/03/08 5:34:49 PDT PMGina Accawi
+		      Add processContents lax to extension point.
+		 17   055_RETS_Standard 1.16        24/01/08 11:30:31 PST AMPaul Stusiak
+		      correct copyright notice language
+		 16   055_RETS_Standard 1.15        07/10/07 10:44:41 PDT PMPaul Stusiak
+		      general clean up of the schema, add missing retsid as necessary.
+		 15   055_RETS_Standard 1.14        25/07/07 12:11:45 PDT AMPaul Stusiak
+		      add retsid documentation pattern
+		 14   055_RETS_Standard 1.13        06/07/07 9:30:49 PDT AMPaul Stusiak
+		      Change enumerations to use common format of
+		      OtherEnumerationDescriptionString for Rooms change CR 29
+		 13   055_RETS_Standard 1.12        05/07/07 2:05:50 PDT PMGina Accawi
+		      Add address category enumeration. Add preference order information.
+		 12   055_RETS_Standard 1.11        04/07/07 11:18:29 PDT AMPaul Stusiak
+		      Change example for PostalCode
+		 11   055_RETS_Standard 1.10        02/05/07 1:08:57 PDT PMPaul Stusiak
+		      change namespace location
+		 10   055_RETS_Standard 1.9         01/05/07 2:36:58 PDT PMPaul Stusiak
+		      Update the version timestamp, make the schema relative again,
+		      normalize the date related typing to use SecureDateTime and naming to
+		      be of the form XXXDateTime
+		 9    055_RETS_Standard 1.8         13/04/07 11:54:30 PDT AMPaul Stusiak
+		      Pretty-print update to limit body width to less than 70 characters for
+		       review purposes.
+		 8    055_RETS_Standard 1.7         03/04/07 1:43:54 PDT AMPaul Stusiak
+		      change namespace to remote location (www.ftc2.com) for testing
+		 7    055_RETS_Standard 1.6         02/04/07 11:26:52 PDT AMPaul Stusiak
+		      change namespace to match responding server and to use the URI
+		      versioning suggested by both HP and XFront
+		 6    055_RETS_Standard 1.5         30/03/07 6:20:18 PDT PMPaul Stusiak
+		      Update of the versionTimestamp and the namespace (namespace to
+		      200704). Change formating to a standard format
+		 5    055_RETS_Standard 1.4         26/03/07 6:43:41 PDT PMPaul Stusiak
+		      additional annotations added and some minor corrections
+		 4    055_RETS_Standard 1.3         12/03/07 9:39:15 PDT PMPaul Stusiak
+		      reformat the layout, add some more documentation, make sequence
+		      correction per Joshua Vosper for the order of the Country/Postal code.
+		       Add new choice constraint between civic address and PO Box.
+		 3    055_RETS_Standard 1.2         07/03/07 10:44:45 PST PMPaul Stusiak
+		      Clean up the project information for the purposes of document
+		      generation.
+		 2    055_RETS_Standard 1.1         28/02/07 12:26:37 PST AMPaul Stusiak
+		      completion of first cut at refactoring out from RETSCommons.xsd
+		 1    055_RETS_Standard 1.0         27/02/07 7:14:30 PST PMPaul Stusiak    
+		$
+		======================
+	-->
+	<xs:include schemaLocation="Primitives.xsd"/>
+	
+	<xs:annotation>
+		<xs:documentation>
+			A generalized type description of an Address
+		</xs:documentation>
+	</xs:annotation>
+
+	<!-- simple Types -->
+	<xs:complexType name="AddressCategoryEnum">
+		<xs:simpleContent>
+			<xs:restriction base="commons:OtherEnumerationDescriptionString">
+				<xs:enumeration value="Physical">
+					<xs:annotation>
+						<xs:appinfo>
+							<retsid>101616</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Display">
+					<xs:annotation>
+						<xs:appinfo>
+							<retsid>101617</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Mailing">
+					<xs:annotation>
+						<xs:appinfo>
+							<retsid>101618</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Shipping">
+					<xs:annotation>
+						<xs:appinfo>
+							<retsid>101619</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Billing">
+					<xs:annotation>
+						<xs:appinfo>
+							<retsid>101620</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Legal">
+					<xs:annotation>
+						<xs:appinfo>
+							<retsid>101621</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Tax">
+					<xs:annotation>
+						<xs:appinfo>
+							<retsid>101622</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Other">
+					<xs:annotation>
+						<xs:appinfo>
+							<retsid>101623</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+			</xs:restriction>
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<!-- complex Types -->
+
+
+	<xs:complexType name="StreetNumberType">
+		<xs:annotation>
+			<xs:documentation>
+				Text field that uniquely locates a building on a given
+				street. House numbers may have fractional or alphabetic
+				modifiers. This is the first component in a street
+				address.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="xs:string" />
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="StreetDirPrefixType">
+		<xs:annotation>
+			<xs:documentation>
+				Text field containing the direction that follows the
+				house number and precedes the street name in an address.  
+				The format may be either an abbreviation, such as "NE" or
+				"N.E" or the full direction, "Northeast".
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="xs:string" />
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="StreetNameType">
+		<xs:annotation>
+			<xs:documentation>
+				Text field containing the name of the street in an
+				address.  This may follow the house number or, if
+				applicable, the street direction prefix. It precedes the
+				street suffix. for example, in the address
+				"123 Main St.", "Main" is the street name.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="xs:string" />
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="StreetSuffixType">
+		<xs:annotation>
+			<xs:documentation>
+				Text field describing the street type in an address. This
+				field follows the street name and precedes the street
+				direction suffix. A street suffix may be formatted as
+				either an  abbreviation or full name. Examples include:
+				Road, Rd., Avenue, Ave., etc.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="xs:string" />
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="StreetDirSuffixType">
+		<xs:annotation>
+			<xs:documentation>
+				Text field containing the direction that follows the
+				street suffix in an address. The format may be either an
+				abbreviation, such as "NE" or "N.E" or the full
+				direction, "Northeast".
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="xs:string" />
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="StreetAdditionalInfoType">
+		<xs:simpleContent>
+			<xs:extension base="xs:string" />
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="BoxNumberType">
+		<xs:annotation>
+			<xs:documentation>
+				A container at a central mailing location, where the
+				incoming mail of a person or legal entity is held until
+				picked up by the person or legal entity. Also known as
+				a post office box.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="xs:string" />
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="UnitNumberType">
+		<xs:annotation>
+			<xs:documentation>
+				Text field containing the number or portion of a larger
+				building or complex. Unit Number should appear following
+				the street suffix or, if it exists, the street suffix
+				direction, in the street address. Examples are:
+				"APT G", "55", etc.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="xs:string" />
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="CityType">
+		<xs:annotation>
+			<xs:documentation>
+				The city, township, municipality, etc. portion of the
+				physical, legal or mailing address for a property,
+				person, etc.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="xs:string" />
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="StateOrProvinceType">
+		<xs:annotation>
+			<xs:documentation>
+				Text field containing either the accepted postal
+				abbreviation or the full name for one of the 50 U.S.
+				states or 13 Canadian provinces/territories.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="xs:string" />
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="CountryType">
+		<xs:annotation>
+			<xs:documentation>
+				The territory of nation or state included in a person or 
+				property's legal or mailing address.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="xs:string"/>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="PostalCodeType">
+		<xs:annotation>
+			<xs:documentation>
+				In the United states, the postal code (ZIP code) the
+				basic postal code format consists of five numerical
+				digits and may include a five digit ZIP+4 code that
+				allows delivery of a piece of mail to be even more
+				accurately defined. In Canada, the postal code is a six
+				character alpha-numerical code defined and maintained by
+				Canada Post Corporation for mail processing
+				(sorting and delivery).
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="xs:string" />
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="CarrierRouteType">
+		<xs:annotation>
+			<xs:documentation>
+				The group of addresses to which the USPS assigns the
+				same code to aid in mail delivery. For the USPS, these
+				codes are 9 digits: 5 numbers for the ZIP Code, one
+				letter for the carrier route type, and 3 numbers for the
+				carrier route number.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="xs:string" />
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="Address">
+		<xs:sequence>
+			<xs:element name="preference-order"
+				type="commons:preferenceOrderType">
+				<xs:annotation>
+					<xs:documentation>
+						Indicates the preference order within all
+						the ContactMethods. The highest preference
+						is 0.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>100023</retsid>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="address-preference-order"
+				type="commons:preferenceOrderType">
+				<xs:annotation>
+					<xs:documentation>
+						Indicates the preference order within all
+						the Phones. The highest preference is 0.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>100024</retsid>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="category"
+							type="commons:AddressCategoryEnum"
+							minOccurs="0"
+							maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Provide a category for the address.
+						Examples include shipping, billing,
+						physical, etc.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>100025</retsid>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="FullStreetAddress"
+							type="xs:string"
+							minOccurs="0"
+							maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						The FullStreetAddress is a text representation of
+						the address with the full civic location as a single entity.
+						
+						It may optionally include any of City, StateOrProvince,
+						PostalCode and Country.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>100026</retsid>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:choice>
+				<xs:annotation>
+					<xs:documentation>
+						By definition, only one of the civic address, Box
+						number or General Delivery information can be
+						displayed.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>100027</retsid>
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:sequence>
+					<xs:element	name="StreetNumber"
+									type="commons:StreetNumberType"
+									minOccurs="0"
+									maxOccurs="1">
+						<xs:annotation>
+							<xs:appinfo>
+								<retsid>100028</retsid>
+								<example>5323</example>
+							</xs:appinfo>
+						</xs:annotation>
+					</xs:element>
+					<xs:element	name="StreetDirPrefix"
+									type="commons:StreetDirPrefixType"
+									minOccurs="0"
+									maxOccurs="1">
+						<xs:annotation>
+							<xs:appinfo>
+								<retsid>100029</retsid>
+								<example>W</example>
+							</xs:appinfo>
+						</xs:annotation>
+					</xs:element>
+					<xs:element	name="StreetName"
+									type="commons:StreetNameType"
+									minOccurs="0"
+									maxOccurs="1">
+						<xs:annotation>
+							<xs:appinfo>
+								<retsid>100030</retsid>
+								<example>Broadway</example>
+							</xs:appinfo>
+						</xs:annotation>
+					</xs:element>
+					<xs:element	name="StreetSuffix"
+									type="commons:StreetSuffixType"
+									minOccurs="0"
+									maxOccurs="1">
+						<xs:annotation>
+							<xs:appinfo>
+								<retsid>100031</retsid>
+								<example></example>
+							</xs:appinfo>
+						</xs:annotation>
+					</xs:element>
+					<xs:element	name="StreetDirSuffix"
+									type="commons:StreetDirSuffixType"
+									minOccurs="0"
+									maxOccurs="1">
+						<xs:annotation>
+							<xs:appinfo>
+								<retsid>100032</retsid>
+								<example></example>
+							</xs:appinfo>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="StreetAdditionalInfo"
+									type="commons:StreetAdditionalInfoType"
+									minOccurs="0"
+									maxOccurs="1">
+						<xs:annotation>
+							<xs:appinfo>
+								<retsid>100033</retsid>
+								<example></example>
+							</xs:appinfo>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+				<xs:element		name="BoxNumber"
+									type="commons:BoxNumberType"
+									minOccurs="0"
+									maxOccurs="1">
+					<xs:annotation>
+						<xs:documentation>
+							Use the BoxNumber element to contain address
+							location information not covered by the Civic
+							Address.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>100035</retsid>
+							<example></example>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:element>
+			</xs:choice>
+			<xs:element name="UnitNumber"
+				type="commons:UnitNumberType"
+				minOccurs="0"
+				maxOccurs="1">
+				<xs:annotation>
+					<xs:appinfo>
+						<retsid>100034</retsid>
+						<example>12</example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="City"
+							type="commons:CityType"
+							minOccurs="1"
+							maxOccurs="1">
+				<xs:annotation>
+					<xs:appinfo>
+						<retsid>100036</retsid>
+						<example>Anytown</example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="StateOrProvince"
+							type="commons:StateOrProvinceType"
+							minOccurs="0"
+							maxOccurs="1">
+				<xs:annotation>
+					<xs:appinfo>
+						<retsid>100037</retsid>
+						<example>DC</example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="PostalCode"
+							type="commons:PostalCodeType"
+							minOccurs="0"
+							maxOccurs="1">
+				<xs:annotation>
+					<xs:appinfo>
+						<retsid>100038</retsid>
+						<example>90281-1374</example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="CarrierRoute"
+							type="commons:CarrierRouteType"
+							minOccurs="0"
+							maxOccurs="1">
+				<xs:annotation>
+					<xs:appinfo>
+						<retsid>100039</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="Country"
+							type="commons:CountryType"
+							minOccurs="0"
+							maxOccurs="1">
+				<xs:annotation>
+					<xs:appinfo>
+						<retsid>100040</retsid>
+						<example>US</example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:any	namespace="##other" processContents="lax"				
+						minOccurs="0"
+						maxOccurs="15"/>
+		</xs:sequence>
+		<xs:attribute ref="commons:privacyType"
+			use="optional">
+			<xs:annotation>
+				<xs:documentation>
+					The level of privacy for this address.
+				</xs:documentation>
+				<xs:appinfo>
+					<retsid>100041</retsid>
+					<example>US</example>
+				</xs:appinfo>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+</xs:schema>

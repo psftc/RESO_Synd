@@ -1,0 +1,1809 @@
+<?xml version="1.0"?>
+<xs:schema	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+			xmlns:commons="http://rets.org/xsd/RETSCommons/2007-08"
+			targetNamespace="http://rets.org/xsd/RETSCommons/2007-08"
+			elementFormDefault="qualified"
+			attributeFormDefault="unqualified">
+
+	<!--
+		(C)2007 National Association of REALTORS(R). All Rights Reserved
+
+		Tab stops
+		:set ts=3
+		
+		File History
+		======================
+		$Header: Primitives.xsd, 47, 15/04/09 4:27:40 PDT PM, Paul Stusiak$
+		
+		$Log:
+		 47   055_RETS_Standard 1.46        15/04/09 4:27:40 PDT PMPaul Stusiak
+		      slightly modify the description for full address
+		 46   055_RETS_Standard 1.45        15/04/09 12:44:13 PDT PMGina Accawi
+		      Move MarketingInformation into commons to share between Listings and
+		      Syndication for the VOW fields
+		 45   055_RETS_Standard 1.44        20/11/08 3:19:31 PST PMGina Accawi
+		      Add RelativeScale element and size types to support it. Ensure
+		      timestamps and keys are required. These are requested in CR 117.
+		 44   055_RETS_Standard 1.43        20/11/08 1:52:06 PST PMGina Accawi
+		      Changes per CR 117
+		 43   055_RETS_Standard 1.42        07/10/08 1:38:38 PDT PMGina Accawi
+		      Add currency type enumeration. Create simple, non-secured Money type
+		      for use by Syndication. 
+		 42   055_RETS_Standard 1.41        03/04/08 6:21:56 PDT PMGina Accawi
+		      Add simple time type. Validates example: 9:00 PM.
+		 41   055_RETS_Standard 1.40        03/04/08 9:47:09 PDT AMPaul Stusiak
+		      Moved URL to primitives as part of the Property refactoring
+		 40   055_RETS_Standard 1.39        27/02/08 11:57:39 PST AMPaul Stusiak
+		      Add an enumeration to the Licensing type
+		 39   055_RETS_Standard 1.38        21/02/08 12:56:02 PST PMGina Accawi
+		      Modify enum values to add whitespace where necessary.
+		 38   055_RETS_Standard 1.37        21/02/08 8:38:02 PST AMGina Accawi
+		      Rename age-enum to age. Previously this was breaking transformations.
+		 37   055_RETS_Standard 1.36        24/01/08 11:30:34 PST AMPaul Stusiak
+		      correct copyright notice language
+		 36   055_RETS_Standard 1.35        07/10/07 10:44:42 PDT PMPaul Stusiak
+		      general clean up of the schema, add missing retsid as necessary.
+		 35   055_RETS_Standard 1.34        02/10/07 12:19:28 PDT PMGina Accawi
+		      Create reusable type for systemId. Reference it where used. Ensure
+		      there is a systemId on the primary single and optional on plural
+		      version of resource payloads.
+		 34   055_RETS_Standard 1.33        25/09/07 2:37:48 PDT PMGina Accawi
+		      Modify listing contract information structure. Include Rent/Lease
+		      dates in contract information.
+		 33   055_RETS_Standard 1.32        25/09/07 7:55:45 PDT AMGina Accawi
+		      Financial type simplification.
+		 32   055_RETS_Standard 1.31        24/09/07 9:03:21 PDT AMGina Accawi
+		      Remove unused type.
+		 31   055_RETS_Standard 1.30        26/07/07 1:29:37 PDT PMGina Accawi
+		      Import namespace for lang.
+		 30   055_RETS_Standard 1.29        26/07/07 1:12:51 PDT PMGina Accawi
+		      Add language attribute to the remark type.
+		 29   055_RETS_Standard 1.28        24/07/07 10:45:43 PDT PMPaul Stusiak
+		      use boundedCardinalInteger to avoid code generation use of BigDecimal
+		 28   055_RETS_Standard 1.27        24/07/07 5:09:01 PDT PMPaul Stusiak
+		      add keys to Participant and Person, update the entities to support
+		      this, make the files have a common pattern.
+		 27   055_RETS_Standard 1.26        06/07/07 9:30:49 PDT AMPaul Stusiak
+		      Change enumerations to use common format of
+		      OtherEnumerationDescriptionString for Rooms change CR 29
+		 26   055_RETS_Standard 1.25        05/07/07 2:13:04 PDT PMGina Accawi
+		      Add gender and preference order types.
+		 25   055_RETS_Standard 1.24        05/07/07 12:07:00 PDT PMGina Accawi
+		      Create privacy type attribute for contact information items. 
+		 24   055_RETS_Standard 1.23        04/07/07 7:04:02 PDT PMPaul Stusiak
+		      add measurementSource to measured types.
+		 23   055_RETS_Standard 1.22        03/07/07 12:58:59 PDT AMPaul Stusiak
+		      Change names of lotacreage and pricepersqft to have units and currency
+		       attributes and change the name to be units neutral.
+		 22   055_RETS_Standard 1.21        02/07/07 5:39:44 PDT PMPaul Stusiak
+		      Update comment on key field type
+		 21   055_RETS_Standard 1.20        29/06/07 12:49:24 PDT PMGina Accawi
+		      Add documentation for master room.
+		 20   055_RETS_Standard 1.19        29/06/07 11:59:12 PDT AMGina Accawi
+		      Create common resource key type.
+		 19   055_RETS_Standard 1.18        28/06/07 12:03:14 PDT PMGina Accawi
+		      Change unspecified to unknown in enum value for consistency. Add Other
+		       to enum for text types.
+		 18   055_RETS_Standard 1.17        28/06/07 7:46:10 PDT AMGina Accawi
+		      Add type for enumerations of string values. This type includes an
+		      attribute, otherDescription and should be extended by any enum type
+		      needing to allow for this attribute to be present.
+		 17   055_RETS_Standard 1.16        25/06/07 3:18:18 PDT PMGina Accawi
+		      Add isMaster attribute.
+		 16   055_RETS_Standard 1.15        02/05/07 12:54:50 PDT PMPaul Stusiak
+		      remove attribute default to remove code generation warnings
+		 15   055_RETS_Standard 1.14        01/05/07 4:16:59 PDT PMGina Accawi
+		      Make the Secure types nullable: SecureYear, SecureToken, SecureURI,
+		      SecureBoolean
+		 14   055_RETS_Standard 1.13        01/05/07 2:36:59 PDT PMPaul Stusiak
+		      Update the version timestamp, make the schema relative again,
+		      normalize the date related typing to use SecureDateTime and naming to
+		      be of the form XXXDateTime
+		 13   055_RETS_Standard 1.12        15/04/07 11:52:00 PDT PMPaul Stusiak
+		      Fix nullabilty to permit proper validation
+		 12   055_RETS_Standard 1.11        13/04/07 11:54:30 PDT AMPaul Stusiak
+		      Pretty-print update to limit body width to less than 70 characters for
+		       review purposes.
+		 11   055_RETS_Standard 1.10        13/04/07 11:25:48 PDT AMPaul Stusiak
+		      add nullable types to permit empty strings for some elements.
+		 10   055_RETS_Standard 1.9         03/04/07 1:43:58 PDT AMPaul Stusiak
+		      change namespace to remote location (www.ftc2.com) for testing
+		 9    055_RETS_Standard 1.8         02/04/07 11:26:57 PDT AMPaul Stusiak
+		      change namespace to match responding server and to use the URI
+		      versioning suggested by both HP and XFront
+		 8    055_RETS_Standard 1.7         30/03/07 6:20:06 PDT PMPaul Stusiak
+		      Update of the versionTimestamp and the namespace (namespace to
+		      200704). Change formating to a standard format
+		 7    055_RETS_Standard 1.6         30/03/07 12:48:21 PDT PMPaul Stusiak
+		      Move period, currencyPeriod from RETSCommons to here.
+		 6    055_RETS_Standard 1.5         29/03/07 2:23:25 PDT PMGina Accawi
+		      Add simple type enum for month.
+		 5    055_RETS_Standard 1.4         21/03/07 4:18:02 PDT PMPaul Stusiak
+		      update annotation values
+		 4    055_RETS_Standard 1.3         16/03/07 11:46:02 PDT AMPaul Stusiak
+		      move present tri-state and age type from RETSCommons
+		 3    055_RETS_Standard 1.2         07/03/07 11:00:15 PST PMPaul Stusiak
+		      Clean up the project information for the purposes of document
+		      generation. Added trial annotation format for Gina's review. Made
+		      modification to document format. Added attributes visibilityFlag and
+		      textFormatType from RETSCommons and created replacements for Notes,
+		      Remarks from RETSCommons.
+		 2    055_RETS_Standard 1.1         06/03/07 1:54:49 PST PMPaul Stusiak
+		      Added tab stop information, added additional types Measurement, Area,
+		      removed unnecessary default=Public fixed Float type.
+		 1    055_RETS_Standard 1.0         28/02/07 12:26:37 PST AMPaul Stusiak
+		      completion of first cut at refactoring out from RETSCommons.xsd
+		$
+		======================
+	-->
+	<xs:annotation>
+		<xs:documentation>
+			Primitive type definitions - attributes and elements,
+			including visibility.
+		</xs:documentation>
+	</xs:annotation>
+	<xs:import  namespace="http://www.w3.org/XML/1998/namespace"
+		schemaLocation="http://www.w3.org/2001/xml.xsd"/>
+	<!-- Attributes -->
+
+	<xs:attribute name="isMaster" type="xs:boolean">
+		<xs:annotation>
+			<xs:documentation>
+				Flag indicating whether a given room is the principle one for room 
+				type. Most commonly thought in terms of bedroom and bathroom. Flag 
+				may be used on rooms of any type, however. For a master bathroom, 
+				there is a door or entranceway between the master bedroom and this
+				bathroom.
+			</xs:documentation>
+			<xs:appinfo>
+				false
+			</xs:appinfo>
+		</xs:annotation>
+	</xs:attribute>
+
+	<xs:attribute name="visibilityFlag">
+		<xs:annotation>
+			<xs:documentation>
+				Visibility flag for publicly visible items
+			</xs:documentation>
+			<xs:appinfo>
+				true
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:boolean"/>
+		</xs:simpleType>
+	</xs:attribute>
+
+	<xs:attribute name="present">
+		<xs:annotation>
+			<xs:documentation>
+				Tri-state indicates the existence of something
+			</xs:documentation>
+			<xs:appinfo>
+				Yes
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:token">
+				<xs:enumeration value="Yes"/>
+				<xs:enumeration value="No"/>
+				<xs:enumeration value="Unknown"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:attribute>
+
+	<xs:attribute name="textFormatType">
+		<xs:annotation>
+			<xs:documentation>
+				Simple format instructions for text
+			</xs:documentation>
+			<xs:appinfo>
+				PlainText
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:token">
+				<xs:enumeration value="PlainText"/>
+				<xs:enumeration value="HTML"/>
+				<xs:enumeration value="Other"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:attribute>
+
+	<xs:attribute name="isgSecurityClass">
+		<xs:annotation>
+			<xs:documentation>
+				The NAR Information Security Guidelines class.
+				See the document for more details.
+			</xs:documentation>
+			<xs:appinfo>
+				Confidential
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:enumeration value="Public"/>
+				<xs:enumeration value="Confidential"/>
+				<xs:enumeration value="Secret"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:attribute>
+
+	<xs:attribute name="currencyCode" default="USD">
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:annotation>
+					<xs:documentation>
+						The currency code.
+					</xs:documentation>
+					<xs:appinfo>
+						USD
+					</xs:appinfo>
+				</xs:annotation>
+				<xs:enumeration value="AED">
+					<xs:annotation>
+						<xs:documentation>United Arab Emirates,
+						Dirhams</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="AFN">
+					<xs:annotation>
+						<xs:documentation>Afghanistan, Afghanis</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="ALL">
+					<xs:annotation>
+						<xs:documentation>Albania, Leke</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="AMD">
+					<xs:annotation>
+						<xs:documentation>Armenia, Drams</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="ANG">
+					<xs:annotation>
+						<xs:documentation>Netherlands Antilles, Guilders (also called
+							Florins)</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="AOA">
+					<xs:annotation>
+						<xs:documentation>Angola, Kwanza</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="ARS">
+					<xs:annotation>
+						<xs:documentation>Argentina, Pesos</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="AUD">
+					<xs:annotation>
+						<xs:documentation>Australia, Dollars</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="AWG">
+					<xs:annotation>
+						<xs:documentation>Aruba, Guilders (also called
+						Florins)</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="AZN">
+					<xs:annotation>
+						<xs:documentation>Azerbaijan, New Manats</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="BAM">
+					<xs:annotation>
+						<xs:documentation>Bosnia and Herzegovina, Convertible
+						Marka</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="BBD">
+					<xs:annotation>
+						<xs:documentation>Barbados, Dollars</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="BDT">
+					<xs:annotation>
+						<xs:documentation>Bangladesh, Taka</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="BGN">
+					<xs:annotation>
+						<xs:documentation>Bulgaria, Leva</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="BHD">
+					<xs:annotation>
+						<xs:documentation>Bahrain, Dinars</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="BIF">
+					<xs:annotation>
+						<xs:documentation>Burundi, Francs</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="BMD">
+					<xs:annotation>
+						<xs:documentation>Bermuda, Dollars</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="BND">
+					<xs:annotation>
+						<xs:documentation>Brunei Darussalam,
+						Dollars</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="BOB">
+					<xs:annotation>
+						<xs:documentation>Bolivia, Bolivianos</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="BRL">
+					<xs:annotation>
+						<xs:documentation>Brazil, Brazil Real</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="BSD">
+					<xs:annotation>
+						<xs:documentation>Bahamas, Dollars</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="BTN">
+					<xs:annotation>
+						<xs:documentation>Bhutan, Ngultrum</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="BWP">
+					<xs:annotation>
+						<xs:documentation>Botswana, Pulas</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="BYR">
+					<xs:annotation>
+						<xs:documentation>Belarus, Rubles</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="BZD">
+					<xs:annotation>
+						<xs:documentation>Belize, Dollars</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="CAD">
+					<xs:annotation>
+						<xs:documentation>Canada, Dollars</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="CDF">
+					<xs:annotation>
+						<xs:documentation>Congo/Kinshasa, Congolese
+						Francs</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="CHF">
+					<xs:annotation>
+						<xs:documentation>Switzerland, Francs</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="CLP">
+					<xs:annotation>
+						<xs:documentation>Chile, Pesos</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="CNY">
+					<xs:annotation>
+						<xs:documentation>China, Yuan Renminbi</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="COP">
+					<xs:annotation>
+						<xs:documentation>Colombia, Pesos</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="CRC">
+					<xs:annotation>
+						<xs:documentation>Costa Rica, Colones</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="CUP">
+					<xs:annotation>
+						<xs:documentation>Cuba, Pesos</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="CVE">
+					<xs:annotation>
+						<xs:documentation>Cape Verde, Escudos</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="CYP">
+					<xs:annotation>
+						<xs:documentation>Cyprus, Pounds (expires
+						2008-Jan-31)</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="CZK">
+					<xs:annotation>
+						<xs:documentation>Czech Republic, Koruny</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="DJF">
+					<xs:annotation>
+						<xs:documentation>Djibouti, Francs</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="DKK">
+					<xs:annotation>
+						<xs:documentation>Denmark, Kroner</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="DOP">
+					<xs:annotation>
+						<xs:documentation>Dominican Republic, Pesos</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="DZD">
+					<xs:annotation>
+						<xs:documentation>Algeria, Algeria Dinars</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="EEK">
+					<xs:annotation>
+						<xs:documentation>Estonia, Krooni</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="EGP">
+					<xs:annotation>
+						<xs:documentation>Egypt, Pounds</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="ERN">
+					<xs:annotation>
+						<xs:documentation>Eritrea, Nakfa</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="ETB">
+					<xs:annotation>
+						<xs:documentation>Ethiopia, Birr</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="EUR">
+					<xs:annotation>
+						<xs:documentation>Euro Member Countries,
+						Euro</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="FJD">
+					<xs:annotation>
+						<xs:documentation>Fiji, Dollars</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="FKP">
+					<xs:annotation>
+						<xs:documentation>Falkland Islands (Malvinas),
+						Pounds</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="GBP">
+					<xs:annotation>
+						<xs:documentation>United Kingdom, Pounds</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="GEL">
+					<xs:annotation>
+						<xs:documentation>Georgia, Lari</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="GGP">
+					<xs:annotation>
+						<xs:documentation>Guernsey, Pounds</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="GHS">
+					<xs:annotation>
+						<xs:documentation>Ghana, Cedis</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="GIP">
+					<xs:annotation>
+						<xs:documentation>Gibraltar, Pounds</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="GMD">
+					<xs:annotation>
+						<xs:documentation>Gambia, Dalasi</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="GNF">
+					<xs:annotation>
+						<xs:documentation>Guinea, Francs</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="GTQ">
+					<xs:annotation>
+						<xs:documentation>Guatemala, Quetzales</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="GYD">
+					<xs:annotation>
+						<xs:documentation>Guyana, Dollars</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="HKD">
+					<xs:annotation>
+						<xs:documentation>Hong Kong, Dollars</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="HNL">
+					<xs:annotation>
+						<xs:documentation>Honduras, Lempiras</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="HRK">
+					<xs:annotation>
+						<xs:documentation>Croatia, Kuna</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="HTG">
+					<xs:annotation>
+						<xs:documentation>Haiti, Gourdes</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="HUF">
+					<xs:annotation>
+						<xs:documentation>Hungary, Forint</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="IDR">
+					<xs:annotation>
+						<xs:documentation>Indonesia, Rupiahs</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="ILS">
+					<xs:annotation>
+						<xs:documentation>Israel, New Shekels</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="IMP">
+					<xs:annotation>
+						<xs:documentation>Isle of Man, Pounds</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="INR">
+					<xs:annotation>
+						<xs:documentation>India, Rupees</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="IQD">
+					<xs:annotation>
+						<xs:documentation>Iraq, Dinars</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="IRR">
+					<xs:annotation>
+						<xs:documentation>Iran, Rials</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="ISK">
+					<xs:annotation>
+						<xs:documentation>Iceland, Kronur</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="JEP">
+					<xs:annotation>
+						<xs:documentation>Jersey, Pounds</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="JMD">
+					<xs:annotation>
+						<xs:documentation>Jamaica, Dollars</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="JOD">
+					<xs:annotation>
+						<xs:documentation>Jordan, Dinars</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="JPY">
+					<xs:annotation>
+						<xs:documentation>Japan, Yen</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="KES">
+					<xs:annotation>
+						<xs:documentation>Kenya, Shillings</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="KGS">
+					<xs:annotation>
+						<xs:documentation>Kyrgyzstan, Soms</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="KHR">
+					<xs:annotation>
+						<xs:documentation>Cambodia, Riels</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="KMF">
+					<xs:annotation>
+						<xs:documentation>Comoros, Francs</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="KPW">
+					<xs:annotation>
+						<xs:documentation>Korea (North), Won</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="KRW">
+					<xs:annotation>
+						<xs:documentation>Korea (South), Won</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="KWD">
+					<xs:annotation>
+						<xs:documentation>Kuwait, Dinars</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="KYD">
+					<xs:annotation>
+						<xs:documentation>Cayman Islands, Dollars</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="KZT">
+					<xs:annotation>
+						<xs:documentation>Kazakhstan, Tenge</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="LAK">
+					<xs:annotation>
+						<xs:documentation>Laos, Kips</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="LBP">
+					<xs:annotation>
+						<xs:documentation>Lebanon, Pounds</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="LKR">
+					<xs:annotation>
+						<xs:documentation>Sri Lanka, Rupees</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="LRD">
+					<xs:annotation>
+						<xs:documentation>Liberia, Dollars</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="LSL">
+					<xs:annotation>
+						<xs:documentation>Lesotho, Maloti</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="LTL">
+					<xs:annotation>
+						<xs:documentation>Lithuania, Litai</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="LVL">
+					<xs:annotation>
+						<xs:documentation>Latvia, Lati</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="LYD">
+					<xs:annotation>
+						<xs:documentation>Libya, Dinars</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="MAD">
+					<xs:annotation>
+						<xs:documentation>Morocco, Dirhams</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="MDL">
+					<xs:annotation>
+						<xs:documentation>Moldova, Lei</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="MGA">
+					<xs:annotation>
+						<xs:documentation>Madagascar, Ariary</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="MKD">
+					<xs:annotation>
+						<xs:documentation>Macedonia, Denars</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="MMK">
+					<xs:annotation>
+						<xs:documentation>Myanmar (Burma), Kyats</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="MNT">
+					<xs:annotation>
+						<xs:documentation>Mongolia, Tugriks</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="MOP">
+					<xs:annotation>
+						<xs:documentation>Macau, Patacas</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="MRO">
+					<xs:annotation>
+						<xs:documentation>Mauritania, Ouguiyas</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="MTL">
+					<xs:annotation>
+						<xs:documentation>Malta, Liri (expires
+						2008-Jan-31)</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="MUR">
+					<xs:annotation>
+						<xs:documentation>Mauritius, Rupees</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="MVR">
+					<xs:annotation>
+						<xs:documentation>Maldives (Maldive Islands),
+						Rufiyaa</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="MWK">
+					<xs:annotation>
+						<xs:documentation>Malawi, Kwachas</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="MXN">
+					<xs:annotation>
+						<xs:documentation>Mexico, Pesos</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="MYR">
+					<xs:annotation>
+						<xs:documentation>Malaysia, Ringgits</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="MZN">
+					<xs:annotation>
+						<xs:documentation>Mozambique, Meticais</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="NAD">
+					<xs:annotation>
+						<xs:documentation>Namibia, Dollars</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="NGN">
+					<xs:annotation>
+						<xs:documentation>Nigeria, Nairas</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="NIO">
+					<xs:annotation>
+						<xs:documentation>Nicaragua, Cordobas</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="NOK">
+					<xs:annotation>
+						<xs:documentation>Norway, Krone</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="NPR">
+					<xs:annotation>
+						<xs:documentation>Nepal, Nepal Rupees</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="NZD">
+					<xs:annotation>
+						<xs:documentation>New Zealand, Dollars</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="OMR">
+					<xs:annotation>
+						<xs:documentation>Oman, Rials</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="PAB">
+					<xs:annotation>
+						<xs:documentation>Panama, Balboa</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="PEN">
+					<xs:annotation>
+						<xs:documentation>Peru, Nuevos Soles</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="PGK">
+					<xs:annotation>
+						<xs:documentation>Papua New Guinea, Kina</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="PHP">
+					<xs:annotation>
+						<xs:documentation>Philippines, Pesos</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="PKR">
+					<xs:annotation>
+						<xs:documentation>Pakistan, Rupees</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="PLN">
+					<xs:annotation>
+						<xs:documentation>Poland, Zlotych</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="PYG">
+					<xs:annotation>
+						<xs:documentation>Paraguay, Guarani</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="QAR">
+					<xs:annotation>
+						<xs:documentation>Qatar, Rials</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="RON">
+					<xs:annotation>
+						<xs:documentation>Romania, New Lei</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="RSD">
+					<xs:annotation>
+						<xs:documentation>Serbia, Dinars</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="RUB">
+					<xs:annotation>
+						<xs:documentation>Russia, Rubles</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="RWF">
+					<xs:annotation>
+						<xs:documentation>Rwanda, Rwanda Francs</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="SAR">
+					<xs:annotation>
+						<xs:documentation>Saudi Arabia, Riyals</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="SBD">
+					<xs:annotation>
+						<xs:documentation>Solomon Islands, Dollars</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="SCR">
+					<xs:annotation>
+						<xs:documentation>Seychelles, Rupees</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="SDG">
+					<xs:annotation>
+						<xs:documentation>Sudan, Pounds</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="SEK">
+					<xs:annotation>
+						<xs:documentation>Sweden, Kronor</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="SGD">
+					<xs:annotation>
+						<xs:documentation>Singapore, Dollars</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="SHP">
+					<xs:annotation>
+						<xs:documentation>Saint Helena, Pounds</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="SKK">
+					<xs:annotation>
+						<xs:documentation>Slovakia, Koruny</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="SLL">
+					<xs:annotation>
+						<xs:documentation>Sierra Leone, Leones</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="SOS">
+					<xs:annotation>
+						<xs:documentation>Somalia, Shillings</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="SPL">
+					<xs:annotation>
+						<xs:documentation>Seborga, Luigini</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="SRD">
+					<xs:annotation>
+						<xs:documentation>Suriname, Dollars</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="STD">
+					<xs:annotation>
+						<xs:documentation>São Tome and Principe,
+						Dobras</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="SVC">
+					<xs:annotation>
+						<xs:documentation>El Salvador, Colones</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="SYP">
+					<xs:annotation>
+						<xs:documentation>Syria, Pounds</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="SZL">
+					<xs:annotation>
+						<xs:documentation>Swaziland, Emalangeni</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="THB">
+					<xs:annotation>
+						<xs:documentation>Thailand, Baht</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="TJS">
+					<xs:annotation>
+						<xs:documentation>Tajikistan, Somoni</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="TMM">
+					<xs:annotation>
+						<xs:documentation>Turkmenistan, Manats</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="TND">
+					<xs:annotation>
+						<xs:documentation>Tunisia, Dinars</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="TOP">
+					<xs:annotation>
+						<xs:documentation>Tonga, Pa'anga</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="TRY">
+					<xs:annotation>
+						<xs:documentation>Turkey, New Lira</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="TTD">
+					<xs:annotation>
+						<xs:documentation>Trinidad and Tobago,
+						Dollars</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="TVD">
+					<xs:annotation>
+						<xs:documentation>Tuvalu, Tuvalu Dollars</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="TWD">
+					<xs:annotation>
+						<xs:documentation>Taiwan, New Dollars</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="TZS">
+					<xs:annotation>
+						<xs:documentation>Tanzania, Shillings</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="UAH">
+					<xs:annotation>
+						<xs:documentation>Ukraine, Hryvnia</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="UGX">
+					<xs:annotation>
+						<xs:documentation>Uganda, Shillings</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="USD">
+					<xs:annotation>
+						<xs:documentation>United States of America,
+						Dollars</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="UYU">
+					<xs:annotation>
+						<xs:documentation>Uruguay, Pesos</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="UZS">
+					<xs:annotation>
+						<xs:documentation>Uzbekistan, Sums</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="VEB">
+					<xs:annotation>
+						<xs:documentation>Venezuela, Bolivares (expires
+						2008-Jun-30)</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="VEF">
+					<xs:annotation>
+						<xs:documentation>Venezuela, Bolivares
+						Fuertes</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="VND">
+					<xs:annotation>
+						<xs:documentation>Viet Nam, Dong</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="VUV">
+					<xs:annotation>
+						<xs:documentation>Vanuatu, Vatu</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="WST">
+					<xs:annotation>
+						<xs:documentation>Samoa, Tala</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="XAF">
+					<xs:annotation>
+						<xs:documentation>Communauté Financière Africaine BEAC,
+						Francs</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="XAG">
+					<xs:annotation>
+						<xs:documentation>Silver, Ounces</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="XAU">
+					<xs:annotation>
+						<xs:documentation>Gold, Ounces</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="XCD">
+					<xs:annotation>
+						<xs:documentation>East Caribbean Dollars</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="XDR">
+					<xs:annotation>
+						<xs:documentation>International Monetary Fund (IMF) Special
+							Drawing Rights</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="XOF">
+					<xs:annotation>
+						<xs:documentation>Communauté Financière Africaine BCEAO,
+							Francs</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="XPD">
+					<xs:annotation>
+						<xs:documentation>Palladium Ounces</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="XPF">
+					<xs:annotation>
+						<xs:documentation>Comptoirs Français du Pacifique
+						Francs</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="XPT">
+					<xs:annotation>
+						<xs:documentation>Platinum, Ounces</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="YER">
+					<xs:annotation>
+						<xs:documentation>Yemen, Rials</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="ZAR">
+					<xs:annotation>
+						<xs:documentation>South Africa, Rand</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="ZMK">
+					<xs:annotation>
+						<xs:documentation>Zambia, Kwacha</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="ZWD">
+					<xs:annotation>
+						<xs:documentation>Zimbabwe, Zimbabwe
+						Dollars</xs:documentation>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Unknown"/>
+				<xs:enumeration value="Other"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:attribute>
+
+	<xs:attribute name="measurementSource">
+		<xs:annotation>
+			<xs:documentation>
+				The source of the measurement
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:enumeration value="Appraisal">
+					<xs:annotation>
+						<xs:documentation>
+							Appraiser provided the measurement
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid></retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Builder">
+					<xs:annotation>
+						<xs:documentation>
+							Builder provided the measurement
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid></retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Measured">
+					<xs:annotation>
+						<xs:documentation>
+							Listing Member provided the measurement
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid></retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Public Records">
+					<xs:annotation>
+						<xs:documentation>
+							Measurement obtained from the Public Record
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid></retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Unknown">
+					<xs:annotation>
+						<xs:appinfo>
+							<retsid></retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Other">
+					<xs:annotation>
+						<xs:appinfo>
+							<retsid></retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:attribute>
+
+	<xs:attribute name="measurementUnits" default="feet">
+		<xs:annotation>
+			<xs:documentation>
+				Measurement units
+			</xs:documentation>
+			<xs:appinfo>
+				feet
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:token">
+				<xs:enumeration value="feet"/>
+				<xs:enumeration value="yard"/>
+				<xs:enumeration value="rod"/>
+				<xs:enumeration value="chain"/>
+				<xs:enumeration value="centimeter"/>
+				<xs:enumeration value="meter"/>
+				<xs:enumeration value="unknown"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:attribute>
+
+	<xs:attribute name="areaUnits" default="squareFoot">
+		<xs:annotation>
+			<xs:documentation>
+				Area measurement units
+			</xs:documentation>
+			<xs:appinfo>
+				squareFoot
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:token">
+				<xs:enumeration value="squareFoot"/>
+				<xs:enumeration value="squareYard"/>
+				<xs:enumeration value="acre"/>
+				<xs:enumeration value="squareCentimeter"/>
+				<xs:enumeration value="squareMeter"/>
+				<xs:enumeration value="hectare"/>
+				<xs:enumeration value="unknown"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:attribute>
+
+	<xs:attribute name="period" default="Month">
+		<xs:simpleType>
+			<xs:restriction base="xs:token">
+				<xs:enumeration value="Day"/>
+				<xs:enumeration value="Week"/>
+				<xs:enumeration value="Month"/>
+				<xs:enumeration value="Year"/>
+				<xs:enumeration value="Fixed"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:attribute>
+
+	<xs:attribute name="currencyPeriod">
+		<xs:simpleType>
+			<xs:restriction base="xs:token">
+				<xs:enumeration value="Daily"/>
+				<xs:enumeration value="Week"/>
+				<xs:enumeration value="Bi-Weekly"/>
+				<xs:enumeration value="Month"/>
+				<xs:enumeration value="Bi-Monthly"/>
+				<xs:enumeration value="Quarterly"/>
+				<xs:enumeration value="Semi-Annually"/>
+				<xs:enumeration value="Annually"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:attribute>
+
+	<xs:attribute name="privacyType">
+		<xs:annotation>
+			<xs:documentation>
+				Indicates the level of privacy for this information. Creation of this attribute 
+				inspired by the need to provide this level of privacy information for contact 
+				information: phone, email, address, and the like. See CR 54.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:token">
+				<xs:enumeration value="Public"/>
+				<xs:enumeration value="Agent/Member"/>
+				<xs:enumeration value="MLS"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:attribute>
+
+	<xs:attribute name="sizeUnit">
+		<xs:simpleType>
+			<xs:restriction base="xs:token">
+				<xs:enumeration value="em"/>
+				<xs:enumeration value="px"/>
+				<xs:enumeration value="pt"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:attribute>
+	<xs:attribute name="internalURLIndicator" type="xs:boolean"/>
+
+	<!-- Simple Types -->
+	<xs:simpleType name="empty-string">
+		<xs:annotation>
+			<xs:documentation>
+				A primitive type used to permit null values, represented
+				by the empty string, for data types other than the
+				xs:string type. Combined with the base data type in a
+				union, the custom data type can permit validation of the
+				XML instance document where the underlying type is
+				integer for example. In that case, the values permitted
+				are any integer OR the empty string.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="0"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ageEnum">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="New"/>
+			<xs:enumeration value="Old"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="boundedCardinalInteger">
+		<xs:annotation>
+			<xs:documentation>
+				Indicates a cardinal small integer.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:nonNegativeInteger">
+			<xs:maxInclusive value="127"/>
+			<xs:fractionDigits value="0"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="preferenceOrderType">
+		<xs:annotation>
+			<xs:documentation>
+				Indicates preference. 0 is highest order of precedence, 
+				up to the maximum number of items. 
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:nonNegativeInteger">
+			<xs:maxInclusive value="127"/>
+			<xs:fractionDigits value="0"/>
+		</xs:restriction>
+	</xs:simpleType>	
+	<xs:simpleType name="stringnumeric">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[0-9]*"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="gender">
+		<xs:restriction base="xs:token">
+			<xs:enumeration value="female"/>
+			<xs:enumeration value="male"/>
+			<xs:enumeration value="unknown"/>			
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="month">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="January"/>
+			<xs:enumeration value="February"/>
+			<xs:enumeration value="March"/>
+			<xs:enumeration value="April"/>
+			<xs:enumeration value="May"/>
+			<xs:enumeration value="June"/>
+			<xs:enumeration value="July"/>
+			<xs:enumeration value="August"/>
+			<xs:enumeration value="September"/>
+			<xs:enumeration value="October"/>
+			<xs:enumeration value="November"/>
+			<xs:enumeration value="December"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="simpleTime">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[0-1]?[0-9][:]+[0-5][0-9]\s*(AM|PM|am|pm|A|P|a|p)?\s*"></xs:pattern>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="sizeEnum">
+		<xs:restriction base="xs:token">
+			<xs:enumeration value="small"/>
+			<xs:enumeration value="medium"/>
+			<xs:enumeration value="large"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="nullable-boolean">
+		<xs:union memberTypes="xs:boolean commons:empty-string"/>
+	</xs:simpleType>
+	<xs:simpleType name="nullable-dateTime">
+		<xs:annotation>
+			<xs:documentation>
+				Utilization of the xml validation trick of nullability.
+				See nntp:microsoft.public.dotnet.xml
+				messageId O8#J5#61EHA.2676@TK2MSFTNGP12.phx.gbl
+				by Patricia Walmsley.
+
+				As noted therein, the normally described solution of
+				using the nillable attribute requires the addition of
+				the xs:nil="true" to each element that is nil.
+
+				The solution provided in the nntp group
+				xmlschema-dev@w3.org
+				messageId 170431525270.20030527171850@jenitennison.com
+				does not work.
+
+				The union permits the underlying data type
+				representation and the empty element tag.
+				Both a valid dateTime and the string "" will validate.
+
+				This documentation comment applies to all simpleTypes
+				with the name pattern nullable-data-type.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:union memberTypes="xs:dateTime commons:empty-string"/>
+	</xs:simpleType>
+	<xs:simpleType name="nullable-decimal">
+		<xs:union memberTypes="xs:decimal commons:empty-string"/>
+	</xs:simpleType>
+	<xs:simpleType name="nullable-integer">
+		<xs:union memberTypes="xs:integer commons:empty-string"/>
+	</xs:simpleType>
+	<xs:simpleType name="nullable-float">
+		<xs:union memberTypes="xs:float commons:empty-string"/>
+	</xs:simpleType>
+	<xs:simpleType name="nullable-nmtoken">
+		<xs:union memberTypes="xs:NMTOKEN commons:empty-string"/>
+	</xs:simpleType>
+	<xs:simpleType name="nullable-uri">
+		<xs:union memberTypes="xs:anyURI commons:empty-string"/>
+	</xs:simpleType>
+	<xs:simpleType name="nullable-year">
+		<xs:union memberTypes="xs:gYear commons:empty-string"/>
+	</xs:simpleType>
+	<xs:simpleType name="simple-age">
+		<xs:union memberTypes="commons:nullable-integer commons:ageEnum"/>
+	</xs:simpleType>
+	<xs:simpleType name="simple-size">
+		<xs:union memberTypes="commons:nullable-integer commons:sizeEnum"/>
+	</xs:simpleType>
+	<xs:simpleType name="system-id">
+		<xs:annotation>
+			<xs:documentation>
+				A common type definition for use by all payloads. 
+				This type is used for the common systemId attribute
+				that appears on all payloads to indicate the source 
+				system from whence the instance originated.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	<xs:simpleType name="resource-key">
+		<xs:annotation>
+			<xs:documentation>
+				A common key type definition for use by all resources.
+				This may be a string, number, URI or other unique
+				location descriptor.
+			</xs:documentation>
+			<xs:appinfo>
+				X32834792
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:restriction base="xs:token" />		
+	</xs:simpleType>
+
+	<!-- Complex Types -->
+	<xs:complexType name="OtherEnumerationDescriptionString">
+		<xs:annotation>
+			<xs:documentation>
+				This type is to be used within enumerations requiring
+				the presence of an attribute descriptor. This
+				attribute is called otherDescription and should only
+				be used in the case of the enum having the value of
+				"Other". There is no elegant way to tie the value
+				"Other" and the attribute otherDescription. 
+
+				In order to use this common type, make the enum a
+				complexType and extend the base type of
+				commons:OtherEnumerationDescriptionString. Ensure
+				the value of "Other" appears in the enumerated
+				list of values.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute	name="otherDescription" 
+									use="optional"
+									type="xs:string"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<xs:complexType name="Measurement">
+		<xs:simpleContent>
+			<xs:extension base="commons:nullable-decimal">
+				<xs:attribute	ref="commons:measurementUnits"
+									use="optional"/>
+				<xs:attribute	ref="commons:measurementSource"
+									use="optional"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="Size">
+		<xs:simpleContent>
+			<xs:extension base="commons:nullable-decimal">
+				<xs:attribute ref="commons:sizeUnit" use="optional"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<xs:complexType name="Area">
+		<xs:simpleContent>
+			<xs:extension base="commons:nullable-decimal">
+				<xs:attribute	ref="commons:areaUnits"
+									use="optional"/>
+				<xs:attribute	ref="commons:measurementSource"
+									use="optional"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<xs:complexType name="Remark">
+		<xs:annotation>
+			<xs:documentation>
+				Brief records, comments or explanation as pertaining to a
+				transaction, listing, meeting, contact, etc.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute	ref="commons:visibilityFlag"
+									use="optional">
+					<xs:annotation>
+						<xs:documentation>
+							Provides visibility information about the string
+						</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+				<xs:attribute	ref="commons:textFormatType"
+									use="optional"/>
+				<xs:attribute	ref="xml:lang"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="SecureString">
+		<xs:annotation>
+			<xs:documentation>
+				String element with an isgSecurityClass attribute.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute	ref="commons:isgSecurityClass"
+									use="required"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="SecureInteger">
+		<xs:annotation>
+			<xs:documentation>
+				Integer element with an isgSecurityClass attribute.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="commons:nullable-integer">
+				<xs:attribute	ref="commons:isgSecurityClass"
+									use="required"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="SecureDecimal">
+		<xs:annotation>
+			<xs:documentation>
+				Decimal element with an isgSecurityClass attribute.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="commons:nullable-decimal">
+				<xs:attribute	ref="commons:isgSecurityClass"
+									use="required"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="SecureFloat">
+		<xs:annotation>
+			<xs:documentation>
+				Float element with an isgSecurityClass attribute.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="commons:nullable-float">
+				<xs:attribute	ref="commons:isgSecurityClass"
+									use="required"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="SecureMoney">
+		<xs:annotation>
+			<xs:documentation>
+				Money element with access control attribute
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="commons:Money">
+				<xs:attribute ref="commons:isgSecurityClass" use="required"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="SecureYear">
+		<xs:annotation>
+			<xs:documentation>
+				gYear element with an isgSecurityClass attribute.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="commons:nullable-year">
+				<xs:attribute	ref="commons:isgSecurityClass"
+									use="required"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="SecureToken">
+		<xs:annotation>
+			<xs:documentation>
+				String token with an isgSecurityClass attribute.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="commons:nullable-nmtoken">
+				<xs:attribute	ref="commons:isgSecurityClass"
+									use="required"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="SecureURI">
+		<xs:annotation>
+			<xs:documentation>
+				URI element with an isgSecurityClass attribute.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="commons:nullable-uri">
+				<xs:attribute	ref="commons:isgSecurityClass"
+									use="required"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="SecureDateTime">
+		<xs:annotation>
+			<xs:documentation>
+				DateTime element with an isgSecurityClass attribute.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="commons:nullable-dateTime">
+				<xs:attribute	ref="commons:isgSecurityClass"
+									use="required"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="SecureBoolean">
+		<xs:annotation>
+			<xs:documentation>
+				Boolean element with an isgSecurityClass attribute.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="commons:nullable-boolean">
+				<xs:attribute	ref="commons:isgSecurityClass"
+									use="required"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="SecureMeasurement">
+		<xs:annotation>
+			<xs:documentation>
+				Measurement element with visibility control and units
+				attributes.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="commons:Measurement">
+				<xs:attribute	ref="commons:isgSecurityClass"
+									use="required"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="SecureArea">
+		<xs:annotation>
+			<xs:documentation>
+				Area element with visibility control and units
+				attributes.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="commons:Area">
+				<xs:attribute	ref="commons:isgSecurityClass"
+									use="required"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<xs:complexType name="SecureRemark">
+		<xs:annotation>
+			<xs:documentation>
+				Secured, brief record, comments or explanation pertaining
+				to a transaction, listing, meeting, contact, etc.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="commons:Remark">
+				<xs:attribute	ref="commons:isgSecurityClass"
+									use="required"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="MonetaryValueDescriptionPairType">
+		<xs:sequence>
+			<xs:element name="Value" 
+				type="commons:SecureMoney" 
+				minOccurs="0" 
+				maxOccurs="1">
+				<xs:annotation>
+					<xs:appinfo>
+						<retsid>100019</retsid>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Description" 
+				type="xs:string"
+				minOccurs="0" 
+				maxOccurs="1">
+				<xs:annotation>
+					<xs:appinfo>
+						<retsid>100020</retsid>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="StringValueDescriptionPairType">
+		<xs:sequence>
+			<xs:element name="Value" 
+				type="commons:SecureString" 
+				minOccurs="0" 
+				maxOccurs="1">
+				<xs:annotation>
+					<xs:appinfo>
+						<retsid>100021</retsid>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Description" 
+				type="xs:string" 
+				minOccurs="0" 
+				maxOccurs="1">
+				<xs:annotation>
+					<xs:appinfo>
+						<retsid>100022</retsid>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Age"> 
+		<xs:annotation>
+			<xs:documentation>
+				The age, in years, of a structure.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="commons:simple-age">
+				<xs:attribute	ref="commons:isgSecurityClass"
+									use="required"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="ModificationTimestamp">
+		<xs:annotation>
+			<xs:documentation>
+				Datetime that a record (such as a listing) or document (such as an
+				offer or an XML instance of metadata) was changed.
+			</xs:documentation>
+			<xs:appinfo>
+				2007-03-10T12:00:00-05:00
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="commons:SecureDateTime"/>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="URL">
+		<xs:annotation>
+			<xs:documentation>
+				Text field containing a uniform resource locator, which is
+				an internet address conisisting of the access protocol, the domain
+				name, and optionally the path of a file or resource residing on the server.
+				An example is http://www.example.com
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="commons:SecureURI">
+				<xs:attribute ref="commons:internalURLIndicator"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="Money">
+		<xs:simpleContent>
+			<xs:extension base="commons:nullable-decimal">
+				<xs:attribute ref="commons:currencyCode"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+</xs:schema>

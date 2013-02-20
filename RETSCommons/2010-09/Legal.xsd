@@ -1,0 +1,1985 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+				xmlns:commons="http://rets.org/xsd/RETSCommons"
+				targetNamespace="http://rets.org/xsd/RETSCommons"
+				elementFormDefault="qualified"
+				attributeFormDefault="unqualified">
+
+	<!--
+		(C)2008 National Association of REALTORS(R). All Rights Reserved
+
+		(C)2010 Falcon Technologies Corporation. All Rights Reserved.
+		
+		Tab stops
+		:set ts=3
+		
+		File History
+		======================
+		$Header: Legal.xsd, 10, 15/04/09 4:35:09 PDT PM, Paul Stusiak$
+
+		$Log:
+		 10   055_RETS_Standard 1.9         15/04/09 4:35:09 PDT PMPaul Stusiak
+		      correct some of the documentation
+		 9    055_RETS_Standard 1.8         07/04/08 5:01:05 PDT AMPaul Stusiak
+		      permit unlimited disclosure documents URLS, add general disclosure
+		 8    055_RETS_Standard 1.7         03/04/08 10:14:06 PDT AMPaul Stusiak
+		      Added DisclosureURL to the structure
+		 7    055_RETS_Standard 1.6         01/04/08 4:51:54 PDT PMPaul Stusiak
+		      add additional disclosures, use pattern of white space in values.
+		 6    055_RETS_Standard 1.5         31/03/08 1:02:21 PDT AMPaul Stusiak
+		      Included Syndication enum. Include additional enum values from 200802
+		      and 200803 meetings.
+		 5    055_RETS_Standard 1.4         28/02/08 12:05:24 PST PMPaul Stusiak
+		      Add retsid to file
+		 4    055_RETS_Standard 1.3         26/02/08 3:54:00 PST PMPaul Stusiak
+		      correct enumeration copy-paste error.
+		 3    055_RETS_Standard 1.2         26/02/08 3:12:36 PST PMPaul Stusiak
+		      Move ContingengiesType and Disclosures to Legal.xsd. Update
+		      enumerations in Legal.xsd
+		 2    055_RETS_Standard 1.1         24/01/08 12:44:59 PST PMPaul Stusiak
+		      corrected the copyright notice
+		 1    055_RETS_Standard 1.0         24/01/08 12:27:53 PST PMPaul Stusiak    
+		$
+		======================
+	-->
+
+	<xs:annotation>
+		<xs:documentation>
+			Enumerations and type definitions related to contracts
+			and legal types of elements.
+		</xs:documentation>
+	</xs:annotation>
+
+	<xs:include schemaLocation="Primitives.xsd"/>
+
+	<!-- Enumerations -->
+	<xs:complexType name="ContingencyDescriptionEnum">
+		<xs:simpleContent>
+			<xs:restriction base="commons:OtherEnumerationDescriptionString">
+				<xs:enumeration value="24 Hour Notice">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101297</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="48 Hour Notice">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101298</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="72 Hour Notice">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101299</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="1031 Exchange">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101300</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Accept Backup Offer">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101301</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Appraisal">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101302</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Attorney Review">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101303</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Concurrent Close">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101304</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Co-op Board Approval">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101305</retsid>
+						</xs:appinfo>
+					</xs:annotation>					
+				</xs:enumeration>
+				<xs:enumeration value="Court Approval">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101306</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Document Review">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101307</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Escape Clause">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101308</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Exchange">
+					<xs:annotation>
+						<xs:documentation>
+							Other tax-deferred exchange contingency
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101309</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Fault Zone">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101310</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Fire Zone">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101311</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="First Right of Refusal">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101312</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Financing">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101313</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Foreclosure">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101645</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Gift Letter">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101314</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Home Inspection">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101315</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Job Transfer">
+					<xs:annotation>
+						<xs:documentation>
+							Also known as Relo
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101316</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Notice of Default">
+					<xs:annotation>
+						<xs:documentation>
+							Also known as NOD or NOD Filed. This may
+							be used for any of the pre-default states that
+							a property may have.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101317</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="None">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101318</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Other Hazard">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101319</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Planning Approval">
+					<xs:annotation>
+						<xs:documentation>
+							Also known as Planning Board
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101320</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Probate">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101321</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Radon Inspection">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101322</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Short Sale">
+					<xs:annotation>
+						<xs:documentation>
+							The lender has agreed to provide
+							debt forgiveness to the owner for the
+							difference between the mortgage principal
+							and the selling price. Typically this is in lieu
+							of proceeding with foreclosure, to save the
+							additional costs and time to complete the
+							foreclosure
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101324</retsid>
+							<synonym>Discounted Payout</synonym>
+							<synonym>Short Pay</synonym>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Special Hazard">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101325</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Spousal Approval">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101326</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Termite Inspection">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101327</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Use Same Lender">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101646</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Zoning Approval">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101328</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Other">
+					<xs:annotation>
+						<xs:documentation>
+							The property has a regional contingency.
+							See the otherDescription attribute.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101329</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+			</xs:restriction>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="DisclosureEnum">
+		<xs:annotation>
+			<xs:documentation>
+				Defines the the disclosures for a listing.
+				NOTE:Sexual Offenders are not included in the list of
+				disclosures. The need for disclosure of this item varies
+				from region to region. Some state have specific exemptions
+				for REALTORS(R) while other states require disclosure. The
+				current case law is not complete on this topic. In
+				jurisdictions where this is required, use the
+				otherDescription to hold the appropriate disclosure term.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:restriction base="commons:OtherEnumerationDescriptionString">
+				<xs:enumeration value="Agricultural Use Zone">
+					<xs:annotation>
+						<xs:documentation>
+							The property is part of an agricultural use
+							zone. Restrictions may exist on the use
+							of the property, limitations may be
+							placed on insuring the property or reductions
+							or exemptions on tax and other levies may exist.
+							In California, this is known as the Williamsons Act
+							or the California Land Conservation Act of 1965.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101330</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Agriculture Proximity">
+					<xs:annotation>
+						<xs:documentation>
+							The property is near or adjacent to land that is 
+							being used for agriculture. This may include fields
+							in crop, livestock or other agriculture uses that may
+							impare the use of the property or impact the
+							property.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101554</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Air Rights">
+					<xs:annotation>
+						<xs:documentation>
+							The property has air rights that may be
+							ceded to a third party or may be severable
+							from the property.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101331</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Airport Proximity">
+					<xs:annotation>
+						<xs:documentation>
+							The property is within a zone near an airport
+							or other landing facility that may be subject to
+							additional noise or be in a zone of additional
+							accident risk.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101332</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Animal Restriction">
+					<xs:annotation>
+						<xs:documentation>
+							The property has restrictions on animals on the property.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101555</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Aquaculture Proximity">
+					<xs:annotation>
+						<xs:documentation>
+							The property is near or adjacent to water that is 
+							being used for aquaculture. This may include fish
+							farms, shellfish beds, canneries or other uses that may
+							impare the use of the property or impact the
+							property.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101556</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Aquaculture Zone">
+					<xs:annotation>
+						<xs:documentation>
+							The property is in or is currently used for aquaculture.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101557</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Architectural Approval Required">
+					<xs:annotation>
+						<xs:documentation>
+							Modifications to the buildings on the property
+							require architectural approval. This is separate
+							from a PUD.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101558</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Asbestos Declaration">
+					<xs:annotation>
+						<xs:documentation>
+							An asbestos declaration document exists for this
+							property. The specific form of the document is
+							determined by some government body.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101333</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Avalanche Zone">
+					<xs:annotation>
+						<xs:documentation>
+							The property is part of an avalanche
+							zone. Restrictions may exist on the treatment
+							of the property or limitations may be
+							placed on insuring the property.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101334</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Bank Owned">
+					<xs:annotation>
+						<xs:documentation>
+							The property is owned by a bank or other
+							mortgage holder.
+							Also known as an REO
+							Also known as Lender Owned
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101559</retsid>
+							<synonym>REO</synonym>
+							<synonym>Lender Owned</synonym>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Beach Rights">
+					<xs:annotation>
+						<xs:documentation>
+							The property has beach rights that may be
+							ceded to a third party, may be severable
+							from the property or may have easements or
+							right-of-way rights attached.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101335</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Building Restriction">
+					<xs:annotation>
+						<xs:documentation>
+							The property has one or more restrictions
+							on building.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101560</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Business Licensed">
+					<xs:annotation>
+						<xs:documentation>
+							The property has an existing business that has a
+							valid license to operate.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101561</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Call for details">
+					<xs:annotation>
+						<xs:documentation>
+							The property has disclosures that require
+							contacting the seller or seller's agent.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101336</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="CCR">
+					<xs:annotation>
+						<xs:documentation>
+							The Covenance, Conveyance and Restrictrions
+							The Denver meeting decided to remove the
+							&amp; from the name.
+							
+							The property has Covenants and Conditions
+							(Restrictions) attached. These may include deeded
+							covenants and covenants running with the land.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101337</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Common Driveway">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101413</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Community Association">
+					<xs:annotation>
+						<xs:documentation>
+							The property is part of a community association,
+							either an HOA, a condominum association or a
+							PUD association.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101338</retsid>
+							<synonym>HOA</synonym>
+							<synonym>PUD Association</synonym>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Community Association Approval Required">
+					<xs:annotation>
+						<xs:documentation>
+							The purchase of the property is subject to the approval
+							of the community association. The association may be
+							a co-operative, pud association, home owner's association
+							or other association that the purchaser must receive approval
+							to purchase.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101562</retsid>
+							<synonym>Association Approval Required</synonym>
+							<synonym>Coop Approval Required</synonym>
+							<synonym>HOA Approval Required</synonym>
+							<synonym>Condo or Coop Approval Required</synonym>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Conditional Use Permit">
+					<xs:annotation>
+						<xs:documentation>
+							The property has a conditional use permit
+							applied.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101339</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Condominium">
+					<xs:annotation>
+						<xs:documentation>
+							The property belongs to a condominium
+							association or has an agreement or contract
+							associated with the condominum association.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101340</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Conservation Zone">
+					<xs:annotation>
+						<xs:documentation>
+							A catch-all description of conservation, 
+							ecological or other, that puts controls on the
+							use and development of the property.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101341</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Contract for Crops">
+					<xs:annotation>
+						<xs:documentation>
+							The property has crops that are handled under
+							a separate contract.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101563</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Contract for Timber">
+					<xs:annotation>
+						<xs:documentation>
+							The property has timber that is handled under
+							a separate contract.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101564</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Cooperative">
+					<xs:annotation>
+						<xs:documentation>
+							The property has a cooperative corporation
+							ownership structure.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101342</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Corporate Ownership">
+					<xs:annotation>
+						<xs:documentation>
+							The property is owned by a corporate entity.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101565</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Court Approval Required">
+					<xs:annotation>
+						<xs:documentation>
+							The property sale is under court control.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101566</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Death on property">
+					<xs:annotation>
+						<xs:documentation>
+							A death has occurred on the property.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101343</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Deed Restriction">
+					<xs:annotation>
+						<xs:documentation>
+							The property has one or more restrictions
+							applied to the deed or title
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101824</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Development Offset Rights">
+					<xs:annotation>
+						<xs:documentation>
+							The property has development rights that may be
+							ceded to a third party or may be severable
+							from the property. Typically, this involves
+							exchanging building size or density in one
+							location for increased density in another
+							location.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101344</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Earthquake Zone">
+					<xs:annotation>
+						<xs:documentation>
+							The property is in a recognized earthquake zone.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101567</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Easements">
+					<xs:annotation>
+						<xs:documentation>
+							The property may have one or more easements applied
+							to it.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101345</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Farm">
+					<xs:annotation>
+						<xs:documentation>
+							The property has an existing operating farm.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101568</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Fault Zone">
+					<xs:annotation>
+						<xs:documentation>
+							The property is part of a fault or earthquake
+							zone. Restrictions may exist on the treatment
+							of the property or limitations may be
+							placed on insuring the property.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101346</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Fire Protection District">
+					<xs:annotation>
+						<xs:documentation>
+							The property is in a designated fire protection
+							district.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101569</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Fire Protection Restriction">
+					<xs:annotation>
+						<xs:documentation>
+							The property has restrictions on the fire
+							protection services available.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101570</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Fire Zone">
+					<xs:annotation>
+						<xs:documentation>
+							The property is part of a fire zone.
+							Restrictions may exist on the treatment
+							of the property or limitations may be
+							placed on insuring the property.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101347</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Fishery Conservation Zone">
+					<xs:annotation>
+						<xs:documentation>
+							The property is part of a fishery conservation
+							zone. Restrictions may exist on the treatment
+							of the property near the adjacent or nearby
+							body of water.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101348</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Flight Path">
+					<xs:annotation>
+						<xs:documentation>
+							The property is on a flight path.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101349</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Flood Plain">
+					<xs:annotation>
+						<xs:documentation>
+							The property is in a flood plain.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101350</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Flood Zone">
+					<xs:annotation>
+						<xs:documentation>
+							The property is part of a flood zone.
+							zone. Restrictions may exist on the treatment
+							of the property or limitations may be
+							placed on insuring the property.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101351</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Forest Conservation Zone">
+					<xs:annotation>
+						<xs:documentation>
+							The property is part of a forest conservation
+							zone. Restrictions may exist on the treatment
+							or use of trees on the property.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101352</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Gas - Methane Zone">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101353</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Gas - Radon Zone">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101354</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Greenbelt Conservation Zone">
+					<xs:annotation>
+						<xs:documentation>
+							The property is part of a greenbelt conservation
+							zone. Restrictions may exist on the treatment
+							of the property near the adjacent or nearby
+							greenbelt.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101355</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Hazardous Materials Zone">
+					<xs:annotation>
+						<xs:documentation>
+							The property is in proximity to a hazardous
+							materials site or contains hazardous material.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101356</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Hazardous Materials on Property">
+					<xs:annotation>
+						<xs:documentation>
+							The property contains hazardous material.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101571</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Historic District">
+						<xs:annotation>
+							<xs:documentation>
+								The property is part of an Historic District.
+								Restrictions may exist on the use of the property
+								or changes to the property or structures on the
+								property.
+							</xs:documentation>
+							<xs:appinfo>
+								<retsid>101357</retsid>
+							</xs:appinfo>
+						</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Historic Structure">
+					<xs:annotation>
+						<xs:documentation>
+							The property is designated an historic structure
+							Restrictions may exist on the use of the property
+							or changes to the property or structures on the
+							property. These restrictions are typically greater
+							than that applied to a structure in an historic
+							district.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101358</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="In Bankruptcy">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101359</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="In Foreclosure">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101360</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="In Probate">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101361</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Industrial Zone">
+					<xs:annotation>
+						<xs:documentation>
+							The property is in an industrial use zone.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101572</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Industrial Zone Proximity">
+					<xs:annotation>
+						<xs:documentation>
+							The property is in proximity to an industrial
+							zone.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101573</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Intertidal Rights">
+					<xs:annotation>
+						<xs:documentation>
+							The property has intertidal rights that may be
+							ceded to a third party, may be severable
+							from the property or may have easements or
+							right-of-way rights attached. Intertidal is
+							the land between the low and high tide marks.
+							Each jurisdiction has its own definition of
+							the specific values. Also known as the wet-sand
+							area or littoral area.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101362</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Lead Paint">
+					<xs:annotation>
+						<xs:documentation>
+							The property may have lead paint on the 
+							structure or in the soil surrounding the
+							structure.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101363</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Lead Remediation">
+					<xs:annotation>
+						<xs:documentation>
+							The property may have lead paint on the 
+							structure or in the soil surrounding the
+							structure.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101411</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Leased Land">
+					<xs:annotation>
+						<xs:documentation>
+							The property has some portion of the land
+							in an existing lease arrangement as the lessor.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101574</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Listing Member has Ownership Interest">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101364</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Listing Member has Familial Relationship">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101365</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Littoral Conservation Zone">
+					<xs:annotation>
+						<xs:documentation>
+							The property is part of a coastal or other
+							ocean conservation zone. Restrictions may
+							exist on the treatment of the property near
+							the adjacent or nearby sea shore.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101366</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Manufactured Homes Allowed on Lot">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101367</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Military Ordnance">
+					<xs:annotation>
+						<xs:documentation>
+							The property within the boundary of a current or
+							former military or other ordnance site. In California,
+							this is a 1 mile radius of current or former state
+							or federal defence installations.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101368</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Mineral Rights">
+					<xs:annotation>
+						<xs:documentation>
+							The property has mineral rights that may be
+							ceded to a third party or may be severable
+							from the property.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101369</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Mining Zone">
+					<xs:annotation>
+						<xs:documentation>
+							The property is in an existing mining zone.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101575</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Mining Zone Proximity">
+					<xs:annotation>
+						<xs:documentation>
+							The property is in proximity to an area of
+							active mining.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101576</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Mold">
+					<xs:annotation>
+						<xs:documentation>
+							The building(s) of the property has a
+							recognized problem with mold.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101675</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Moratorium">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101370</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="None">
+					<xs:annotation>
+						<xs:documentation>
+							The property has no disclosures.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101371</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Oil or Mineral Rights">
+					<xs:annotation>
+						<xs:documentation>
+							The property has oil and or minerals rights
+							that may be ceded to a third party or may be
+							severable from the property.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101372</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Owner has Read">
+					<xs:annotation>
+						<xs:documentation>
+							The owner has read the disclosures.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101412</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Posted Permission">
+					<xs:annotation>
+						<xs:documentation>
+							The property owner has posted permission to the
+							public to access certain parts of the property
+							to prevent adverse possesion. Typically,
+							this is used to indicate that the public has 
+							accessed the property and there may be risk of
+							easement by prescription. This may include beach
+							access, intertidal access or other access.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101373</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Quarry Zone">
+					<xs:annotation>
+						<xs:documentation>
+							The property is in a quarry zone.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101577</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Quarry Zone Proximity">
+					<xs:annotation>
+						<xs:documentation>
+							The property is in proximity to an existing
+							quarry operation.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101578</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Relocation">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101374</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Rent Control">
+					<xs:annotation>
+						<xs:documentation>
+							The property is covered under an
+							existing rent control system.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101579</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Rent or Lease Restriction">
+					<xs:annotation>
+						<xs:documentation>
+							The property has a restriction on
+							rental or lease of the property.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101580</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Riparian Conservation Zone">
+					<xs:annotation>
+						<xs:documentation>
+							The property is part of a riparian conservation
+							zone. Restrictions may exist on the treatment
+							of the property near the adjacent or nearby
+							stream or body of water.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101375</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Road Agreement">
+					<xs:annotation>
+						<xs:documentation>
+							The property has an existing road agreement
+							for one or more of easement, maintenance sharing
+							ownership or other rights and restrictions related
+							to a roadway or driveway.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101581</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="School Boundaries Under Review">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101822</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="School or District Under Court Control">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101823</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Seller Disclosure">
+					<xs:annotation>
+						<xs:documentation>
+							A local general disclosure statement
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101821</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Seller has Real Estate License">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101376</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Short Sale">
+					<xs:annotation>
+						<xs:documentation>
+							The property is a short sale, indicating
+							that lender involvement is required to
+							complete the sale.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101410</retsid>
+							<synonym>Discounted Payout</synonym>
+							<synonym>Short Pay</synonym>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Slide Zone">
+					<xs:annotation>
+						<xs:documentation>
+							The property is part of a slide zone.
+							Restrictions may exist on the treatment
+							of the property or limitations may be
+							placed on insuring the property.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101377</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Subsidence">
+					<xs:annotation>
+						<xs:documentation>
+							The property is suffering from subsidence.
+							This make take the form of general subsidence
+							caused by a mine, water table changes - frequently
+							expressed as sinkhole formations or any other
+							forms of soil subsidence.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101378</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Timber Rights">
+					<xs:annotation>
+						<xs:documentation>
+							The timber on a  property may have certain
+							controls, conditions or harvest rights attached
+							to it.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101582</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Timber Zone">
+					<xs:annotation>
+						<xs:documentation>
+							The property is in or currently used for timberland.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101583</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Timber Zone Proximity">
+					<xs:annotation>
+						<xs:documentation>
+							The property is near or adjacent to land that is 
+							being used as timberland.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101584</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Toxic Material">
+					<xs:annotation>
+						<xs:documentation>
+							The property is in proximity to a toxic material
+							site or has toxic material present on the property.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101379</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Tree Conservation Zone">
+					<xs:annotation>
+						<xs:documentation>
+							The property is part of a tree conservation
+							zone. Restrictions may exist on the treatment
+							of trees on the property.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101380</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="UFFI Declaration">
+					<xs:annotation>
+						<xs:documentation>
+							Urea Formaldehyde Foam Insulation
+							declaration.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101381</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Unincorporated">
+					<xs:annotation>
+						<xs:documentation>
+							The property lies in an unincorporated
+							region.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101585</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Unreinforced Concrete Masonry">
+					<xs:annotation>
+						<xs:documentation>
+							The property has an unreinforced concrete brick
+							or block construction. This may be a specific
+							risk in hurricane, seismic or tornado zones.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101382</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Water Percolation Zone">
+					<xs:annotation>
+						<xs:documentation>
+							The property is located in a zone that
+							has one or more of a report on percolation,
+							a zone that has identified restrictions on well or waste
+							water or other disclosures related to ground water
+							and ground water flow.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101586</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Water Restrictions">
+					<xs:annotation>
+						<xs:documentation>
+							The property has usufructuary restrictions or
+							other restrictions on the use of water on the
+							property.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101383</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Water Rights">
+					<xs:annotation>
+						<xs:documentation>
+							The property has water rights that may be
+							ceded to a third party or may be severable
+							from the property.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101384</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Well Production Logging">
+					<xs:annotation>
+						<xs:documentation>
+							The property has an existing easement or
+							other restriction to permit the logging of
+							production well(s).
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101587</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Well Production Zone">
+					<xs:annotation>
+						<xs:documentation>
+							The property is in a well production zone.
+							This may include oil, gas or other substances
+							extracted from the ground using well technology.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101588</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Other">
+					<xs:annotation>
+						<xs:documentation>
+							The property has a regional disclosure.
+							See the otherDescription attribute.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101385</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Other - see remarks">
+					<xs:annotation>
+						<xs:documentation>
+							The property has disclosures described
+							in the remarks. The implementing system may
+							choose to use the otherDescription to provide
+							a title for the description permitting multiple
+							entries under this category.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101386</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+			</xs:restriction>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="ForeclosureStatusEnum">
+		<xs:simpleContent>
+			<xs:restriction base="commons:OtherEnumerationDescriptionString">
+				<xs:enumeration value="Notice of Default (Pre-Foreclosure)">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101647</retsid>
+						</xs:appinfo>					
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Lis Pendens (Pre-Foreclosure)">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101648</retsid>
+						</xs:appinfo>	
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Notice of Trustee Sale (Auction)">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101649</retsid>
+						</xs:appinfo>	
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Notice of Foreclosure Sale (Auction)">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101650</retsid>
+						</xs:appinfo>	
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="REO - Bank Owned">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101651</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="Foreclosure - Other">
+						<xs:annotation>
+							<xs:documentation>
+							</xs:documentation>
+							<xs:appinfo>
+								<retsid>103409</retsid>
+							</xs:appinfo>
+						</xs:annotation>
+					</xs:enumeration>
+				<xs:enumeration value="Other">
+					<xs:annotation>
+						<xs:documentation>
+							The possession is some other type.
+							See the possessionTypeOtherDescription attribute
+							for more details.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>103410</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+			</xs:restriction>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="PossessionEnum">
+		<xs:annotation>
+			<xs:documentation>
+				The property possession type.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:restriction base="commons:OtherEnumerationDescriptionString">
+				<xs:enumeration value="After Season">
+					<xs:annotation>
+						<xs:documentation>
+							Possession is after the season, usually refers
+							to a recreational property where use is generally
+							greatest during a specific time of year, ski season,
+							hunting season, fishing season, beach season or other
+							local condition.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101387</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="After Harvest">
+					<xs:annotation>
+						<xs:documentation>
+							Possession is after the harvest. This usually is a
+							farm or other agricultural land that has a specific
+							crop that must be harvested before the change of
+							possession.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101388</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Before Close">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101605</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Close Of Escrow">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101389</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Close Plus">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101390</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Immediate">
+					<xs:annotation>
+						<xs:documentation>
+							Possession is immediate
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101391</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Negotiable">
+					<xs:annotation>
+						<xs:documentation>
+							Possession is negotiable
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101392</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Seller Lease-back">
+					<xs:annotation>
+						<xs:documentation>
+							Seller will not vacate and will lease back
+							the property as agreed.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101414</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Seller Rent-back">
+					<xs:annotation>
+						<xs:documentation>
+							Seller will not vacate and will rent back
+							the property as agreed.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101415</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Tenants Rights">
+					<xs:annotation>
+						<xs:documentation>
+							Possession has tenants rights as a subject.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101393</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Upon Completion">
+					<xs:annotation>
+						<xs:documentation>
+							Possession is contingent on completion
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101394</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Unknown">
+					<xs:annotation>
+						<xs:documentation>
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101395</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Other - Close Plus">
+					<xs:annotation>
+						<xs:documentation>
+							The possession is some time after the close
+							of escrow. See possessionTypeOtherDescription
+							attribute for further details.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101396</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Other - Subject">
+					<xs:annotation>
+						<xs:documentation>
+							The possession is some time after a subject clause.
+							See the possessionTypeOtherDescription attribute
+							for more details.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101397</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="Other">
+					<xs:annotation>
+						<xs:documentation>
+							The possession is some other type.
+							See the possessionTypeOtherDescription attribute
+							for more details.
+						</xs:documentation>
+						<xs:appinfo>
+							<retsid>101398</retsid>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+			</xs:restriction>
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<!-- Types -->
+	<xs:complexType name="ContingenciesType">
+		<xs:sequence>
+			<xs:element	name="Contingency"
+				type="commons:ContingencyType"
+				minOccurs="1"
+				maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>101432</retsid>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ContingencyType">
+		<xs:sequence>
+			<xs:element	name="Description"
+						type="commons:ContingencyDescriptionEnum"
+						minOccurs="0"
+						maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>101433</retsid>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="IsSatisfied"
+						type="commons:nullable-boolean"
+						minOccurs="0"
+						maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Implementors are encouraged to use the
+						timestamps to manage contingency
+						state, however, for historical reasons
+						a boolean is provided
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>101434</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="ExpirationTimestamp"
+						type="xs:dateTime"
+						minOccurs="0"
+						maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						The timestamp that the contingency
+						reason will expire.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>101435</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="RemoveTimestamp"
+						type="xs:dateTime"
+						minOccurs="0"
+						maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						The timestamp that the contingency
+						reason was satisfied.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>101436</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="KickOutTimestamp"
+						type="xs:dateTime"
+						minOccurs="0"
+						maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						The timestamp that the contingency
+						reason failed.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>101437</retsid>
+						<example></example>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Disclosures">
+		<xs:sequence>
+			<xs:element	name="HasDisclosures"
+						type="xs:boolean"
+						minOccurs="0"
+						maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						The listing has one or more disclosures.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>101589</retsid>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="HasPendingLitigation"
+						type="xs:boolean"
+						minOccurs="0"
+						maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						The listing has pending litigation.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>101590</retsid>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="DisclosureDocumentsURL"
+				type="commons:URL"
+				minOccurs="0"
+				maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>
+						A URL where documents related to disclosures
+						may be found.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>101676</retsid>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="Disclosure"
+						type="commons:DisclosureEnum"
+						minOccurs="0"
+						maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>
+						The list of voluntary disclosures.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>101416</retsid>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+			<xs:element	name="RequiredDisclosure"
+						type="commons:DisclosureEnum"
+						minOccurs="0"
+						maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>
+						The list of required disclosures.
+					</xs:documentation>
+					<xs:appinfo>
+						<retsid>101417</retsid>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>
