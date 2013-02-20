@@ -4,6 +4,8 @@
 *.html
 *.jpg
 *.jpeg
+*.gif
+*.css
 
 # OS generated files #
 ######################
